@@ -1,28 +1,79 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import configureStore from './store/store';
+import { Provider } from 'react-redux';
+import { BrowserRouter as Router } from 'react-router-dom';
+
+import App from './components/App';
+import ScrollHelper from './ScrollHelper';
+import configureStore from './store/Store';
 import jwt_decode from 'jwt-decode';
+import { setAuthToken } from './util/SessionApiUtil';
+import { logout } from './actions/SessionActions';
+
+// BEGIN testing
+import * as sessionActions from './actions/SessionActions';
+import * as useActions from './actions/UserActions';
 
 document.addEventListener('DOMContentLoaded', () => {
   let store;
+
+  // Create a preconfigured state we can immediately add to our store
+  let preloadedState = {};
+
   if (localStorage.jwtToken) {
+    // Set the token as a common header for all axios requests
     setAuthToken(localStorage.jwtToken);
 
+    // Decode the token to obtain the user's info
     const decodedUser = jwt_decode(localStorage.jwtToken);
-    const preloadedState = { session: { isAuthenticated: true, user: decodedUser } };
+    const notifications = { messages: 0, other: [] };
+
+    preloadedState = {
+      ...preloadedState,
+      session: { isAuthenticated: true, user: decodedUser, notifications },
+    };
 
     store = configureStore(preloadedState);
-
     const currentTime = Date.now() / 1000;
 
+    // If token has expired
     if (decodedUser.exp < currentTime) {
+      // Logout the user and redirect to login
       store.dispatch(logout());
-      window.location.href = '/login';
     }
   } else {
-    store = configureStore({});
+    // First time user, start w/ empty store
+    store = configureStore();
   }
+
   const root = document.getElementById('root');
-  window.getState = store.getState;
-  ReactDOM.render(<Root store={store} />, root);
+
+  ReactDOM.render(
+    <Provider store={store}>
+      <Router>
+        <ScrollHelper>
+          <App />
+        </ScrollHelper>
+      </Router>
+    </Provider>,
+    root
+  );
+
+  // BEGIN testing
+
+  window.store = store;
+
+  // return the current user if logged in, fetching user data if necessary
+  // let curr = await currentUser();
+  window.currentUser = function () {
+    const state = store.getState();
+    if (!state.session.user) return null;
+
+    const userId = state.session.user.id;
+    return (
+      state.entities.users[userId] ||
+      store.dispatch(userActions.fetchUser(userId))
+    );
+  };
+  // END testing
 });
