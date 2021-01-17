@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Modal from 'react-modal';
 import Edit from './edit_form';
-import '../../stylesheets/modal.css';
+import { Avatar, Typography } from '@material-ui/core';
 
 function Profolio() {
   const [isOpen, setShow] = useState(false);
@@ -10,7 +10,7 @@ function Profolio() {
   }
   return (
     <div>
-      <img src={currentUser.avatarUrl} />
+      <Avatar src={user.avatarUrl} style={{ marginTop: 20, marginRight: 20 }} />
       <h3>{currentUser.name}</h3>
       <button onClick={toggleModal}>edit</button>
       <Modal

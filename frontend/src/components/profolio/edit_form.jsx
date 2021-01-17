@@ -6,12 +6,25 @@ import { CssTextField, useStyles } from './CssTextField';
 function Edit({ user, updateUser }) {
   const [user, setUser] = useState(user);
   const [newPassword, setNewPassword] = useState('');
+  const [isOpen, setShow] = useState(false);
+  function toggleModal() {
+    setShow(!isOpen);
+  }
+  const [displayMsg, setDisplayMsg] = useState('');
   const [userNameErrors, setUserNameErrors] = useState('');
   const [emailErrors, setEmailErrors] = useState('');
   const [passwordErrors, setPasswordErrors] = useState('');
   const classes = useStyles();
   function handleSubmit(e) {
     e.preventDefault();
+    updateUser(user).then((res) => {
+      if (res.type === 'RECEIVE_SESSION_ERRORS') {
+        setDisplayMsg('Incorrect Email or Password ');
+      } else {
+        setDisplayMsg('Successfully Updated!');
+      }
+    });
+    toggleModal();
   }
 
   function update(field) {
@@ -123,6 +136,18 @@ function Edit({ user, updateUser }) {
           <Button className={classes.submitButton}>SAVE CHANGES</Button>
         </div>
       </form>
+      <Modal
+        isOpen={isOpen}
+        onRequestClose={toggleModal}
+        contentLabel="display update message"
+        className="edit-modal"
+        overlayClassName="edit-overlay"
+        closeTimeoutMS={500}
+        ariaHideApp={false}
+      >
+        {displayMsg}
+        <button onclick={toggleModal}>close</button>
+      </Modal>
     </div>
   );
 }
