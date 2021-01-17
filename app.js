@@ -39,7 +39,7 @@ let shell = require('shelljs')
 // cron.schedule("00 00 * * *", function () {
 //   app.listen(port, () => console.log("a new day"))
 // })
-cron.schedule('*/2 * * * *', () => {
+cron.schedule('*/10 * * * *', () => {
   app.listen(port, () => console.log("2 mins"))
 })
 
