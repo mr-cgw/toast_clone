@@ -17,16 +17,7 @@ export default function SessionReducer(state = _initialState, action) {
   switch (action.type) {
     case RECEIVE_USER:
       const user = action.payload;
-      console.log(
-        'user',
-        user,
-        'stateuser',
-        state.user,
-        'stateuserid',
-        state.user.id
-      );
       if (state.user && state.user.id === user._id) {
-        console.log('here');
         return {
           ...state,
           user: currentUserDetails(user),

@@ -76,16 +76,13 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function Navbar({ currentUser, fetchUser, signout }) {
-  console.log('currentUser', currentUser);
   useEffect(() => {
     if (currentUser) {
-      console.log('currentUser', currentUser);
       fetchUser(currentUser.id);
     }
   }, []);
   const history = useHistory();
   const location = useLocation();
-  console.log('location', location);
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);

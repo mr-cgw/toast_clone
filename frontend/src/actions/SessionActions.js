@@ -33,7 +33,6 @@ export const signout = () => (dispatch) => {
 export const signup = (user) => (dispatch) => {
   APIUtil.signup(user).then(
     (payload) => {
-      console.log('payload', payload);
       dispatch(receiveCurrentUser(payload.data.user));
       dispatch(receiveUserSignIn());
     },
@@ -45,11 +44,9 @@ export const signin = (user) => (dispatch) => {
   APIUtil.signin(user)
     .then((res) => {
       const { token } = res.data;
-      console.log('res.data', res.data);
       localStorage.setItem('jwtToken', token);
       APIUtil.setAuthToken(token);
       const decoded = jwt_decode(token);
-      console.log('decoded', decoded);
       dispatch(receiveCurrentUser({ ...decoded, ...res.data.user }));
     })
     .catch((err) => dispatch(receiveErrors(err.response.data)));

@@ -96,7 +96,6 @@ function Signin({ signinUser }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const handleSignIn = () => {
-    console.log('handling signin');
     if (!validate(email)) setEmailErrors('Invalid Email Address');
     if (password.length < 6)
       setPasswordErrors('Password must be at least 6 characters');
