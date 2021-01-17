@@ -1,45 +1,78 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import IconButton from '@material-ui/core/IconButton';
-import Badge from '@material-ui/core/Badge';
-import MenuItem from '@material-ui/core/MenuItem';
-import Menu from '@material-ui/core/Menu';
-import AccountCircle from '@material-ui/icons/AccountCircle';
-import MailIcon from '@material-ui/icons/Mail';
-import NotificationsIcon from '@material-ui/icons/Notifications';
-import MoreIcon from '@material-ui/icons/MoreVert';
+import {
+  makeStyles,
+  Typography,
+  Toolbar,
+  IconButton,
+  MenuItem,
+  Menu,
+  AppBar,
+  Avatar,
+  Button,
+} from '@material-ui/core';
+import { MoreVert } from '@material-ui/icons';
 
 import * as Colors from '../Colors';
 
 const useStyles = makeStyles((theme) => ({
   navbar: {
     backgroundColor: Colors.navBlack,
+    display: 'flex',
     justifyContent: 'center',
     height: 120,
   },
   grow: {
     flexGrow: 1,
   },
-  logo: {
-    margin: '0 auto',
-  },
+  logo: {},
   sectionDesktop: {
+    display: 'flex',
+  },
+  sectionMobile: {
+    display: 'flex',
+  },
+  buttons: {
     display: 'none',
+    marginRight: '1rem',
+    position: 'absolute',
+    right: 20,
+    bottom: 37,
     [theme.breakpoints.up('md')]: {
       display: 'flex',
     },
   },
-  sectionMobile: {
-    display: 'flex',
+  button: {
+    fontSize: '1.2rem',
+    fontWeight: 100,
+    color: Colors.lightestGreen,
+  },
+  avatar: {
+    display: 'none',
+    marginRight: '1rem',
+    position: 'absolute',
+    right: 20,
+    bottom: 20,
+    [theme.breakpoints.up('md')]: {
+      display: 'block',
+    },
+  },
+  moreButtons: {
+    display: 'block',
+    marginRight: '1rem',
+    position: 'absolute',
+    right: 20,
+    bottom: 35,
     [theme.breakpoints.up('md')]: {
       display: 'none',
     },
   },
+  menuItem: {
+    padding: '20px 40px',
+  },
 }));
 
-export default function PrimarySearchAppBar() {
+export default function PrimarySearchAppBar({ isSignedIn }) {
+  isSignedIn = isSignedIn || true;
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
@@ -65,6 +98,18 @@ export default function PrimarySearchAppBar() {
   };
 
   const menuId = 'primary-search-account-menu';
+  const renderAuthButtons = () => (
+    <IconButton
+      className={classes.moreButtons}
+      aria-controls={mobileMenuId}
+      aria-haspopup="true"
+      onClick={handleMobileMenuOpen}
+      color="inherit"
+    >
+      <MoreVert />
+    </IconButton>
+  );
+
   const renderMenu = (
     <Menu
       anchorEl={anchorEl}
@@ -75,8 +120,12 @@ export default function PrimarySearchAppBar() {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-      <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+      <MenuItem className={classes.menuItem} onClick={handleMenuClose}>
+        User Profile
+      </MenuItem>
+      <MenuItem className={classes.menuItem} onClick={handleMenuClose}>
+        Edit Profile
+      </MenuItem>
     </Menu>
   );
 
@@ -91,66 +140,62 @@ export default function PrimarySearchAppBar() {
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
     >
-      <MenuItem>
-        <IconButton aria-label="show 4 new mails" color="inherit">
-          <Badge badgeContent={4} color="secondary">
-            <MailIcon />
-          </Badge>
-        </IconButton>
-        <p>Messages</p>
-      </MenuItem>
-      <MenuItem>
-        <IconButton aria-label="show 11 new notifications" color="inherit">
-          <Badge badgeContent={11} color="secondary">
-            <NotificationsIcon />
-          </Badge>
-        </IconButton>
-        <p>Notifications</p>
-      </MenuItem>
-      <MenuItem onClick={handleProfileMenuOpen}>
-        <IconButton
-          aria-label="account of current user"
-          aria-controls="primary-search-account-menu"
-          aria-haspopup="true"
-          color="inherit"
-        >
-          <AccountCircle />
-        </IconButton>
-        <p>Profile</p>
-      </MenuItem>
+      {isSignedIn ? (
+        <>
+          <MenuItem className={classes.menuItem}>
+            <Typography>User Profile</Typography>
+          </MenuItem>
+          <MenuItem className={classes.menuItem}>
+            <Typography>Edit Profile</Typography>
+          </MenuItem>
+        </>
+      ) : (
+        <>
+          <MenuItem className={classes.menuItem}>
+            <Typography>SIGN IN</Typography>
+          </MenuItem>
+          <MenuItem className={classes.menuItem}>
+            <Typography>SIGN UP</Typography>
+          </MenuItem>
+        </>
+      )}
     </Menu>
   );
+  const renderButtons = () =>
+    isSignedIn ? (
+      <IconButton className={classes.avatar} onClick={handleProfileMenuOpen}>
+        <Avatar
+          src={`https://res.cloudinary.com/willwang/image/upload/v1610852026/infiHuntLogo_rru0vl.png`}
+          style={{ backgroundColor: '#020202', width: 50, height: 50 }}
+        />
+      </IconButton>
+    ) : (
+      <div className={classes.buttons}>
+        <Button className={classes.button} style={{ marginRight: 20 }}>
+          Sign in
+        </Button>
+        <Button
+          variant="contained"
+          className={classes.button}
+          style={{
+            backgroundColor: Colors.lightestGreen,
+            color: Colors.navBlack,
+          }}
+        >
+          Sign up
+        </Button>
+      </div>
+    );
 
   return (
     <div>
-      <AppBar position="static" className={classes.navbar}>
-        <Toolbar>
+      <AppBar position="static" elevation={1}>
+        <Toolbar className={classes.navbar}>
           <div className={classes.logo}>
             <img src="https://res.cloudinary.com/willwang/image/upload/v1610852069/logoPlusChar_zbzkok.png" />
           </div>
-          <div className={classes.sectionDesktop}>
-            <IconButton
-              edge="end"
-              aria-label="account of current user"
-              aria-controls={menuId}
-              aria-haspopup="true"
-              onClick={handleProfileMenuOpen}
-              color="inherit"
-            >
-              <AccountCircle style={{ height: 50, width: 50 }} />
-            </IconButton>
-          </div>
-          <div className={classes.sectionMobile}>
-            <IconButton
-              aria-label="show more"
-              aria-controls={mobileMenuId}
-              aria-haspopup="true"
-              onClick={handleMobileMenuOpen}
-              color="inherit"
-            >
-              <MoreIcon />
-            </IconButton>
-          </div>
+          <div>{renderButtons()}</div>
+          <div>{renderAuthButtons()}</div>
         </Toolbar>
       </AppBar>
       {renderMobileMenu}
