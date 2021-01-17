@@ -36,6 +36,7 @@ export const fetchUsers = () => (dispatch) => {
 export const fetchUser = (userId) => (dispatch) => {
   return UserAPI.fetchUser(userId)
     .then((res) => {
+      console.log('res', res);
       dispatch(clearUserErrors());
       dispatch(receiveUser(res.data));
       return res.data;

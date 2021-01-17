@@ -6,7 +6,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 
 import App from './components/App';
 import ScrollHelper from './ScrollHelper';
-import configureStore from './store/Store.js';
+import configureStore from './store/store.js';
 import jwt_decode from 'jwt-decode';
 import { setAuthToken } from './util/SessionApiUtil';
 import { signout } from './actions/SessionActions';
@@ -27,11 +27,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Decode the token to obtain the user's info
     const decodedUser = jwt_decode(localStorage.jwtToken);
-    const notifications = { messages: 0, other: [] };
 
     preloadedState = {
       ...preloadedState,
-      session: { isAuthenticated: true, user: decodedUser, notifications },
+      session: { isAuthenticated: true, user: decodedUser },
     };
 
     store = configureStore(preloadedState);
@@ -78,5 +77,6 @@ document.addEventListener('DOMContentLoaded', () => {
     );
   };
   window.sessionActions = sessionActions;
+  window.signout = signout;
   // END testing
 });

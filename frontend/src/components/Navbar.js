@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { useHistory, useLocation } from 'react-router-dom';
 import {
@@ -16,6 +16,7 @@ import { MoreVert } from '@material-ui/icons';
 import { signout } from '../actions/SessionActions';
 
 import * as Colors from '../Colors';
+import { fetchUser } from '../actions/UserActions';
 
 const useStyles = makeStyles((theme) => ({
   navbar: {
@@ -74,8 +75,14 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function Navbar({ currentUser }) {
-  currentUser = currentUser || false;
+function Navbar({ currentUser, fetchUser, signout }) {
+  console.log('currentUser', currentUser);
+  useEffect(() => {
+    if (currentUser) {
+      console.log('currentUser', currentUser);
+      fetchUser(currentUser.id);
+    }
+  }, []);
   const history = useHistory();
   const location = useLocation();
   console.log('location', location);
@@ -131,6 +138,15 @@ function Navbar({ currentUser }) {
       </MenuItem>
       <MenuItem className={classes.menuItem} onClick={handleMenuClose}>
         Edit Profile
+      </MenuItem>
+      <MenuItem
+        className={classes.menuItem}
+        onClick={() => {
+          handleMenuClose();
+          signout();
+        }}
+      >
+        Sign Out
       </MenuItem>
     </Menu>
   );
@@ -244,6 +260,7 @@ const mapStateToProps = ({ session }) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
+  fetchUser: (userId) => dispatch(fetchUser(userId)),
   signout: () => dispatch(signout()),
 });
 
