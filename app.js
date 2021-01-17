@@ -5,6 +5,9 @@ const app = express();
 const db = require('./config/keys').mongoURI;
 const passport = require('passport');
 const path = require('path');
+
+
+
 const users = require('./routes/api/users');
 const applications = require('./routes/api/applications');
 //* connect to mongoDB
@@ -26,3 +29,12 @@ app.use('/api/users', users);
 app.use('/api/applications', applications);
 
 app.listen(port, () => console.log(`server is running on port ${port}`));
+
+
+
+const cron = require('node-cron');
+let shell = require('shelljs')
+//* sec-min-hour-day-month-year
+cron.schedule("* * * * * *", function(){ 
+
+}) 
