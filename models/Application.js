@@ -39,3 +39,7 @@ const ApplicationSchema = new Schema({
     default: ""
   }
 })
+
+
+module.exports = Application = mongoose.model('Application', ApplicationSchema);
+
