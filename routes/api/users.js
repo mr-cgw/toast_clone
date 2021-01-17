@@ -29,7 +29,7 @@ router.post('/register', (req, res) => {
         password: req.body.password,
         email: req.body.email,
         username: req.body.username,
-        avatarUrl: req.body.avatarUrl
+        avatarUrl: req.body.avatarUrl,
       });
       bcrypt.genSalt(10, (err, salt) => {
         bcrypt.hash(newUser.password, salt, (err, hash) => {
@@ -47,7 +47,7 @@ router.post('/register', (req, res) => {
                   res.json({
                     success: true,
                     token: 'Bearer ' + token,
-                    user: user
+                    user: user,
                   });
                 }
               );
@@ -89,7 +89,7 @@ router.post('/signin', (req, res) => {
             res.json({
               success: true,
               token: 'Bearer ' + token,
-              user: user
+              user: user,
             });
           }
         );
@@ -113,41 +113,43 @@ router.patch(
   '/:userId',
   passport.authenticate('jwt', { session: false }),
   (req, res) => {
-    const newUser = {
-      password: req.body.password,
-      email: req.body.email,
-      username: req.body.username,
-      avatarUrl: req.body.avatarUrl
-    }
+    User.findOne({ email: req.body.email }).then((user) => {
+      if (!user) {
+        errors.email = 'This user does not exist';
+        return res.status(400).json(errors);
+      }
+      bcrypt.compare(req.body.password, user.password).then((isMatch) => {
+        if (isMatch) {
+          const newUser = {
+            password: req.body.newPassword,
+            email: req.body.email,
+            username: req.body.username,
+            avatarUrl: req.body.avatarUrl,
+          };
 
-    bcrypt.genSalt(10, (err, salt) => {
-      bcrypt.hash(newUser.password, salt, (err, hash) => {
-        if (err) throw err;
-        newUser.password = hash
+          bcrypt.genSalt(10, (err, salt) => {
+            bcrypt.hash(newUser.password, salt, (err, hash) => {
+              if (err) throw err;
+              newUser.password = hash;
 
-        User.findOneAndUpdate(
-          { _id: req.params.userId },
-          newUser,
-          { new: true }
-        )
-          .then((user) => {
-            res.json(user)
-          })
-          .catch((err) => res.status(400).json(err));
+              User.findOneAndUpdate({ _id: req.params.userId }, newUser, {
+                new: true,
+              })
+                .then((user) => {
+                  res.json(user);
+                })
+                .catch((err) => res.status(400).json(err));
+            });
+          });
+        }
       });
     });
   }
 );
+
 router.get('/', (req, res) => {
   User.find()
-    .then(users => res.json(users))
-    .catch((err) => res.status(400).json(err))
-})
-
-router.get("/todoList", (req, res) => {
-  TodoList.find()
-    .sort({ data: -1 })
-    .then((todoLists) => res.json(todoLists))
+    .then((users) => res.json(users))
     .catch((err) => res.status(400).json(err));
 });
 
