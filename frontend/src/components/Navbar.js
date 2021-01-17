@@ -136,6 +136,7 @@ function Navbar({ currentUser, fetchUser, signout }) {
       <MenuItem className={classes.menuItem} onClick={handleMenuClose}>
         Edit Profile
       </MenuItem>
+
       <MenuItem
         className={classes.menuItem}
         onClick={() => {
@@ -166,6 +167,15 @@ function Navbar({ currentUser, fetchUser, signout }) {
           </MenuItem>
           <MenuItem className={classes.menuItem}>
             <Typography>Edit Profile</Typography>
+          </MenuItem>
+          <MenuItem
+            className={classes.menuItem}
+            onClick={() => {
+              signout();
+              handleMenuClose();
+            }}
+          >
+            Sign Out
           </MenuItem>
         </div>
       ) : (
