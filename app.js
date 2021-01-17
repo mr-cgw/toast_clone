@@ -39,10 +39,13 @@ let shell = require('shelljs')
 cron.schedule("00 00 * * *", function () {
   app.listen(port, () => console.log("a new day"))
 })
-// cron.schedule("* * * * * *", () => {
-//   app.listen(port, () => console.log("one sec"))
-// })
+cron.schedule('/10 * * * *', () => {
+  app.listen(port, () => console.log("one sec"))
+})
 
 
+//* all fullstack
+// https://jobs.github.com/positions.json?description=full+stack&full_time=true
 //* all frontend
-//
+//https://jobs.github.com/positions.json?description=front+end&full_time=true
+//* all backend
