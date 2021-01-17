@@ -1,4 +1,6 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import {
   makeStyles,
   Typography,
@@ -11,6 +13,7 @@ import {
   Button,
 } from '@material-ui/core';
 import { MoreVert } from '@material-ui/icons';
+import { signout } from '../actions/SessionActions';
 
 import * as Colors from '../Colors';
 
@@ -71,8 +74,9 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function PrimarySearchAppBar({ isSignedIn }) {
-  isSignedIn = isSignedIn || true;
+function Navbar({ currentUser }) {
+  currentUser = currentUser || false;
+  const history = useHistory();
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
@@ -140,29 +144,29 @@ export default function PrimarySearchAppBar({ isSignedIn }) {
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
     >
-      {isSignedIn ? (
-        <>
+      {currentUser ? (
+        <div>
           <MenuItem className={classes.menuItem}>
             <Typography>User Profile</Typography>
           </MenuItem>
           <MenuItem className={classes.menuItem}>
             <Typography>Edit Profile</Typography>
           </MenuItem>
-        </>
+        </div>
       ) : (
-        <>
+        <div>
           <MenuItem className={classes.menuItem}>
             <Typography>SIGN IN</Typography>
           </MenuItem>
           <MenuItem className={classes.menuItem}>
             <Typography>SIGN UP</Typography>
           </MenuItem>
-        </>
+        </div>
       )}
     </Menu>
   );
   const renderButtons = () =>
-    isSignedIn ? (
+    currentUser ? (
       <IconButton className={classes.avatar} onClick={handleProfileMenuOpen}>
         <Avatar
           src={`https://res.cloudinary.com/willwang/image/upload/v1610852026/infiHuntLogo_rru0vl.png`}
@@ -171,12 +175,17 @@ export default function PrimarySearchAppBar({ isSignedIn }) {
       </IconButton>
     ) : (
       <div className={classes.buttons}>
-        <Button className={classes.button} style={{ marginRight: 20 }}>
+        <Button
+          className={classes.button}
+          style={{ marginRight: 20 }}
+          onClick={() => history.push('/signin')}
+        >
           Sign in
         </Button>
         <Button
           variant="contained"
           className={classes.button}
+          onClick={() => history.push('/signup')}
           style={{
             backgroundColor: Colors.lightestGreen,
             color: Colors.navBlack,
@@ -192,7 +201,12 @@ export default function PrimarySearchAppBar({ isSignedIn }) {
       <AppBar position="static" elevation={1}>
         <Toolbar className={classes.navbar}>
           <div className={classes.logo}>
-            <img src="https://res.cloudinary.com/willwang/image/upload/v1610852069/logoPlusChar_zbzkok.png" />
+            <img
+              src="https://res.cloudinary.com/willwang/image/upload/v1610852069/logoPlusChar_zbzkok.png"
+              alt={'logo'}
+              onClick={() => history.push('/')}
+              style={{ cursor: 'pointer' }}
+            />
           </div>
           <div>{renderButtons()}</div>
           <div>{renderAuthButtons()}</div>
@@ -203,3 +217,13 @@ export default function PrimarySearchAppBar({ isSignedIn }) {
     </div>
   );
 }
+
+const mapStateToProps = ({ session }) => ({
+  currentUser: session.user,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  signout: () => dispatch(signout()),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Navbar);

@@ -20,14 +20,14 @@ export const receiveErrors = (errors) => ({
   errors,
 });
 
-export const logoutUser = () => ({
+export const signoutUser = () => ({
   type: RECEIVE_USER_LOGOUT,
 });
 
-export const logout = () => (dispatch) => {
+export const signout = () => (dispatch) => {
   localStorage.removeItem('jwtToken');
   APIUtil.setAuthToken(false);
-  dispatch(logoutUser());
+  dispatch(signoutUser());
 };
 
 export const signup = (user) => (dispatch) => {
@@ -40,8 +40,8 @@ export const signup = (user) => (dispatch) => {
   );
 };
 
-export const login = (user) => (dispatch) => {
-  APIUtil.login(user)
+export const signin = (user) => (dispatch) => {
+  APIUtil.signin(user)
     .then((res) => {
       const { token } = res.data;
       localStorage.setItem('jwtToken', token);

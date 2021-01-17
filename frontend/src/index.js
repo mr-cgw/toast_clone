@@ -9,7 +9,7 @@ import ScrollHelper from './ScrollHelper';
 import configureStore from './store/Store';
 import jwt_decode from 'jwt-decode';
 import { setAuthToken } from './util/SessionApiUtil';
-import { logout } from './actions/SessionActions';
+import { signout } from './actions/SessionActions';
 
 // BEGIN testing
 import * as sessionActions from './actions/SessionActions';
@@ -39,8 +39,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // If token has expired
     if (decodedUser.exp < currentTime) {
-      // Logout the user and redirect to login
-      store.dispatch(logout());
+      // signout the user and redirect to login
+      store.dispatch(signout());
     }
   } else {
     // First time user, start w/ empty store
