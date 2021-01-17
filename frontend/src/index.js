@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { BrowserRouter as Router } from 'react-router-dom';
+import CssBaseline from '@material-ui/core/CssBaseline';
 
 import App from './components/App';
 import ScrollHelper from './ScrollHelper';
@@ -12,7 +13,7 @@ import { logout } from './actions/SessionActions';
 
 // BEGIN testing
 import * as sessionActions from './actions/SessionActions';
-import * as useActions from './actions/UserActions';
+import * as userActions from './actions/UserActions';
 
 document.addEventListener('DOMContentLoaded', () => {
   let store;
@@ -50,6 +51,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   ReactDOM.render(
     <Provider store={store}>
+      <CssBaseline />
       <Router>
         <ScrollHelper>
           <App />

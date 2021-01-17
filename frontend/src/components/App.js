@@ -1,9 +1,13 @@
 import React from 'react';
+import { Switch } from 'react-router-dom';
+import Navbar from './Navbar';
 
 function App() {
+  const loggedIn = false;
   return (
     <div>
-      <h1>Hello World</h1>
+      <Navbar loggedIn={loggedIn} />
+      <Switch></Switch>
     </div>
   );
 }
