@@ -94,7 +94,7 @@ router.post('/signin', (req, res) => {
           }
         );
       } else {
-        errors.password = 'Incorrect password';
+        errors.password = 'invalid combination of email and password';
         return res.status(400).json(errors);
       }
     });
@@ -114,7 +114,7 @@ router.patch(
   passport.authenticate('jwt', { session: false }),
   (req, res) => {
 
-    User.findOne({ email: req.body.email }).then(user => {
+    User.findOne({ _id: req.params.userId }).then(user => {
       if (!user) {
         errors.email = 'This user does not exist';
         return res.status(400).json(errors);
@@ -144,6 +144,9 @@ router.patch(
                 .catch((err) => res.status(400).json(err));
             });
           });
+        } else {
+          errors.password = 'invalid combination of email and password';
+          return res.status(400).json(errors);
         }
       })
     })
