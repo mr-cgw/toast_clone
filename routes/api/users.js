@@ -10,14 +10,7 @@ const validateLoginInput = require("../../validation/login");
 
 router.get("/test", (req, res) => res.json({ msg: "This is the users route" }));
 
-router.get('/current', passport.authenticate('jwt', { session: false }), (req, res) => {
-  res.json({
-    id: req.user.id,
-    handle: req.user.handle,
-    email: req.user.email
-  });
-})
-
+//* register new user
 router.post("/register", (req, res) => {
   const { errors, isValid } = validateRegisterInput(req.body);
 
@@ -32,7 +25,6 @@ router.post("/register", (req, res) => {
         .json({ email: "A user is already registered with that email" });
     } else {
       const newUser = new User({
-        handle: req.body.handle,
         email: req.body.email,
         password: req.body.password,
       });
@@ -42,7 +34,7 @@ router.post("/register", (req, res) => {
           newUser.password = hash;
           newUser
             .save()
-            .then((user) => res.json(user))
+            .then((user) => { res.json(user) })
             .catch((err) => console.log(err));
         });
       });
@@ -85,19 +77,5 @@ router.post("/login", (req, res) => {
     });
   });
 });
-//show other user profile
-router.get(
-  "/:user_id", (req, res) => {
 
-    User.findById(req.params.user_id)
-      .then((user) => res.json(user))
-      .catch((err) => res.status(400).json(err));
-  });
-//update user tags
-router.patch('/update', passport.authenticate('jwt', { session: false }), (req, res) => {
-  User.findOneAndUpdate({ id: req.body.user_id }, { tag: req.body.tag }, { new: true })
-    .then((user) => res.json(user))
-    .catch((err) => res.status(400).json(err));
-
-});
 module.exports = router;
