@@ -119,7 +119,7 @@ function Signin() {
             />
             <p>{passwordErrors}</p>
             <div className={classes.signup}>
-              <Typography>
+              <Typography style={{ fontSize: '0.9rem' }}>
                 not account yet?{' '}
                 <Link
                   style={{ marginLeft: 10, color: Colors.lighterGreen }}

@@ -77,7 +77,7 @@ const useStyles = makeStyles((theme) => ({
     marginTop: -100,
     width: '50%',
   },
-  signup: {
+  signin: {
     width: '100%',
     display: 'flex',
     justifyContent: 'flex-end',
@@ -129,17 +129,17 @@ function Signin() {
               }}
             />
             <p>{passwordErrors}</p>
-          </div>
-          <div className={classes.signup}>
-            <Typography>
-              Already registered?{' '}
-              <Link
-                style={{ marginLeft: 10, color: Colors.lighterGreen }}
-                to="/signin"
-              >
-                Sign in
-              </Link>
-            </Typography>
+            <div className={classes.signin}>
+              <Typography style={{ fontSize: '0.8rem' }}>
+                Already registered?{' '}
+                <Link
+                  style={{ marginLeft: 10, color: Colors.lighterGreen }}
+                  to="/signin"
+                >
+                  Sign in
+                </Link>
+              </Typography>
+            </div>
           </div>
         </div>
         <div className={classes.rightPanel}>
