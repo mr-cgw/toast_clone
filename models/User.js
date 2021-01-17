@@ -10,6 +10,14 @@ const UserSchema = new Schema({
   password: {
     type: String,
     reauired: true
+  },
+  avatarUrl: {
+    type: String,
+    default: "https://res.cloudinary.com/willwang/image/upload/v1610908189/avatarDefault_ie65ti.png",
+  },
+  username: {
+    type: String,
+    required: true
   }
 }, {
   timestamps: true

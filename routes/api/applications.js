@@ -10,7 +10,7 @@ router.post(
   '/',
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
-    const { isValid, errors } = validateComment(req.body);
+    const { isValid, errors } = validateApplication(req.body);
 
 
     if (!isValid) {
