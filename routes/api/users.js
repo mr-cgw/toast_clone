@@ -10,17 +10,7 @@ const validateLoginInput = require('../../validation/login');
 
 router.get('/test', (req, res) => res.json({ msg: 'This is the users route' }));
 
-router.get(
-  '/current',
-  passport.authenticate('jwt', { session: false }),
-  (req, res) => {
-    res.json({
-      id: req.user.id,
-      handle: req.user.handle,
-      email: req.user.email,
-    });
-  }
-);
+//* register new user
 
 router.post('/register', (req, res) => {
   const { errors, isValid } = validateRegisterInput(req.body);
@@ -36,8 +26,10 @@ router.post('/register', (req, res) => {
         .json({ email: 'A user is already registered with that email' });
     } else {
       const newUser = new User({
-        email: req.body.email,
         password: req.body.password,
+        email: req.body.email,
+        username: req.body.username,
+        avatarUrl: req.body.avatarUrl,
       });
       bcrypt.genSalt(10, (err, salt) => {
         bcrypt.hash(newUser.password, salt, (err, hash) => {
@@ -45,13 +37,29 @@ router.post('/register', (req, res) => {
           newUser.password = hash;
           newUser
             .save()
-            .then((user) => { res.json(user) })
+            .then((user) => {
+              const payload = { id: user.id, email: user.email };
+              jwt.sign(
+                payload,
+                keys.secretOrKey,
+                { expiresIn: 24 * 3600 },
+                (err, token) => {
+                  res.json({
+                    success: true,
+                    token: 'Bearer ' + token,
+                    user: user,
+                  });
+                }
+              );
+            })
             .catch((err) => console.log(err));
         });
       });
     }
   });
 });
+
+//* user login
 
 router.post('/signin', (req, res) => {
   const { errors, isValid } = validateLoginInput(req.body);
@@ -81,34 +89,71 @@ router.post('/signin', (req, res) => {
             res.json({
               success: true,
               token: 'Bearer ' + token,
+              user: user,
             });
           }
         );
       } else {
-        errors.password = 'Incorrect password';
+        errors.password = 'invalid combination of email and password';
         return res.status(400).json(errors);
       }
     });
   });
 });
 //show other user profile
-router.get('/:user_id', (req, res) => {
-  User.findById(req.params.user_id)
+router.get('/:userId', (req, res) => {
+  User.findById(req.params.userId)
     .then((user) => res.json(user))
     .catch((err) => res.status(400).json(err));
 });
-//update user tags
+
+//* update user
+
 router.patch(
-  '/update',
+  '/:userId',
   passport.authenticate('jwt', { session: false }),
   (req, res) => {
-    User.findOneAndUpdate(
-      { id: req.body.user_id },
-      { tag: req.body.tag },
-      { new: true }
-    )
-      .then((user) => res.json(user))
-      .catch((err) => res.status(400).json(err));
+    User.findOne({ _id: req.params.userId }).then((user) => {
+      if (!user) {
+        errors.email = 'This user does not exist';
+        return res.status(400).json(errors);
+      }
+      bcrypt.compare(req.body.password, user.password).then((isMatch) => {
+        if (isMatch) {
+          const newUser = {
+            password: req.body.newPassword,
+            email: req.body.email,
+            username: req.body.username,
+            avatarUrl: req.body.avatarUrl,
+          };
+
+          bcrypt.genSalt(10, (err, salt) => {
+            bcrypt.hash(newUser.password, salt, (err, hash) => {
+              if (err) throw err;
+              newUser.password = hash;
+
+              User.findOneAndUpdate({ _id: req.params.userId }, newUser, {
+                new: true,
+              })
+                .then((user) => {
+                  res.json(user);
+                })
+                .catch((err) => res.status(400).json(err));
+            });
+          });
+        } else {
+          errors.password = 'invalid combination of email and password';
+          return res.status(400).json(errors);
+        }
+      });
+    });
   }
 );
+
+router.get('/', (req, res) => {
+  User.find()
+    .then((users) => res.json(users))
+    .catch((err) => res.status(400).json(err));
+});
+
 module.exports = router;
