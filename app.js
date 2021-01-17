@@ -36,11 +36,11 @@ const cron = require('node-cron');
 let shell = require('shelljs')
 //* triggerd everyday at 00:00
 //? sec-min-hour-dayOfMonth-month-dayOfWeek
-cron.schedule("00 00 * * *", function () {
-  app.listen(port, () => console.log("a new day"))
-})
-cron.schedule('/10 * * * *', () => {
-  app.listen(port, () => console.log("one sec"))
+// cron.schedule("00 00 * * *", function () {
+//   app.listen(port, () => console.log("a new day"))
+// })
+cron.schedule('*/2 * * * *', () => {
+  app.listen(port, () => console.log("2 mins"))
 })
 
 
