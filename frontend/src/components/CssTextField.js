@@ -77,4 +77,17 @@ export const useStyles = makeStyles((theme) => ({
     justifyContent: 'flex-end',
     alignItems: 'center',
   },
+  uploadAvatar: {
+    display: 'flex',
+    margin: '2rem auto',
+  },
+  avatar: {
+    marginRight: 20,
+    width: 50,
+    height: 50,
+    [theme.breakpoints.up('sm')]: {
+      width: 100,
+      height: 100,
+    },
+  },
 }));
