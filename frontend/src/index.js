@@ -77,5 +77,6 @@ document.addEventListener('DOMContentLoaded', () => {
       store.dispatch(userActions.fetchUser(userId))
     );
   };
+  window.sessionActions = sessionActions;
   // END testing
 });

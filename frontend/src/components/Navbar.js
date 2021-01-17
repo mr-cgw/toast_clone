@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 import {
   makeStyles,
   Typography,
@@ -77,6 +77,8 @@ const useStyles = makeStyles((theme) => ({
 function Navbar({ currentUser }) {
   currentUser = currentUser || false;
   const history = useHistory();
+  const location = useLocation();
+  console.log('location', location);
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
@@ -155,10 +157,22 @@ function Navbar({ currentUser }) {
         </div>
       ) : (
         <div>
-          <MenuItem className={classes.menuItem}>
+          <MenuItem
+            className={classes.menuItem}
+            onClick={() => {
+              history.push('/signin');
+              handleMenuClose();
+            }}
+          >
             <Typography>SIGN IN</Typography>
           </MenuItem>
-          <MenuItem className={classes.menuItem}>
+          <MenuItem
+            className={classes.menuItem}
+            onClick={() => {
+              history.push('/signup');
+              handleMenuClose();
+            }}
+          >
             <Typography>SIGN UP</Typography>
           </MenuItem>
         </div>
@@ -208,8 +222,15 @@ function Navbar({ currentUser }) {
               style={{ cursor: 'pointer' }}
             />
           </div>
-          <div>{renderButtons()}</div>
-          <div>{renderAuthButtons()}</div>
+          {location.pathname === '/signin' ||
+          location.pathname === '/signup' ? (
+            <div></div>
+          ) : (
+            <div>
+              <div>{renderButtons()}</div>
+              <div>{renderAuthButtons()}</div>
+            </div>
+          )}
         </Toolbar>
       </AppBar>
       {renderMobileMenu}

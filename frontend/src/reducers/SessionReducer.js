@@ -6,13 +6,12 @@ import {
 import { RECEIVE_USER } from '../actions/UserActions';
 import { currentUserDetails } from '../util/UserApiUtil';
 
-const initialState = {
+const _initialState = {
   isAuthenticated: false,
   user: undefined,
-  notifications: {},
 };
 
-export default (state = initialState, action) => {
+export default function SessionReducer(state = _initialState, action) {
   Object.freeze(state);
 
   switch (action.type) {
@@ -31,14 +30,12 @@ export default (state = initialState, action) => {
         ...state,
         isAuthenticated: !!action.currentUser,
         user: action.currentUser,
-        notifications: action.currentUser.notifications,
       };
 
     case RECEIVE_USER_LOGOUT:
       return {
         isAuthenticated: false,
         user: undefined,
-        notifications: {},
       };
 
     case RECEIVE_USER_SIGN_IN:
@@ -46,8 +43,7 @@ export default (state = initialState, action) => {
         ...state,
         isSignedIn: true,
       };
-
     default:
       return state;
   }
-};
+}
