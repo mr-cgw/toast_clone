@@ -1,0 +1,10 @@
+body {
+  --lightest-green: #f3ffc8;
+  --lighter-green: #bff499;
+  --darker-green: #86e188;
+  --nav-black: #494949;
+}
+
+.app {
+  max-width: 1500px;
+}
