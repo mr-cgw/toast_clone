@@ -10,6 +10,8 @@ const validateLoginInput = require('../../validation/login');
 
 router.get('/test', (req, res) => res.json({ msg: 'This is the users route' }));
 
+//* register new user
+
 router.post('/register', (req, res) => {
   const { errors, isValid } = validateRegisterInput(req.body);
 
@@ -57,6 +59,8 @@ router.post('/register', (req, res) => {
   });
 });
 
+//* user login
+
 router.post('/signin', (req, res) => {
   const { errors, isValid } = validateLoginInput(req.body);
 
@@ -103,9 +107,10 @@ router.get('/:userId', (req, res) => {
     .catch((err) => res.status(400).json(err));
 });
 
-//update user
+//* update user
+
 router.patch(
-  '/update/:userId',
+  '/:userId',
   passport.authenticate('jwt', { session: false }),
   (req, res) => {
     const newUser = {
@@ -131,10 +136,19 @@ router.patch(
           .catch((err) => res.status(400).json(err));
       });
     });
-
-
-
-
   }
 );
+router.get('/', (req, res) => {
+  User.find()
+    .then(users => res.json(users))
+    .catch((err) => res.status(400).json(err))
+})
+
+router.get("/todoList", (req, res) => {
+  TodoList.find()
+    .sort({ data: -1 })
+    .then((todoLists) => res.json(todoLists))
+    .catch((err) => res.status(400).json(err));
+});
+
 module.exports = router;
