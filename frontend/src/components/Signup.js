@@ -2,13 +2,7 @@ import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { signup } from '../actions/SessionActions';
 import { Link } from 'react-router-dom';
-import {
-  makeStyles,
-  Typography,
-  Button,
-  TextField,
-  withStyles,
-} from '@material-ui/core';
+import { Typography, Button } from '@material-ui/core';
 import { validate } from 'email-validator';
 import * as Colors from '../Colors';
 import { CssTextField, useStyles } from './CssTextField';

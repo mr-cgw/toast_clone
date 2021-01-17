@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { Typography, Button, Avatar } from '@material-ui/core';
-import * as Colors from '../Colors';
-import { CssTextField, useStyles } from './CssTextField';
+import * as Colors from '../../Colors';
+import { CssTextField, useStyles } from '../CssTextField';
 
-function Edit({ user, updateUser }) {
-  const [user, setUser] = useState(user);
+function Edit({ currentUser, updateUser }) {
+  const [user, setUser] = useState(currentUser);
   const [newPassword, setNewPassword] = useState('');
   const [isOpen, setShow] = useState(false);
   function toggleModal() {

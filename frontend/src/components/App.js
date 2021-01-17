@@ -4,6 +4,7 @@ import Navbar from './Navbar';
 import Landing from './Landing';
 import Signin from './Signin';
 import Signup from './Signup';
+import EditForm from './profolio/edit_form';
 import { AuthRoute, ProtectedRoute } from './SpecialRoutes';
 
 function App() {
@@ -15,6 +16,7 @@ function App() {
         <AuthRoute exact path="/signin" component={Signin} />
         <AuthRoute exact path="/signup" component={Signup} />
         <Route exact path="/" component={Landing} />
+        {/* <ProtectedRoute exact path='/edit' component={EditForm} /> */}
       </Switch>
     </div>
   );
