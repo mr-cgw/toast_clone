@@ -3,6 +3,7 @@ export const RECEIVE_APPLICATIONS = 'RECEIVE_APPLICATIONS';
 export const RECEIVE_APPLICATION = 'RECEIVE_APPLICATION';
 export const RECEIVE_APPLICATION_ERRORS = 'RECEIVE_APPLICATION_ERRORS';
 export const CLEAR_APPLICATION_ERRORS = 'CLEAR_APPLICATION_ERRORS';
+export const DELETE_APPLICATION = 'DELETE_APPLICATION';
 
 export const receiveApplication = (payload) => ({
   type: RECEIVE_APPLICATION,
@@ -23,32 +24,55 @@ export const clearApplicationErrors = () => ({
   type: CLEAR_APPLICATION_ERRORS,
 });
 
-export const receiveUsers = (users) => ({
-  type: RECEIVE_USERS,
-  users,
+export const deleteApplication = (applicationId) => ({
+  type: DELETE_APPLICATION,
+  payload: applicationId,
 });
 
-export const fetchUsers = () => (dispatch) => {
-  return UserAPI.fetchUsers()
-    .then((users) => {
-      dispatch(clearUserErrors());
-      dispatch(receiveUsers(users.data));
+export const fetchApplications = (userId) => (dispatch) => {
+  return ApplicationApiUtil.fetchApplications(userId)
+    .then((applications) => {
+      dispatch(receiveApplications(applications));
     })
-    .catch((errors) => dispatch(receiveUserErrors(errors.response.data)));
+    .catch((errors) =>
+      dispatch(receiveApplicationErrors(errors.response.data))
+    );
 };
 
-export const fetchUser = (userId) => (dispatch) => {
-  return UserAPI.fetchUser(userId)
-    .then((res) => {
-      dispatch(clearUserErrors());
-      dispatch(receiveUser(res.data));
-      return res.data;
-    })
-    .catch((errors) => dispatch(receiveUserErrors(errors.response.data)));
+export const postApplication = (applicationData) => (dispatch) => {
+  return ApplicationApiUtil.createApplication(applicationData).then(
+    (applicationData) => {
+      dispatch(receiveApplication(applicationData));
+    }
+  );
 };
 
-export const updateUser = (user) => (dispatch) => {
-  return UserAPI.updateUser(user)
-    .then((res) => dispatch(receiveUser(res.data)))
-    .catch((errors) => dispatch(receiveUserErrors(errors.response.data)));
+export const fetchApplication = (applicationId) => (dispatch) => {
+  return ApplicationApiUtil.fetchApplication(applicationId)
+    .then((application) => {
+      dispatch(receiveApplication(application));
+    })
+    .catch((errors) =>
+      dispatch(receiveApplicationErrors(errors.response.data))
+    );
+};
+
+export const updateApplication = (applicationData) => (dispatch) => {
+  return ApplicationApiUtil.updateApplication(applicationData)
+    .then((application) => {
+      dispatch(receiveApplication(application));
+    })
+    .catch((errors) =>
+      dispatch(receiveApplicationErrors(errors.response.data))
+    );
+};
+
+export const removeApplication = (applicationId) => (dispatch) => {
+  return ApplicationApiUtil.deleteApplication(applicationId)
+    .then(() => {
+      dispatch(deleteApplication(applicationId));
+    })
+    .catch((errors) =>
+      dispatch(receiveApplicationErrors(errors.response.data))
+    );
 };
