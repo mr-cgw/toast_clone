@@ -17,6 +17,7 @@ import './stylesheets/profolio.css';
 import * as sessionActions from './actions/SessionActions';
 import * as userActions from './actions/UserActions';
 import * as applicationActions from './actions/ApplicationActions';
+import * as jobActions from './actions/JobActions';
 
 document.addEventListener('DOMContentLoaded', () => {
   let store;
@@ -83,5 +84,6 @@ document.addEventListener('DOMContentLoaded', () => {
   window.sessionActions = sessionActions;
   window.signout = signout;
   window.applicationActions = applicationActions;
+  window.jobActions = jobActions;
   // END testing
 });

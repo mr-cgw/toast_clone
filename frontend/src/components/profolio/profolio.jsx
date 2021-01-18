@@ -6,6 +6,7 @@ import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
 import EditTwoToneIcon from '@material-ui/icons/EditTwoTone';
 import * as Colors from '../../Colors';
+import ApplicationList from '../ApplicationList';
 function Profolio({ currentUser, fetchUser, updateUser }) {
   const [isOpen, setShow] = useState(false);
   function toggleModal() {
@@ -62,7 +63,9 @@ function Profolio({ currentUser, fetchUser, updateUser }) {
           othertoggle={toggleModal}
         />
       </Modal>
-      <div></div>
+      <div>
+        <ApplicationList />
+      </div>
     </div>
   );
 }
