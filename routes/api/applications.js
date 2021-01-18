@@ -18,7 +18,6 @@ router.post(
     }
 
     const newApplication = new Application({
-      user: req.body.user, //*userId
       company: req.body.company,
       position: req.body.position,
       location: req.body.location,
@@ -27,6 +26,7 @@ router.post(
       salaryMax: req.body.salaryMax,
       note: req.body.note,
       date: req.body.date,
+      logo: req.body.logo,
     })
 
     newApplication.save().then((application) => res.json(application))
@@ -50,6 +50,11 @@ router.patch(
         salaryMax: req.body.salaryMax,
         note: req.body.note,
         date: req.body.date,
+        logo: req.body.logo,
+        phoneScreen: req.body.phoneScreen,
+        techInterview: req.body.techInterview,
+        onSite: req.body.onSite,
+        offer: req.body.offer,
       },
       { new: true }
     )
@@ -103,5 +108,11 @@ router.get(
       .catch(err => res.status(400).json(err))
   }
 )
-
+router.get(
+  '/',
+  (req, res) => {
+    Application.find()
+      .then((apps) => res.json(apps.length))
+      .catch((err) => res.status(400).json(err));
+  });
 module.exports = router;

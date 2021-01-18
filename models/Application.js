@@ -38,6 +38,26 @@ const ApplicationSchema = new Schema({
     type: String,
     default: '',
   },
+  logo: {
+    type: String,
+    default: "https://res.cloudinary.com/willwang/image/upload/v1610993184/no_logo_bwuaae.png"
+  },
+  phoneScreen: {
+    type: Boolean,
+    default: false,
+  },
+  techInterview: {
+    type: Boolean,
+    default: false,
+  },
+  onSite: {
+    type: Boolean,
+    default: false,
+  },
+  Offer: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 module.exports = Application = mongoose.model('Application', ApplicationSchema);
