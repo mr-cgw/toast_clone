@@ -93,4 +93,15 @@ router.get(
       .catch(err => res.status(400).json(err))
   }
 )
+
+router.get(
+  "/:applicationId",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    Application.find({ _id: req.params.applicationId })
+      .then((application) => res.json(application))
+      .catch(err => res.status(400).json(err))
+  }
+)
+
 module.exports = router;

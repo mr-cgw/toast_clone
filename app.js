@@ -28,20 +28,41 @@ app.use('/api/applications', applications);
 
 app.listen(port, () => console.log(`server is running on port ${port}`));
 
-//update job db everyday
+//update job db every 10 mins
 const cron = require('node-cron');
-let shell = require('shelljs');
+var cors = require('cors')
+const axios = require('axios')
+app.use(cors())
+
 //* triggerd everyday at 00:00
 //? sec-min-hour-dayOfMonth-month-dayOfWeek
 // cron.schedule("00 00 * * *", function () {
 //   app.listen(port, () => console.log("a new day"))
 // })
-cron.schedule('*/10 * * * *', () => {
-  app.listen(port, () => console.log('2 mins'));
-});
+const jobMapper = (arr) => {
+  return arr.map(job => {
+    return {
+      position: job["title"],
+      company: job["company"],
+      location: job["location"],
+      link: job.url,
+    }
+  })
 
+}
+
+
+cron.schedule('*/10 * * * *', () => {
+  const jobs = {};
+  axios.get("https://jobs.github.com/positions.json?description=full+stack&full_time=true")
+    .then(res => {
+      app.listen(() => console.log(res))
+    });
+})
 //* all fullstack
 // https://jobs.github.com/positions.json?description=full+stack&full_time=true
 //* all frontend
-//https://jobs.github.com/positions.json?description=front+end&full_time=true
+// https://jobs.github.com/positions.json?description=front+end&full_time=true
 //* all backend
+// https://jobs.github.com/positions.json?description=back+end&full_time=true
+
