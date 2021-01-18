@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
+import Modal from 'react-modal';
 import { Typography, Button, Avatar } from '@material-ui/core';
-import * as Colors from '../Colors';
-import { CssTextField, useStyles } from './CssTextField';
 
-function Edit({ user, updateUser }) {
-  const [user, setUser] = useState(user);
+import { CssTextField, useStyles } from '../CssTextField';
+
+function Edit({ currentUser, updateUser }) {
+  const [user, setUser] = useState(currentUser);
   const [newPassword, setNewPassword] = useState('');
   const [isOpen, setShow] = useState(false);
   function toggleModal() {
@@ -17,7 +18,7 @@ function Edit({ user, updateUser }) {
   const classes = useStyles();
   function handleSubmit(e) {
     e.preventDefault();
-    updateUser(user).then((res) => {
+    updateUser({ ...user, newPassword }).then((res) => {
       if (res.type === 'RECEIVE_SESSION_ERRORS') {
         setDisplayMsg('Incorrect Email or Password ');
       } else {
@@ -52,10 +53,10 @@ function Edit({ user, updateUser }) {
   };
 
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
-        <header>Edit form</header>
-        <div>
+    <div className={classes.root}>
+      <form onSubmit={handleSubmit} style={{ display: 'flex' }}>
+        <div className={classes.leftPanel}>
+          <header>Edit form</header>
           <CssTextField
             type="text"
             value={user.username}
@@ -104,7 +105,7 @@ function Edit({ user, updateUser }) {
           <CssTextField
             type="password"
             value={newPassword}
-            onChange={update('NewPassword')}
+            onChange={update('newPassword')}
             className={classes.textField}
             required
             label="confirm password"
@@ -119,7 +120,7 @@ function Edit({ user, updateUser }) {
         <div className={classes.rightPanel}>
           <label>
             <Avatar
-              src={avatarUrl}
+              src={user.avatarUrl}
               style={{
                 marginRight: 10,
                 width: 100,
@@ -146,7 +147,7 @@ function Edit({ user, updateUser }) {
         ariaHideApp={false}
       >
         {displayMsg}
-        <button onclick={toggleModal}>close</button>
+        <button onClick={toggleModal}>close</button>
       </Modal>
     </div>
   );
