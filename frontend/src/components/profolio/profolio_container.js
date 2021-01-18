@@ -3,9 +3,9 @@ import { fetchUser, updateUser } from '../../actions/UserActions';
 import Profolio from './profolio';
 
 const mapStateToProps = (state) => ({
-  currentUser: state.entities.currentUser,
-  jobLists: Object.values(state.entites.jobLists),
-  updateError: state.errors.sessionErrors,
+  currentUser: state.session.user,
+  //   jobLists: Object.values(state.entites.jobLists),
+  //   updateError: state.errors.sessionErrors,
 });
 
 const mapDispatchToProps = (dispatch) => ({

@@ -3,13 +3,15 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-
   border: 1px solid #ccc;
   background: #fff;
+  background-color: #494949;
   overflow: auto;
   border-radius: 4px;
   outline: none;
-  padding: 20px;
+  padding: 40px 100px;
+  border-radius: 25px;
+  box-shadow: 0px 20px 20px 0px rgba(0, 0, 0, 0.3);
 }
 
 .edit-overlay {
@@ -18,12 +20,12 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(0, 0, 0, 0.75);
+  background-color: rgba(245, 240, 240, 0.75);
 }
 
 .ReactModal__Overlay {
   opacity: 0;
-  transition: opacity 500ms ease-in-out;
+  transition: opacity 300ms ease-in-out;
 }
 
 .ReactModal__Overlay--after-open {
@@ -32,4 +34,8 @@
 
 .ReactModal__Overlay--before-close {
   opacity: 0;
+}
+
+.update-msg {
+  color: #f3ffc8;
 }
