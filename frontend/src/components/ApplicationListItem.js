@@ -30,19 +30,19 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function ApplicationListItem({ application }) {
-  application = application || {
-    company: 'Google',
-    date: Data.now(),
-    link:
-      'https://www.google.com/about/careers/applications/packets/dcbcb991-8725-409e-bc26-b315727b8aca/form',
-    location: 'San Francisco',
-    note: '',
-    position: 'Front End Engineer',
-    salaryMin: 0,
-    salaryMax: 100000,
-    user: '600480d08f58520e79626ff9',
-    _id: '6004916a2e6c3c165f30b26c',
-  };
+  // application = application || {
+  //   company: 'Google',
+  //   date: Data.now(),
+  //   link:
+  //     'https://www.google.com/about/careers/applications/packets/dcbcb991-8725-409e-bc26-b315727b8aca/form',
+  //   location: 'San Francisco',
+  //   note: '',
+  //   position: 'Front End Engineer',
+  //   salaryMin: 0,
+  //   salaryMax: 100000,
+  //   user: '600480d08f58520e79626ff9',
+  //   _id: '6004916a2e6c3c165f30b26c',
+  // };
   const classes = useStyles();
   return (
     <div className={classes.root}>
