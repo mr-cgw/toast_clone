@@ -32,7 +32,12 @@ export const deleteApplication = (applicationId) => ({
 export const fetchApplications = (userId) => (dispatch) => {
   return ApplicationApiUtil.fetchApplications(userId)
     .then((applications) => {
-      dispatch(receiveApplications(applications));
+      const { data } = applications;
+      const payload = {};
+      data.forEach((application) => {
+        payload[application._id] = application;
+      });
+      dispatch(receiveApplications(payload));
     })
     .catch((errors) =>
       dispatch(receiveApplicationErrors(errors.response.data))
