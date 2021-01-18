@@ -21,7 +21,7 @@ function App() {
       <Switch>
         <AuthRoute exact path="/signin" component={Signin} />
         <AuthRoute exact path="/signup" component={Signup} />
-        <ProtectedRoute exact path="/profolio" component={Profolio} />
+        <ProtectedRoute exact path="/edit" component={Profolio} />
         <Route exact path="/" component={Landing} />
         {/* <ProtectedRoute exact path='/edit' component={EditForm} /> */}
         <Route exact path="/item" component={ApplicationListItem} />
