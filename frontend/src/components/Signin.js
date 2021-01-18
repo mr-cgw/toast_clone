@@ -70,6 +70,7 @@ function Signin({ signinUser }) {
               </Typography>
             </div>
           </div>
+          <div></div>
         </div>
         <div className={classes.rightPanel}>
           <div></div>
