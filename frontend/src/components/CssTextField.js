@@ -83,8 +83,8 @@ export const useStyles = makeStyles((theme) => ({
   },
   avatar: {
     marginRight: 20,
-    width: 50,
-    height: 50,
+    width: 80,
+    height: 80,
     [theme.breakpoints.up('sm')]: {
       width: 100,
       height: 100,

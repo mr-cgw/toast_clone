@@ -2,7 +2,9 @@ import React, { useState } from 'react';
 import Modal from 'react-modal';
 import Edit from './edit_form';
 import { Avatar, Typography } from '@material-ui/core';
-
+import IconButton from '@material-ui/core/IconButton';
+import CloseIcon from '@material-ui/icons/Close';
+import * as Colors from '../../Colors';
 function Profolio({ currentUser, fetchUser, updateUser }) {
   const [isOpen, setShow] = useState(false);
   function toggleModal() {
@@ -25,8 +27,22 @@ function Profolio({ currentUser, fetchUser, updateUser }) {
         closeTimeoutMS={500}
         ariaHideApp={false}
       >
-        <Edit currentUser={currentUser} updateUser={updateUser} />
-        <button onClick={toggleModal}>close</button>
+        <IconButton
+          aria-label="Close"
+          onClick={toggleModal}
+          style={{
+            position: 'absolute',
+            top: '0',
+            right: '0',
+          }}
+        >
+          <CloseIcon style={{ color: Colors.lightestGreen }} />
+        </IconButton>
+        <Edit
+          currentUser={currentUser}
+          updateUser={updateUser}
+          othertoggle={toggleModal}
+        />
       </Modal>
       <div></div>
     </div>

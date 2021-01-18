@@ -3,13 +3,17 @@ import Modal from 'react-modal';
 import { Typography, Button, Avatar } from '@material-ui/core';
 
 import { CssTextField, useStyles } from '../CssTextField';
+import IconButton from '@material-ui/core/IconButton';
+import CloseIcon from '@material-ui/icons/Close';
+import * as Colors from '../../Colors';
 
-function Edit({ currentUser, updateUser }) {
+function Edit({ currentUser, updateUser, othertoggle }) {
   const [user, setUser] = useState(currentUser);
   const [newPassword, setNewPassword] = useState('');
   const [isOpen, setShow] = useState(false);
   function toggleModal() {
     setShow(!isOpen);
+    othertoggle();
   }
   const [displayMsg, setDisplayMsg] = useState('');
   const [userNameErrors, setUserNameErrors] = useState('');
@@ -25,7 +29,7 @@ function Edit({ currentUser, updateUser }) {
         setDisplayMsg('Successfully Updated!');
       }
     });
-    toggleModal();
+    setShow(!isOpen);
   }
 
   function update(field) {
@@ -53,10 +57,9 @@ function Edit({ currentUser, updateUser }) {
   };
 
   return (
-    <div className={classes.root}>
+    <div className={classes.root} style={{ paddingTop: '30px' }}>
       <form onSubmit={handleSubmit} style={{ display: 'flex' }}>
         <div className={classes.leftPanel}>
-          <header>Edit form</header>
           <CssTextField
             type="text"
             value={user.username || ''}
@@ -117,7 +120,7 @@ function Edit({ currentUser, updateUser }) {
           />
           <p>{passwordErrors}</p>
         </div>
-        <div className={classes.rightPanel}>
+        <div className={classes.rightPanel} style={{ paddingLeft: '80px' }}>
           <label>
             <Avatar
               src={user.avatarUrl}
@@ -148,8 +151,18 @@ function Edit({ currentUser, updateUser }) {
         closeTimeoutMS={500}
         ariaHideApp={false}
       >
-        {displayMsg}
-        <button onClick={toggleModal}>close</button>
+        <IconButton
+          aria-label="Close"
+          onClick={toggleModal}
+          style={{
+            position: 'absolute',
+            top: '0',
+            right: '0',
+          }}
+        >
+          <CloseIcon style={{ color: Colors.lightestGreen }} />
+        </IconButton>
+        <span className="update-msg">{displayMsg}</span>
       </Modal>
     </div>
   );
