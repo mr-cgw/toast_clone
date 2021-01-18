@@ -130,10 +130,22 @@ function Navbar({ currentUser, fetchUser, signout }) {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <MenuItem className={classes.menuItem} onClick={handleMenuClose}>
-        User Profile
+      <MenuItem
+        className={classes.menuItem}
+        onClick={() => {
+          handleMenuClose();
+          history.push('/list');
+        }}
+      >
+        Application List
       </MenuItem>
-      <MenuItem className={classes.menuItem} onClick={handleMenuClose}>
+      <MenuItem
+        className={classes.menuItem}
+        onClick={() => {
+          handleMenuClose();
+          history.push('/edit');
+        }}
+      >
         Edit Profile
       </MenuItem>
 
