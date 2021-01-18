@@ -5,20 +5,20 @@ const JobsSchema = new Schema(
   {
     frontend: {
       type: Object,
-      default: {}
+      default: {},
     },
     backend: {
       type: Object,
-      default: {}
+      default: {},
     },
     fullstack: {
       type: Object,
-      default: {}
-    }
+      default: {},
+    },
   },
   {
     timestamps: true,
   }
-)
+);
 
-module.exports = Jobs = mongoose.model("Jobs", JobsSchema)
+module.exports = Jobs = mongoose.model('Jobs', JobsSchema);

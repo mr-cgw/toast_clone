@@ -1,14 +1,19 @@
 import React, { useState } from 'react';
+import Modal from 'react-modal';
 import { Typography, Button, Avatar } from '@material-ui/core';
-import * as Colors from '../../Colors';
-import { CssTextField, useStyles } from '../CssTextField';
 
-function Edit({ currentUser, updateUser }) {
+import { CssTextField, useStyles } from '../CssTextField';
+import IconButton from '@material-ui/core/IconButton';
+import CloseIcon from '@material-ui/icons/Close';
+import * as Colors from '../../Colors';
+
+function Edit({ currentUser, updateUser, othertoggle }) {
   const [user, setUser] = useState(currentUser);
   const [newPassword, setNewPassword] = useState('');
   const [isOpen, setShow] = useState(false);
   function toggleModal() {
     setShow(!isOpen);
+    othertoggle();
   }
   const [displayMsg, setDisplayMsg] = useState('');
   const [userNameErrors, setUserNameErrors] = useState('');
@@ -17,14 +22,14 @@ function Edit({ currentUser, updateUser }) {
   const classes = useStyles();
   function handleSubmit(e) {
     e.preventDefault();
-    updateUser(user).then((res) => {
+    updateUser({ ...user, newPassword }).then((res) => {
       if (res.type === 'RECEIVE_SESSION_ERRORS') {
         setDisplayMsg('Incorrect Email or Password ');
       } else {
         setDisplayMsg('Successfully Updated!');
       }
     });
-    toggleModal();
+    setShow(!isOpen);
   }
 
   function update(field) {
@@ -52,13 +57,12 @@ function Edit({ currentUser, updateUser }) {
   };
 
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
-        <header>Edit form</header>
-        <div>
+    <div className={classes.root} style={{ paddingTop: '30px' }}>
+      <form onSubmit={handleSubmit} style={{ display: 'flex' }}>
+        <div className={classes.leftPanel}>
           <CssTextField
             type="text"
-            value={user.username}
+            value={user.username || ''}
             onChange={update('username')}
             className={classes.textField}
             required
@@ -73,7 +77,7 @@ function Edit({ currentUser, updateUser }) {
 
           <CssTextField
             type="text"
-            value={user.email}
+            value={user.email || ''}
             onChange={update('email')}
             className={classes.textField}
             required
@@ -88,7 +92,7 @@ function Edit({ currentUser, updateUser }) {
 
           <CssTextField
             type="password"
-            value={user.password}
+            value={user.password || ''}
             onChange={update('password')}
             className={classes.textField}
             required
@@ -104,7 +108,7 @@ function Edit({ currentUser, updateUser }) {
           <CssTextField
             type="password"
             value={newPassword}
-            onChange={update('NewPassword')}
+            onChange={update('newPassword')}
             className={classes.textField}
             required
             label="confirm password"
@@ -116,10 +120,10 @@ function Edit({ currentUser, updateUser }) {
           />
           <p>{passwordErrors}</p>
         </div>
-        <div className={classes.rightPanel}>
+        <div className={classes.rightPanel} style={{ paddingLeft: '80px' }}>
           <label>
             <Avatar
-              src={avatarUrl}
+              src={user.avatarUrl}
               style={{
                 marginRight: 10,
                 width: 100,
@@ -133,7 +137,9 @@ function Edit({ currentUser, updateUser }) {
               onChange={(e) => handleAvatar(e.target.files[0])}
             />
           </label>
-          <Button className={classes.submitButton}>SAVE CHANGES</Button>
+          <Button type="submit" className={classes.submitButton}>
+            SAVE CHANGES
+          </Button>
         </div>
       </form>
       <Modal
@@ -145,8 +151,18 @@ function Edit({ currentUser, updateUser }) {
         closeTimeoutMS={500}
         ariaHideApp={false}
       >
-        {displayMsg}
-        <button onclick={toggleModal}>close</button>
+        <IconButton
+          aria-label="Close"
+          onClick={toggleModal}
+          style={{
+            position: 'absolute',
+            top: '0',
+            right: '0',
+          }}
+        >
+          <CloseIcon style={{ color: Colors.lightestGreen }} />
+        </IconButton>
+        <span className="update-msg">{displayMsg}</span>
       </Modal>
     </div>
   );
