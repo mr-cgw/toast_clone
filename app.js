@@ -71,7 +71,7 @@ cron.schedule('*/10 * * * *', () => {
           .then((res) => {
             jobMapper(res.data, 'frontend');
           });
-      }, 500)
+      }, 1000)
     )
     .then(
       setTimeout(() => {
@@ -82,7 +82,7 @@ cron.schedule('*/10 * * * *', () => {
           .then((res) => {
             jobMapper(res.data, 'backend');
           });
-      }, 1000)
+      }, 2000)
     )
     .then(() => {
       setTimeout(() => {
@@ -97,6 +97,6 @@ cron.schedule('*/10 * * * *', () => {
             { new: true }
           )
           .then((res) => app.listen(() => console.log(res)));
-      }, 1500);
+      }, 3000);
     });
 });
