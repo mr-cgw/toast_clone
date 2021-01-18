@@ -59,7 +59,7 @@ function Edit({ currentUser, updateUser }) {
           <header>Edit form</header>
           <CssTextField
             type="text"
-            value={user.username}
+            value={user.username || ''}
             onChange={update('username')}
             className={classes.textField}
             required
@@ -74,7 +74,7 @@ function Edit({ currentUser, updateUser }) {
 
           <CssTextField
             type="text"
-            value={user.email}
+            value={user.email || ''}
             onChange={update('email')}
             className={classes.textField}
             required
@@ -89,7 +89,7 @@ function Edit({ currentUser, updateUser }) {
 
           <CssTextField
             type="password"
-            value={user.password}
+            value={user.password || ''}
             onChange={update('password')}
             className={classes.textField}
             required
@@ -134,7 +134,9 @@ function Edit({ currentUser, updateUser }) {
               onChange={(e) => handleAvatar(e.target.files[0])}
             />
           </label>
-          <Button className={classes.submitButton}>SAVE CHANGES</Button>
+          <Button type="submit" className={classes.submitButton}>
+            SAVE CHANGES
+          </Button>
         </div>
       </form>
       <Modal
