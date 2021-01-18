@@ -32,7 +32,7 @@ function App() {
       ) : (
           <Footer />
         )}
-      <Charts style={{ width: "30vw" }} />
+      <Charts />
     </div>
   );
 }
