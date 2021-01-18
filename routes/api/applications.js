@@ -17,6 +17,7 @@ router.post(
     }
 
     const newApplication = new Application({
+      user: req.body.user,
       company: req.body.company,
       position: req.body.position,
       location: req.body.location,
@@ -50,7 +51,7 @@ router.patch(
         note: req.body.note,
         date: req.body.date,
         logo: req.body.logo,
-        phoneScreen: req.body.phoneScreen,
+        phoneScreen: req.body.phoneScreen ,
         techInterview: req.body.techInterview,
         onSite: req.body.onSite,
         offer: req.body.offer,

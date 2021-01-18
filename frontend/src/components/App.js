@@ -11,7 +11,7 @@ import Profolio from './profolio/profolio_container';
 import ApplicationList from './ApplicationList';
 import ApplicationListItem from './ApplicationListItem';
 import Footer from './Footer';
-
+import Charts from './charts/allChartsContainer'
 function App() {
   const loggedIn = false;
   const location = useLocation();
@@ -30,8 +30,9 @@ function App() {
       {location.pathname === '/signin' || location.pathname === '/signup' ? (
         <div></div>
       ) : (
-        <Footer />
-      )}
+          <Footer />
+        )}
+      <Charts style={{ width: "30vw" }} />
     </div>
   );
 }
