@@ -1,4 +1,13 @@
+.land-top {
+  display: flex;
+  flex-direction: row;
+}
 .loca-drop {
   margin-left: 50px;
-  margin-top: 50px;
+  margin-top: 25px;
+}
+
+.land-check {
+  margin-left: 50px;
+  margin-top: 25px;
 }
