@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Modal from 'react-modal';
+import { validate } from 'email-validator';
 import { Typography, Button, Avatar } from '@material-ui/core';
 
 import { CssTextField, useStyles } from '../CssTextField';
