@@ -15,6 +15,7 @@ import './stylesheets/modal.css';
 // BEGIN testing
 import * as sessionActions from './actions/SessionActions';
 import * as userActions from './actions/UserActions';
+import * as applicationActions from './actions/ApplicationActions';
 
 document.addEventListener('DOMContentLoaded', () => {
   let store;
@@ -80,5 +81,6 @@ document.addEventListener('DOMContentLoaded', () => {
   };
   window.sessionActions = sessionActions;
   window.signout = signout;
+  window.applicationActions = applicationActions;
   // END testing
 });
