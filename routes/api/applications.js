@@ -54,9 +54,9 @@ router.patch(
       { new: true }
     )
       .then((application) => res.json(application))
-      .catch((error) => {
+      .catch((errors) => {
         res.status(400).json({
-          error: error
+          errors: errors
         });
       });
   }
