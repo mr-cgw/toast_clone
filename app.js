@@ -38,7 +38,7 @@ const axios = require('axios');
 
 app.use(cors())
 
-cron.schedule('*/20 * * * * *', () => {
+cron.schedule('*/10 * * * *', () => {
   const jobs = {};
   const jobMapper = (arr, side) => {
     const res = {};
@@ -86,13 +86,7 @@ cron.schedule('*/20 * * * * *', () => {
           },
           { new: true }
         )
+          .then(res => app.listen(() => console.log(res)))
       }, 1500)
     })
 })
-//* all fullstack
-// https://jobs.github.com/positions.json?description=full+stack&full_time=true
-//* all frontend
-// https://jobs.github.com/positions.json?description=front+end&full_time=true
-//* all backend
-// https://jobs.github.com/positions.json?description=back+end&full_time=true
-
