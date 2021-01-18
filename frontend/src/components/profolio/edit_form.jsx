@@ -20,16 +20,24 @@ function Edit({ currentUser, updateUser, othertoggle }) {
   const [emailErrors, setEmailErrors] = useState('');
   const [passwordErrors, setPasswordErrors] = useState('');
   const classes = useStyles();
+
   function handleSubmit(e) {
     e.preventDefault();
-    updateUser({ ...user, newPassword }).then((res) => {
-      if (res.type === 'RECEIVE_SESSION_ERRORS') {
-        setDisplayMsg('Incorrect Email or Password ');
-      } else {
-        setDisplayMsg('Successfully Updated!');
-      }
-    });
-    setShow(!isOpen);
+    if (username.length < 6)
+      setUserNameErrors('Username must be at least 6 characters');
+    if (!validate(email)) setEmailErrors('Email is invalid');
+    if (password.length < 6)
+      setPasswordErrors('Password must be at least 6 characters');
+    if (!userNameErrors && !emailErrors && !passwordErrors) {
+      updateUser({ ...user, newPassword }).then((res) => {
+        if (res.type === 'RECEIVE_SESSION_ERRORS') {
+          setDisplayMsg('Incorrect Email or Password ');
+        } else {
+          setDisplayMsg('Successfully Updated!');
+        }
+      });
+      setShow(!isOpen);
+    }
   }
 
   function update(field) {

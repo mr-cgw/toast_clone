@@ -77,6 +77,12 @@ export const useStyles = makeStyles((theme) => ({
     justifyContent: 'flex-end',
     alignItems: 'center',
   },
+  signup: {
+    width: '100%',
+    display: 'flex',
+    justifyContent: 'flex-end',
+    alignItems: 'center',
+  },
   uploadAvatar: {
     display: 'flex',
     margin: '2rem auto',
