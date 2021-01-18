@@ -7,6 +7,7 @@ import Signin from './Signin';
 import Signup from './Signup';
 import EditForm from './profolio/edit_form';
 import { AuthRoute, ProtectedRoute } from './SpecialRoutes';
+import Profolio from './profolio/profolio_container';
 import ApplicationList from './ApplicationList';
 import ApplicationListItem from './ApplicationListItem';
 import Footer from './Footer';
@@ -20,6 +21,7 @@ function App() {
       <Switch>
         <AuthRoute exact path="/signin" component={Signin} />
         <AuthRoute exact path="/signup" component={Signup} />
+        <ProtectedRoute exact path="/edit" component={Profolio} />
         <Route exact path="/" component={Landing} />
         {/* <ProtectedRoute exact path='/edit' component={EditForm} /> */}
         <Route exact path="/item" component={ApplicationListItem} />
@@ -28,8 +30,8 @@ function App() {
       {location.pathname === '/signin' || location.pathname === '/signup' ? (
         <div></div>
       ) : (
-          <Footer />
-        )}
+        <Footer />
+      )}
     </div>
   );
 }
