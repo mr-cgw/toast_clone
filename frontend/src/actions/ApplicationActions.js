@@ -14,13 +14,13 @@ export const receiveApplications = (payload) => ({
   payload,
 });
 
-export const clearApplicationErrors = () => ({
-  type: CLEAR_APPLICATION_ERRORS,
+export const receiveApplicationErrors = (errors) => ({
+  type: RECEIVE_APPLICATION_ERRORS,
+  errors,
 });
 
-export const receiveUserErrors = (errors) => ({
-  type: RECEIVE_USER_ERRORS,
-  errors,
+export const clearApplicationErrors = () => ({
+  type: CLEAR_APPLICATION_ERRORS,
 });
 
 export const receiveUsers = (users) => ({
