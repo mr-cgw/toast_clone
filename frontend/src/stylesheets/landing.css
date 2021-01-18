@@ -11,3 +11,8 @@
   margin-left: 50px;
   margin-top: 25px;
 }
+
+.job-item img {
+  height: 50px;
+  width: auto;
+}

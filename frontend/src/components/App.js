@@ -2,7 +2,7 @@ import React from 'react';
 import { useLocation } from 'react-router-dom';
 import { Switch, Route } from 'react-router-dom';
 import Navbar from './Navbar';
-import Landing from './Landing';
+import Landing from './Landing_container';
 import Signin from './Signin';
 import Signup from './Signup';
 import EditForm from './profolio/edit_form';
