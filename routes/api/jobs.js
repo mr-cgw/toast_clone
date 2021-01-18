@@ -66,7 +66,9 @@ router.post('/', (req, res) => {
 //* 6004f5e394d8c762eeeeb6f4
 router.get('/', (req, res) => {
   JobsDB.find({ _id: '6004f5e394d8c762eeeeb6f4' })
-    .then((db) => res.json(db))
+    .then((db) => {
+      return res.json(db);
+    })
     .catch((err) => res.status(400).json(err));
 });
 
