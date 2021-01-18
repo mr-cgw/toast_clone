@@ -1,45 +1,43 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const ApplicationSchema = new Schema({
   user: {
     type: Schema.Types.ObjectId,
-    ref: "users"
+    ref: 'users',
   },
   company: {
     type: String,
-    required: true
+    required: true,
   },
   position: {
     type: String,
-    required: true
+    required: true,
   },
   location: {
     type: String,
-    default: ""
+    default: '',
   },
   link: {
     type: String,
-    default: ""
+    default: '',
   },
   salaryMin: {
     type: Number,
-    default: 0
+    default: 0,
   },
   salaryMax: {
     type: Number,
-    default: 0
+    default: 0,
   },
   date: {
     type: String,
-    default: ""
+    default: '',
   },
   note: {
     type: String,
-    default: ""
-  }
-})
-
+    default: '',
+  },
+});
 
 module.exports = Application = mongoose.model('Application', ApplicationSchema);
-

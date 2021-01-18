@@ -11,6 +11,7 @@ import jwt_decode from 'jwt-decode';
 import { setAuthToken } from './util/SessionApiUtil';
 import { signout } from './actions/SessionActions';
 
+import './stylesheets/modal.css';
 // BEGIN testing
 import * as sessionActions from './actions/SessionActions';
 import * as userActions from './actions/UserActions';
@@ -40,6 +41,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (decodedUser.exp < currentTime) {
       // signout the user and redirect to login
       store.dispatch(signout());
+      window.location.href = '/login';
     }
   } else {
     // First time user, start w/ empty store
