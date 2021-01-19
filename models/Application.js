@@ -58,6 +58,14 @@ const ApplicationSchema = new Schema({
     type: Boolean,
     default: false,
   },
+  favorite: {
+    type: Boolean,
+    default: false,
+  },
+  resumeUrl: {
+    type: String,
+    default: ""
+  }
 });
 
 module.exports = Application = mongoose.model('Application', ApplicationSchema);

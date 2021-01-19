@@ -27,6 +27,7 @@ router.post(
       note: req.body.note,
       date: req.body.date,
       logo: req.body.logo,
+      resumeUrl: req.body.resumeUrl
     })
 
     newApplication.save().then((application) => res.json(application));
@@ -51,10 +52,12 @@ router.patch(
         note: req.body.note,
         date: req.body.date,
         logo: req.body.logo,
-        phoneScreen: req.body.phoneScreen ,
+        phoneScreen: req.body.phoneScreen,
         techInterview: req.body.techInterview,
         onSite: req.body.onSite,
-        offer: req.body.offer,
+        Offer: req.body.Offer,
+        resumeUrl: req.body.resumeUrl,
+        favorite: req.body.favorite
       },
       { new: true }
     )
