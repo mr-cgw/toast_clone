@@ -17,6 +17,7 @@ router.post(
     }
 
     const newApplication = new Application({
+      user: req.body.user,
       company: req.body.company,
       position: req.body.position,
       location: req.body.location,
@@ -26,7 +27,8 @@ router.post(
       note: req.body.note,
       date: req.body.date,
       logo: req.body.logo,
-    })
+      resumeUrl: req.body.resumeUrl,
+    });
 
     newApplication.save().then((application) => res.json(application));
   }
@@ -53,7 +55,9 @@ router.patch(
         phoneScreen: req.body.phoneScreen,
         techInterview: req.body.techInterview,
         onSite: req.body.onSite,
-        offer: req.body.offer,
+        Offer: req.body.Offer,
+        resumeUrl: req.body.resumeUrl,
+        favorite: req.body.favorite,
       },
       { new: true }
     )
@@ -104,12 +108,10 @@ router.get(
       .then((application) => res.json(application))
       .catch((err) => res.status(400).json(err));
   }
-)
-router.get(
-  '/',
-  (req, res) => {
-    Application.find()
-      .then((apps) => res.json(apps.length))
-      .catch((err) => res.status(400).json(err));
-  });
+);
+router.get('/', (req, res) => {
+  Application.find()
+    .then((apps) => res.json(apps.length))
+    .catch((err) => res.status(400).json(err));
+});
 module.exports = router;

@@ -30,19 +30,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function ApplicationListItem({ application }) {
-  // application = application || {
-  //   company: 'Google',
-  //   date: Data.now(),
-  //   link:
-  //     'https://www.google.com/about/careers/applications/packets/dcbcb991-8725-409e-bc26-b315727b8aca/form',
-  //   location: 'San Francisco',
-  //   note: '',
-  //   position: 'Front End Engineer',
-  //   salaryMin: 0,
-  //   salaryMax: 100000,
-  //   user: '600480d08f58520e79626ff9',
-  //   _id: '6004916a2e6c3c165f30b26c',
-  // };
   const classes = useStyles();
   return (
     <div className={classes.root}>
@@ -95,7 +82,7 @@ function ApplicationListItem({ application }) {
             phone screen
           </Typography>
           <Checkbox
-            checked={application.screened}
+            checked={!!application.phoneScreen}
             inputProps={{ 'aria-label': 'primary checkbox' }}
           />
         </label>
@@ -106,7 +93,7 @@ function ApplicationListItem({ application }) {
             Tech Interview
           </Typography>
           <Checkbox
-            checked={application.tech}
+            checked={!!application.techInterview}
             inputProps={{ 'aria-label': 'primary checkbox' }}
           />
         </label>
@@ -117,7 +104,7 @@ function ApplicationListItem({ application }) {
             On Site
           </Typography>
           <Checkbox
-            checked={application.onsite}
+            checked={!!application.onSite}
             inputProps={{ 'aria-label': 'primary checkbox' }}
           />
         </label>
@@ -128,7 +115,7 @@ function ApplicationListItem({ application }) {
             Offer
           </Typography>
           <Checkbox
-            checked={application.offer}
+            checked={!!application.Offer}
             inputProps={{ 'aria-label': 'primary checkbox' }}
           />
         </label>
