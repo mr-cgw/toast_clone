@@ -12,13 +12,13 @@ function Landing({ jobs, fetchJobs }) {
   useEffect(() => {
     fetchJobs();
   }, []);
-  console.log('jobs', jobs);
-  const [flag, setFlag] = useState('false');
+  const [flag, setFlag] = useState(false);
   const [location, setLocation] = useState('SF');
   function handleChange(e) {
     e.preventDefault();
     setLocation(e.target.value);
   }
+  console.log('flag', flag);
   return (
     <div className="landing">
       <div className="land-top">
@@ -47,16 +47,19 @@ function Landing({ jobs, fetchJobs }) {
               <FormControlLabel
                 value="all"
                 control={<Checkbox color="primary" />}
+                onChange={() => setFlag(!flag)}
                 label="All"
                 labelPlacement="start"
               />
               <FormControlLabel
+                disabled={flag}
                 value="frontend"
                 control={<Checkbox color="primary" />}
                 label="Frontend"
                 labelPlacement="start"
               />
               <FormControlLabel
+                disabled={flag}
                 value="backend"
                 control={<Checkbox color="primary" />}
                 label="Backend"
@@ -69,7 +72,7 @@ function Landing({ jobs, fetchJobs }) {
 
       <div className="job-container">
         {jobs.map((job, idx) => (
-          <JobItem job={job} key={job.id + idx} />
+          <JobItem job={job} key={job.id + idx} location={location} />
         ))}
       </div>
     </div>

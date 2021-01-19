@@ -69,7 +69,20 @@
   right: -49px;
   display: inline-block;
 }
+.job-position {
+  position: absolute;
+  bottom: 52px;
+  align-content: center;
+  display: inline-block;
+}
+.job-location {
+  position: absolute;
+  bottom: 6px;
+  left: -49px;
+  display: inline-block;
+}
 
 .job-company {
   font-weight: bold;
+  margin-bottom: 25px;
 }
