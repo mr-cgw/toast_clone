@@ -58,6 +58,16 @@ const ApplicationSchema = new Schema({
     type: Boolean,
     default: false,
   },
-});
+  favorite: {
+    type: Boolean,
+    default: false,
+  },
+  resumeUrl: {
+    type: String,
+    default: ""
+  }
+
+},
+  { timestamps: true });
 
 module.exports = Application = mongoose.model('Application', ApplicationSchema);
