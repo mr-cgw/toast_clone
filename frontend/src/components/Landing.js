@@ -14,6 +14,7 @@ function Landing({ jobs, fetchJobs }) {
   }, []);
   const [flag, setFlag] = useState(false);
   const [location, setLocation] = useState('All');
+  const [position, setPosition] = useState('All-Pos');
   function handleChange(e) {
     e.preventDefault();
     setLocation(e.target.value);
@@ -47,16 +48,31 @@ function Landing({ jobs, fetchJobs }) {
           <FormControl component="fieldset">
             <FormGroup aria-label="position" row>
               <FormControlLabel
-                value="all"
+                value="All-Pos"
                 control={<Checkbox color="primary" />}
-                onChange={() => setFlag(!flag)}
+                onChange={(e) => {
+                  setFlag(!flag), setPosition(e.target.value);
+                }}
                 label="All"
+                labelPlacement="start"
+              />
+              <FormControlLabel
+                disabled={flag}
+                value="fullstack"
+                control={<Checkbox color="primary" />}
+                onChange={(e) => {
+                  setPosition(e.target.value);
+                }}
+                label="full-stack"
                 labelPlacement="start"
               />
               <FormControlLabel
                 disabled={flag}
                 value="frontend"
                 control={<Checkbox color="primary" />}
+                onChange={(e) => {
+                  setPosition(e.target.value);
+                }}
                 label="Frontend"
                 labelPlacement="start"
               />
@@ -64,6 +80,9 @@ function Landing({ jobs, fetchJobs }) {
                 disabled={flag}
                 value="backend"
                 control={<Checkbox color="primary" />}
+                onChange={(e) => {
+                  setPosition(e.target.value);
+                }}
                 label="Backend"
                 labelPlacement="start"
               />
@@ -74,7 +93,12 @@ function Landing({ jobs, fetchJobs }) {
 
       <div className="job-container">
         {jobs.map((job, idx) => (
-          <JobItem job={job} key={job.id + idx} location={location} />
+          <JobItem
+            job={job}
+            key={job.id + idx}
+            location={location}
+            position={position}
+          />
         ))}
       </div>
     </div>
