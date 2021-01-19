@@ -66,6 +66,8 @@ const ApplicationSchema = new Schema({
     type: String,
     default: ""
   }
-});
+
+},
+  { timestamps: true });
 
 module.exports = Application = mongoose.model('Application', ApplicationSchema);
