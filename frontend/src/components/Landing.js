@@ -13,7 +13,8 @@ function Landing({ jobs, fetchJobs }) {
     fetchJobs();
   }, []);
   const [flag, setFlag] = useState(false);
-  const [location, setLocation] = useState('SF');
+  const [location, setLocation] = useState('All');
+  const [position, setPosition] = useState('All-Pos');
   function handleChange(e) {
     e.preventDefault();
     setLocation(e.target.value);
@@ -24,7 +25,7 @@ function Landing({ jobs, fetchJobs }) {
       <div className="land-top">
         <div className="loca-drop">
           <FormControl variant="outlined">
-            <InputLabel id="loca">Age</InputLabel>
+            <InputLabel id="loca">Location</InputLabel>
             <Select
               labelId="loca"
               id="demo-simple-select-outlined"
@@ -32,12 +33,14 @@ function Landing({ jobs, fetchJobs }) {
               onChange={handleChange}
               label="Location"
             >
-              <MenuItem value="">
-                <em>None</em>
+              <MenuItem value="All">
+                <em>All</em>
               </MenuItem>
-              <MenuItem value={'SF'}>SF</MenuItem>
-              <MenuItem value={'LA'}>LA</MenuItem>
-              <MenuItem value={'SEA'}>SEA</MenuItem>
+              <MenuItem value={'Remote'}>Remote</MenuItem>
+              <MenuItem value={'Los Angeles'}>LA</MenuItem>
+              <MenuItem value={'San Francisco'}>SF</MenuItem>
+              <MenuItem value={'Berlin'}>Berlin</MenuItem>
+              <MenuItem value={'New York'}>NY</MenuItem>
             </Select>
           </FormControl>
         </div>
@@ -45,16 +48,31 @@ function Landing({ jobs, fetchJobs }) {
           <FormControl component="fieldset">
             <FormGroup aria-label="position" row>
               <FormControlLabel
-                value="all"
+                value="All-Pos"
                 control={<Checkbox color="primary" />}
-                onChange={() => setFlag(!flag)}
+                onChange={(e) => {
+                  setFlag(!flag), setPosition(e.target.value);
+                }}
                 label="All"
+                labelPlacement="start"
+              />
+              <FormControlLabel
+                disabled={flag}
+                value="fullstack"
+                control={<Checkbox color="primary" />}
+                onChange={(e) => {
+                  setPosition(e.target.value);
+                }}
+                label="full-stack"
                 labelPlacement="start"
               />
               <FormControlLabel
                 disabled={flag}
                 value="frontend"
                 control={<Checkbox color="primary" />}
+                onChange={(e) => {
+                  setPosition(e.target.value);
+                }}
                 label="Frontend"
                 labelPlacement="start"
               />
@@ -62,6 +80,9 @@ function Landing({ jobs, fetchJobs }) {
                 disabled={flag}
                 value="backend"
                 control={<Checkbox color="primary" />}
+                onChange={(e) => {
+                  setPosition(e.target.value);
+                }}
                 label="Backend"
                 labelPlacement="start"
               />
@@ -72,7 +93,12 @@ function Landing({ jobs, fetchJobs }) {
 
       <div className="job-container">
         {jobs.map((job, idx) => (
-          <JobItem job={job} key={job.id + idx} location={location} />
+          <JobItem
+            job={job}
+            key={job.id + idx}
+            location={location}
+            position={position}
+          />
         ))}
       </div>
     </div>
