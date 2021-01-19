@@ -7,7 +7,6 @@ function AllCharts({ currentUser, applications, fetchApplications }) {
 			fetchApplications(currentUser.id);
 		}
 	}, []);
-	console.log(applications);
 	return <PieChar applications={applications} />;
 }
 

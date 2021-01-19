@@ -1,7 +1,6 @@
 import { Doughnut } from "react-chartjs-2";
 import * as Colors from "../../Colors";
 export default function PieChar({ applications }) {
-	console.log("pie", Object.values(applications));
 	const appArr = Object.values(applications);
 	const offer = appArr.filter((app) => app.Offer).length;
 	const onSite = appArr.filter((app) => app.onSite).length;
@@ -11,7 +10,6 @@ export default function PieChar({ applications }) {
 		(app) => !app.Offer && !app.onSite && !app.techInterview && !app.phoneScreen
 	).length;
 	const data = [total, phoneScreen, techInterview, onSite, offer];
-	console.log("data", data);
 	return appArr.length ? (
 		<div className="donut">
 			<Doughnut

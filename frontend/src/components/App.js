@@ -12,6 +12,8 @@ import ApplicationList from './ApplicationList';
 import ApplicationDetailItem from './ApplicationDetailItem';
 import Footer from './Footer';
 import Charts from './charts/allChartsContainer'
+
+import AppPostForm from './appForms/appPostForm'
 function App() {
   const loggedIn = false;
   const location = useLocation();
@@ -32,7 +34,15 @@ function App() {
       ) : (
           <Footer />
         )}
-      <Charts />
+      {/* <AppPostForm job={{
+        "id": "fc829ec9-cf3b-4ca6-bce4-edf492f9f62c",
+        "company": "Workist GmbH",
+        "position": "(Senior) Backend Engineer",
+        "location": "Berlin",
+        "createdAt": "Mon Jan 18 10:08:02 UTC 2021",
+        "companyLogo": "https://jobs.github.com/rails/active_storage/blobs/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBckNWIiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--d15c9a5524ae780e7386e6569c40b0bbabc092e1/Workist%20GmbH.png"
+      }} /> */}
+      {/* <Charts /> */}
     </div>
   );
 }
