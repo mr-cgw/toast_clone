@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { useHistory, useLocation } from 'react-router-dom';
+import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 import {
   makeStyles,
   Typography,
@@ -54,7 +55,7 @@ const useStyles = makeStyles((theme) => ({
     display: 'none',
     marginRight: '1rem',
     position: 'absolute',
-    right: 20,
+    right: 120,
     bottom: 20,
     [theme.breakpoints.up('md')]: {
       display: 'block',
@@ -72,6 +73,16 @@ const useStyles = makeStyles((theme) => ({
   },
   menuItem: {
     padding: '20px 40px',
+  },
+  applyButton: {
+    color: Colors.lightestGreen,
+    display: 'none',
+    position: 'absolute',
+    right: 40,
+    bottom: 17,
+    [theme.breakpoints.up('md')]: {
+      display: 'block',
+    },
   },
 }));
 
@@ -228,12 +239,17 @@ function Navbar({ currentUser, fetchUser, signout }) {
   );
   const renderButtons = () =>
     currentUser ? (
-      <IconButton className={classes.avatar} onClick={handleProfileMenuOpen}>
-        <Avatar
-          src={`https://res.cloudinary.com/willwang/image/upload/v1610852026/infiHuntLogo_rru0vl.png`}
-          style={{ backgroundColor: '#020202', width: 50, height: 50 }}
-        />
-      </IconButton>
+      <div>
+        <IconButton className={classes.avatar} onClick={handleProfileMenuOpen}>
+          <Avatar
+            src={`https://res.cloudinary.com/willwang/image/upload/v1610852026/infiHuntLogo_rru0vl.png`}
+            style={{ backgroundColor: '#020202', width: 50, height: 50 }}
+          />
+        </IconButton>
+        <IconButton className={classes.applyButton}>
+          <AddCircleOutlineIcon style={{ width: 60, height: 60 }} />
+        </IconButton>
+      </div>
     ) : (
       <div className={classes.buttons}>
         <Button
