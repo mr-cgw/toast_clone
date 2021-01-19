@@ -2,7 +2,7 @@ import React from 'react';
 import { useLocation } from 'react-router-dom';
 import { Switch, Route } from 'react-router-dom';
 import Navbar from './Navbar';
-import Landing from './Landing';
+import Landing from './Landing_container';
 import Signin from './Signin';
 import Signup from './Signup';
 import EditForm from './profolio/edit_form';
@@ -11,7 +11,7 @@ import Profolio from './profolio/profolio_container';
 import ApplicationList from './ApplicationList';
 import ApplicationDetailItem from './ApplicationDetailItem';
 import Footer from './Footer';
-import Charts from './charts/allChartsContainer'
+import Charts from './charts/allChartsContainer';
 function App() {
   const loggedIn = false;
   const location = useLocation();
@@ -30,8 +30,8 @@ function App() {
       {location.pathname === '/signin' || location.pathname === '/signup' ? (
         <div></div>
       ) : (
-          <Footer />
-        )}
+        <Footer />
+      )}
       <Charts />
     </div>
   );

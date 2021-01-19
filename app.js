@@ -96,7 +96,9 @@ cron.schedule('*/10 * * * *', () => {
             },
             { new: true }
           )
-          .then((res) => app.listen(() => console.log(Object.values(res).length)));
+          .then((res) =>
+            app.listen(() => console.log(Object.values(res).length))
+          );
       }, 3000);
     });
 });
