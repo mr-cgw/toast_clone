@@ -13,7 +13,7 @@ function Landing({ jobs, fetchJobs }) {
     fetchJobs();
   }, []);
   const [flag, setFlag] = useState(false);
-  const [location, setLocation] = useState('SF');
+  const [location, setLocation] = useState('All');
   function handleChange(e) {
     e.preventDefault();
     setLocation(e.target.value);
@@ -24,7 +24,7 @@ function Landing({ jobs, fetchJobs }) {
       <div className="land-top">
         <div className="loca-drop">
           <FormControl variant="outlined">
-            <InputLabel id="loca">Age</InputLabel>
+            <InputLabel id="loca">Location</InputLabel>
             <Select
               labelId="loca"
               id="demo-simple-select-outlined"
@@ -32,12 +32,14 @@ function Landing({ jobs, fetchJobs }) {
               onChange={handleChange}
               label="Location"
             >
-              <MenuItem value="">
-                <em>None</em>
+              <MenuItem value="All">
+                <em>All</em>
               </MenuItem>
-              <MenuItem value={'SF'}>SF</MenuItem>
-              <MenuItem value={'LA'}>LA</MenuItem>
-              <MenuItem value={'SEA'}>SEA</MenuItem>
+              <MenuItem value={'Remote'}>Remote</MenuItem>
+              <MenuItem value={'Los Angeles'}>LA</MenuItem>
+              <MenuItem value={'San Francisco'}>SF</MenuItem>
+              <MenuItem value={'Berlin'}>Berlin</MenuItem>
+              <MenuItem value={'New York'}>NY</MenuItem>
             </Select>
           </FormControl>
         </div>
