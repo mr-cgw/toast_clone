@@ -16,7 +16,7 @@ export const fetchApplication = (applicationId) => {
 
 export const updateApplication = (applicationData) => {
   return axios.patch(
-    `/api/applications/${applicationData.id}`,
+    `/api/applications/${applicationData._id}`,
     applicationData
   );
 };
