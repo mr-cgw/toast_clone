@@ -13,14 +13,14 @@ function Landing({ jobs, fetchJobs }) {
     fetchJobs();
   }, []);
   console.log('jobs', jobs);
-
+  const [flag, setFlag] = useState('false');
   const [location, setLocation] = useState('SF');
   function handleChange(e) {
     e.preventDefault();
     setLocation(e.target.value);
   }
   return (
-    <div>
+    <div className="landing">
       <div className="land-top">
         <div className="loca-drop">
           <FormControl variant="outlined">
@@ -66,7 +66,8 @@ function Landing({ jobs, fetchJobs }) {
           </FormControl>
         </div>
       </div>
-      <div>
+
+      <div className="job-container">
         {jobs.map((job, idx) => (
           <JobItem job={job} key={job.id + idx} />
         ))}
