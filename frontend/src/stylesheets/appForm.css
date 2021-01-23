@@ -1,0 +1,9 @@
+#app-date {
+	color: #f3ffc8;
+}
+#app-date:before {
+	border-color: #f3ffc8;
+}
+.MuiInput-underline:before {
+	border-bottom: 1px solid #f3ffc8;
+}
