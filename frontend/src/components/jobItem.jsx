@@ -6,9 +6,9 @@ import en from 'javascript-time-ago/locale/en';
 
 TimeAgo.addDefaultLocale(en);
 // English.
-function JobItem({ job, location, position }) {
+function JobItem({ job, location, positions }) {
   if (job.location.includes(location) || location === 'All') {
-    if (job.category.includes(position) || position === 'All-Pos') {
+    if (positions.includes(job.category) || positions.length === 0) {
       return (
         <div className="job-item">
           <span className="job-company">{job.company}</span>
