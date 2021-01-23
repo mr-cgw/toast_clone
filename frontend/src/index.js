@@ -15,6 +15,7 @@ import './stylesheets/modal.css';
 import './stylesheets/profolio.css';
 import './stylesheets/charts.css'
 import './stylesheets/appForm.css'
+import './stylesheets/landing.css';
 // BEGIN testing
 import * as sessionActions from './actions/SessionActions';
 import * as userActions from './actions/UserActions';

@@ -1,5 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { makeStyles, Typography, Checkbox } from '@material-ui/core';
+import { updateApplication } from '../actions/ApplicationActions';
+import { connect } from 'react-redux';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -29,7 +31,11 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function ApplicationListItem({ application }) {
+function ApplicationListItem({ application, updateApplication }) {
+  const [phoneScreen, setPhoneScreen] = useState(application.phoneScreen);
+  const [techInterview, setTechInterview] = useState(application.techInterview);
+  const [onSite, setOnsite] = useState(application.onSite);
+  const [Offer, setOffer] = useState(application.Offer);
   const classes = useStyles();
   return (
     <div className={classes.root}>
@@ -82,8 +88,13 @@ function ApplicationListItem({ application }) {
             phone screen
           </Typography>
           <Checkbox
-            checked={!!application.phoneScreen}
+            checked={phoneScreen}
             inputProps={{ 'aria-label': 'primary checkbox' }}
+            onChange={() => {
+              setPhoneScreen(!phoneScreen);
+              application.phoneScreen = !application.phoneScreen;
+              updateApplication(application);
+            }}
           />
         </label>
         <label
@@ -93,8 +104,13 @@ function ApplicationListItem({ application }) {
             Tech Interview
           </Typography>
           <Checkbox
-            checked={!!application.techInterview}
+            checked={techInterview}
             inputProps={{ 'aria-label': 'primary checkbox' }}
+            onChange={() => {
+              setTechInterview(!techInterview);
+              application.techInterview = !application.techInterview;
+              updateApplication(application);
+            }}
           />
         </label>
         <label
@@ -104,8 +120,13 @@ function ApplicationListItem({ application }) {
             On Site
           </Typography>
           <Checkbox
-            checked={!!application.onSite}
+            checked={onSite}
             inputProps={{ 'aria-label': 'primary checkbox' }}
+            onChange={() => {
+              setOnsite(!onSite);
+              application.onSite = !application.onSite;
+              updateApplication(application);
+            }}
           />
         </label>
         <label
@@ -115,8 +136,13 @@ function ApplicationListItem({ application }) {
             Offer
           </Typography>
           <Checkbox
-            checked={!!application.Offer}
+            checked={Offer}
             inputProps={{ 'aria-label': 'primary checkbox' }}
+            onChange={() => {
+              setOffer(!Offer);
+              application.Offer = !application.Offer;
+              updateApplication(application);
+            }}
           />
         </label>
       </div>
@@ -124,4 +150,6 @@ function ApplicationListItem({ application }) {
   );
 }
 
-export default ApplicationListItem;
+export default connect(null, (dispatch) => ({
+  updateApplication: (application) => dispatch(updateApplication(application)),
+}))(ApplicationListItem);

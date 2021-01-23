@@ -1,5 +1,5 @@
-import { Doughnut } from "react-chartjs-2";
-import * as Colors from "../../Colors";
+import { Doughnut } from 'react-chartjs-2';
+import * as Colors from '../../Colors';
 export default function PieChar({ applications }) {
 	const appArr = Object.values(applications);
 	const offer = appArr.filter((app) => app.Offer).length;
