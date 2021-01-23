@@ -13,13 +13,15 @@ import { signout } from './actions/SessionActions';
 
 import './stylesheets/modal.css';
 import './stylesheets/profolio.css';
+import './stylesheets/charts.css'
+import './stylesheets/appForm.css'
 import './stylesheets/landing.css';
-import './stylesheets/charts.css';
 // BEGIN testing
 import * as sessionActions from './actions/SessionActions';
 import * as userActions from './actions/UserActions';
 import * as applicationActions from './actions/ApplicationActions';
 import * as jobActions from './actions/JobActions';
+
 
 document.addEventListener('DOMContentLoaded', () => {
   let store;

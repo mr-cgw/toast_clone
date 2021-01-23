@@ -11,7 +11,8 @@ import Profolio from './profolio/profolio_container';
 import ApplicationList from './ApplicationList';
 import ApplicationDetailItem from './ApplicationDetailItem';
 import Footer from './Footer';
-import Charts from './charts/allChartsContainer';
+import Charts from './charts/allChartsContainer'
+
 function App() {
   const loggedIn = false;
   const location = useLocation();
