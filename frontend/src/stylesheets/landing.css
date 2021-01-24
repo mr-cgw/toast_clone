@@ -42,11 +42,11 @@
   box-shadow: 2px 2px lightgray;
 }
 
-.job-item img {
+/* .job-item img {
   max-height: 100px;
   max-width: 100px;
   display: block;
-}
+} */
 
 .job-item span {
   text-align: center;
@@ -69,15 +69,16 @@
   display: inline-block;
 }
 .job-position {
-  position: absolute;
-  bottom: 52px;
+  /* position: absolute; */
+  /* bottom: 52px; */
+  margin-top: 0.2rem;
   align-content: center;
   display: inline-block;
 }
 .job-location {
   position: absolute;
   bottom: 6px;
-  left: -49px;
+  left: -47px;
   display: inline-block;
 }
 
