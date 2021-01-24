@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom'
 import { updateApplication } from '../actions/ApplicationActions';
 import { connect } from 'react-redux';
 import JobCard from './JobCard';
@@ -133,6 +134,7 @@ function ApplicationDetailItem({ application, updateApplication }) {
   );
 
   return (
+
     <div className={classes.root}>
       <div className={classes.leftPanel}>
         {/* <JobCard /> */}
@@ -170,8 +172,8 @@ function ApplicationDetailItem({ application, updateApplication }) {
                 {!application.phoneScreen ? (
                   <span className={classes.notyet}>Not yet</span>
                 ) : (
-                  'attended'
-                )}
+                    'attended'
+                  )}
               </span>
             </Typography>
             <Typography className={classes.procedure}>
@@ -180,8 +182,8 @@ function ApplicationDetailItem({ application, updateApplication }) {
                 {!application.techInterview ? (
                   <span className={classes.notyet}>Not yet</span>
                 ) : (
-                  'attended'
-                )}
+                    'attended'
+                  )}
               </span>
             </Typography>
             <Typography className={classes.procedure}>
@@ -190,8 +192,8 @@ function ApplicationDetailItem({ application, updateApplication }) {
                 {!application.onSite ? (
                   <span className={classes.notyet}>Not yet</span>
                 ) : (
-                  'attended'
-                )}
+                    'attended'
+                  )}
               </span>
             </Typography>
             <Typography className={classes.procedure}>
@@ -200,8 +202,8 @@ function ApplicationDetailItem({ application, updateApplication }) {
                 {!application.Offer ? (
                   <span className={classes.notyet}>Not yet</span>
                 ) : (
-                  'attended'
-                )}
+                    'attended'
+                  )}
               </span>
             </Typography>
           </div>
