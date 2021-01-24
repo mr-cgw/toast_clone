@@ -43,14 +43,12 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function ApplicationList({ applications, fetchApplications }) {
-  console.log('here');
   const [view, setView] = useState('list');
   const classes = useStyles();
   const params = useParams();
   const history = useHistory();
   const { id } = params;
   useEffect(() => {
-    console.log('firing up fetch');
     fetchApplications('6005eca83bd3570f22e478d6');
   }, []);
   console.log('applications', applications);

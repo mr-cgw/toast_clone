@@ -4,7 +4,7 @@ import Profolio from './profolio';
 
 const mapStateToProps = (state) => ({
   currentUser: state.session.user,
-  //   jobLists: Object.values(state.entites.jobLists),
+  applications: Object.values(state.entities.applications),
   //   updateError: state.errors.sessionErrors,
 });
 
