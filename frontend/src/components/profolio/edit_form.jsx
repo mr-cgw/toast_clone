@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Modal from 'react-modal';
 import { validate } from 'email-validator';
 import { Typography, Button, Avatar } from '@material-ui/core';
@@ -9,8 +9,6 @@ import CloseIcon from '@material-ui/icons/Close';
 import * as Colors from '../../Colors';
 
 function Edit({ currentUser, updateUser, othertoggle }) {
-  const [user, setUser] = useState(currentUser);
-  const [newPassword, setNewPassword] = useState('');
   const [isOpen, setShow] = useState(false);
   function toggleModal() {
     setShow(!isOpen);
@@ -20,32 +18,33 @@ function Edit({ currentUser, updateUser, othertoggle }) {
   const [userNameErrors, setUserNameErrors] = useState('');
   const [emailErrors, setEmailErrors] = useState('');
   const [passwordErrors, setPasswordErrors] = useState('');
+  const [newPasswordErrors, setNewPasswordErrors] = useState('');
+  const [email, setEmail] = useState(currentUser.email);
+  const [password, setPassword] = useState(currentUser.password);
+  const [newPassword, setNewPassword] = useState('');
+  const [username, setUsername] = useState(currentUser.username);
+  const [avatarUrl, setAvatarUrl] = useState(currentUser.avatarUrl);
   const classes = useStyles();
 
   function handleSubmit(e) {
     e.preventDefault();
+
     if (username.length < 6)
       setUserNameErrors('Username must be at least 6 characters');
     if (!validate(email)) setEmailErrors('Email is invalid');
     if (password.length < 6)
       setPasswordErrors('Password must be at least 6 characters');
+    if (newPassword.length < 6)
+      setNewPasswordErrors('Password must be at least 6 characters');
     if (!userNameErrors && !emailErrors && !passwordErrors) {
-      updateUser({ ...user, newPassword }).then((res) => {
+      updateUser({ username, email, password, newPassword }).then((res) => {
         if (res.type === 'RECEIVE_SESSION_ERRORS') {
           setDisplayMsg('Incorrect Email or Password ');
         } else {
           setDisplayMsg('Successfully Updated!');
         }
+        setShow(!isOpen);
       });
-      setShow(!isOpen);
-    }
-  }
-
-  function update(field) {
-    if (field === 'newPassword') {
-      return (e) => setNewPassword(e.currentTarget.value);
-    } else {
-      return (e) => setUser({ ...user, [field]: e.currentTarget.value });
     }
   }
   const handleAvatar = (image) => {
@@ -59,8 +58,7 @@ function Edit({ currentUser, updateUser, othertoggle }) {
     })
       .then((res) => res.json())
       .then((data) => {
-        setUser({ ...user, avatarUrl: data.url });
-        console.log('data', data.url);
+        setAvatarUrl(data.url);
       })
       .catch((err) => console.log('error', err));
   };
@@ -71,8 +69,8 @@ function Edit({ currentUser, updateUser, othertoggle }) {
         <div className={classes.leftPanel}>
           <CssTextField
             type="text"
-            value={user.username || ''}
-            onChange={update('username')}
+            value={username || ''}
+            onChange={(e) => setUsername(e.target.value)}
             className={classes.textField}
             required
             label="username"
@@ -82,12 +80,12 @@ function Edit({ currentUser, updateUser, othertoggle }) {
               className: classes.input,
             }}
           />
-          <p>{userNameErrors}</p>
+          <p style={{ color: 'red' }}>{userNameErrors}</p>
 
           <CssTextField
             type="text"
-            value={user.email || ''}
-            onChange={update('email')}
+            value={email || ''}
+            onChange={(e) => setEmail(e.target.value)}
             className={classes.textField}
             required
             label="email"
@@ -97,12 +95,12 @@ function Edit({ currentUser, updateUser, othertoggle }) {
               className: classes.input,
             }}
           />
-          <p>{emailErrors}</p>
+          <p style={{ color: 'red' }}>{emailErrors}</p>
 
           <CssTextField
             type="password"
-            value={user.password || ''}
-            onChange={update('password')}
+            value={password || ''}
+            onChange={(e) => setPassword(e.target.value)}
             className={classes.textField}
             required
             label="password"
@@ -112,12 +110,12 @@ function Edit({ currentUser, updateUser, othertoggle }) {
               className: classes.input,
             }}
           />
-          <p>{passwordErrors}</p>
+          <p style={{ color: 'red' }}>{passwordErrors}</p>
 
           <CssTextField
             type="password"
             value={newPassword}
-            onChange={update('newPassword')}
+            onChange={(e) => setNewPassword(e.target.value)}
             className={classes.textField}
             required
             label="confirm password"
@@ -127,12 +125,12 @@ function Edit({ currentUser, updateUser, othertoggle }) {
               className: classes.input,
             }}
           />
-          <p>{passwordErrors}</p>
+          <p style={{ color: 'red' }}>{newPasswordErrors}</p>
         </div>
         <div className={classes.rightPanel} style={{ paddingLeft: '80px' }}>
           <label>
             <Avatar
-              src={user.avatarUrl}
+              src={avatarUrl}
               style={{
                 marginRight: 10,
                 width: 100,

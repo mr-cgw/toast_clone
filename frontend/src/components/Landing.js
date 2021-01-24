@@ -12,14 +12,25 @@ function Landing({ jobs, fetchJobs }) {
   useEffect(() => {
     fetchJobs();
   }, []);
-  const [flag, setFlag] = useState(false);
+
   const [location, setLocation] = useState('All');
-  const [position, setPosition] = useState('All-Pos');
+  const [positions, setPositions] = useState([]);
+
   function handleChange(e) {
     e.preventDefault();
     setLocation(e.target.value);
   }
-  console.log('flag', flag);
+
+  function handlePos(e) {
+    const { value } = e.target;
+
+    if (positions.indexOf(value) === -1) {
+      setPositions([...positions, value]);
+    } else {
+      setPositions(positions.filter((pos) => pos !== value));
+    }
+  }
+
   return (
     <div className="landing">
       <div className="land-top">
@@ -48,41 +59,23 @@ function Landing({ jobs, fetchJobs }) {
           <FormControl component="fieldset">
             <FormGroup aria-label="position" row>
               <FormControlLabel
-                value="All-Pos"
-                control={<Checkbox color="primary" />}
-                onChange={(e) => {
-                  setFlag(!flag), setPosition(e.target.value);
-                }}
-                label="All"
-                labelPlacement="start"
-              />
-              <FormControlLabel
-                disabled={flag}
                 value="fullstack"
                 control={<Checkbox color="primary" />}
-                onChange={(e) => {
-                  setPosition(e.target.value);
-                }}
-                label="full-stack"
+                onChange={handlePos}
+                label="Full-Stack"
                 labelPlacement="start"
               />
               <FormControlLabel
-                disabled={flag}
                 value="frontend"
                 control={<Checkbox color="primary" />}
-                onChange={(e) => {
-                  setPosition(e.target.value);
-                }}
+                onChange={handlePos}
                 label="Frontend"
                 labelPlacement="start"
               />
               <FormControlLabel
-                disabled={flag}
                 value="backend"
                 control={<Checkbox color="primary" />}
-                onChange={(e) => {
-                  setPosition(e.target.value);
-                }}
+                onChange={handlePos}
                 label="Backend"
                 labelPlacement="start"
               />
@@ -97,7 +90,7 @@ function Landing({ jobs, fetchJobs }) {
             job={job}
             key={job.id + idx}
             location={location}
-            position={position}
+            positions={positions}
           />
         ))}
       </div>

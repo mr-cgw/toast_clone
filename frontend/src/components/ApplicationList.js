@@ -85,7 +85,10 @@ function ApplicationList({ applications, fetchApplications, userId }) {
 }
 
 export default connect(
-  (state) => ({ applications: state.entities.applications, userId: state.session.user.id }),
+  (state) => ({
+    applications: state.entities.applications,
+    userId: state.session.user.id,
+  }),
   (dispatch) => ({
     fetchApplications: (userId) => dispatch(fetchApplications(userId)),
   })

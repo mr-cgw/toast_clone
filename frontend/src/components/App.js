@@ -35,8 +35,8 @@ function App() {
       {location.pathname === '/signin' || location.pathname === '/signup' ? (
         <div></div>
       ) : (
-          <Footer />
-        )}
+        <Footer />
+      )}
       {/* <Charts />
       <ApplicationPostForm /> */}
     </div>
