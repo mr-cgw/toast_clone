@@ -1,15 +1,15 @@
-import React from "react";
-import ReactTimeAgo from "react-time-ago";
-import TimeAgo from "javascript-time-ago";
-import { Link } from "react-router-dom";
+import React from 'react';
+import ReactTimeAgo from 'react-time-ago';
+import TimeAgo from 'javascript-time-ago';
+import { Link } from 'react-router-dom';
 
-import en from "javascript-time-ago/locale/en";
+import en from 'javascript-time-ago/locale/en';
 
 TimeAgo.addDefaultLocale(en);
 // English.
-function JobItem({ job, location, position }) {
+function JobItem({ job, location, positions }) {
   if (job.location.includes(location) || location === 'All') {
-    if (job.category.includes(position) || position === 'All-Pos') {
+    if (positions.includes(job.category) || positions.length === 0) {
       return (
         <div className="job-item">
           <span className="job-company">{job.company}</span>

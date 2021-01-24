@@ -10,4 +10,21 @@
 
 .profolio-top h3 {
   font-size: 30px;
+  text-align: center;
+}
+.profile-data span {
+  display: inline-block;
+  background-color: rgba(255, 255, 255, 0.9);
+  border: 2px solid rgba(139, 139, 139, 0.3);
+  border-radius: 25px;
+  white-space: nowrap;
+  margin: 16px 16px;
+  user-select: none;
+  width: 159px;
+  justify-items: center;
+  text-align: center;
+}
+
+.profile-icon {
+  position: relative;
 }

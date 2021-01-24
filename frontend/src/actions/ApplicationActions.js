@@ -45,10 +45,9 @@ export const fetchApplications = (userId) => (dispatch) => {
 };
 
 export const postApplication = (applicationData) => (dispatch) => {
-  return ApplicationApiUtil.createApplication(applicationData).then(
-    (applicationData) => dispatch(receiveApplication(applicationData))
-
-  );
+  return ApplicationApiUtil.createApplication(
+    applicationData
+  ).then((applicationData) => dispatch(receiveApplication(applicationData)));
 };
 
 export const fetchApplication = (applicationId) => (dispatch) => {

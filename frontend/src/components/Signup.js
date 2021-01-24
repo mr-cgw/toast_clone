@@ -32,7 +32,7 @@ function Signup({ signupUser }) {
       });
     }
   };
-  
+
   return (
     <div className={classes.root}>
       <div className={classes.signincard}>
