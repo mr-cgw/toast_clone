@@ -2,3 +2,9 @@ a.app-item-link {
 	text-decoration: none;
 	color: black;
 }
+
+img.app-detail-img {
+	height: 200px;
+	width: 200px;
+	border-radius: 50%;
+}

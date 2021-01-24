@@ -84,7 +84,7 @@ function AppPostForm({ job = newJob, currentUser, postApplication }) {
 			});
 			console.log("err", newErrors);
 			console.log(currJob);
-			postApplication(currJob).then((res) => {
+			postApplication(currJob).then(() => {
 				setCurrJob(newJob);
 			});
 		}
