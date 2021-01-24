@@ -18,6 +18,7 @@ router.post('/', (req, res) => {
         location: job.location,
         createdAt: job.created_at,
         companyLogo: job.company_logo,
+        url: job.url,
       };
     });
     jobs[side] = res;
@@ -85,6 +86,7 @@ router.patch('/', (req, res) => {
         location: job.location,
         createdAt: job.created_at,
         companyLogo: job.company_logo,
+        url: job.url,
       };
     });
     jobs[side] = res;

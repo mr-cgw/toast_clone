@@ -12,6 +12,8 @@ import ApplicationList from './ApplicationList';
 import ApplicationDetailItem from './ApplicationDetailItem';
 import Footer from './Footer';
 import Charts from './charts/allChartsContainer';
+import ApplicationPostForm from './appForms/appPostForm';
+
 function App() {
   const loggedIn = false;
   const location = useLocation();
@@ -22,6 +24,11 @@ function App() {
         <AuthRoute exact path="/signin" component={Signin} />
         <AuthRoute exact path="/signup" component={Signup} />
         <ProtectedRoute exact path="/edit" component={Profolio} />
+        <ProtectedRoute
+          exact
+          path="/newApplication"
+          component={ApplicationPostForm}
+        />
         <Route exact path="/" component={Landing} />
         {/* <ProtectedRoute exact path='/edit' component={EditForm} /> */}
         <Route exact path="/item" component={ApplicationDetailItem} />
@@ -32,7 +39,8 @@ function App() {
       ) : (
         <Footer />
       )}
-      <Charts />
+      {/* <Charts />
+      <ApplicationPostForm /> */}
     </div>
   );
 }

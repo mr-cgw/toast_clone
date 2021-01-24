@@ -1,0 +1,17 @@
+#app-date {
+  color: #f3ffc8;
+}
+#app-date:before {
+  border-color: #f3ffc8;
+}
+.MuiInput-underline:before {
+  border-bottom: 1px solid #f3ffc8;
+}
+img.app-company-logo {
+  height: 100px;
+  width: 100px;
+  border-radius: 50%;
+}
+#app-note {
+  min-height: 50px;
+}
