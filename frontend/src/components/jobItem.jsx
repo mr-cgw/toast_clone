@@ -1,8 +1,9 @@
-import React from 'react';
-import ReactTimeAgo from 'react-time-ago';
-import TimeAgo from 'javascript-time-ago';
+import React from "react";
+import ReactTimeAgo from "react-time-ago";
+import TimeAgo from "javascript-time-ago";
+import { Link } from "react-router-dom";
 
-import en from 'javascript-time-ago/locale/en';
+import en from "javascript-time-ago/locale/en";
 
 TimeAgo.addDefaultLocale(en);
 // English.

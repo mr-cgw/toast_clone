@@ -12,7 +12,7 @@ export default (oldState = _initState, action) => {
     case RECEIVE_APPLICATIONS:
       return { ...action.payload };
     case RECEIVE_APPLICATION:
-      return { ...oldState, [action.payload._id]: action.payload };
+      return { ...oldState, [action.payload.data._id]: action.payload.data };
     case DELETE_APPLICATION:
       const newApps = { ...oldState };
       delete newApps[action.payload._id];

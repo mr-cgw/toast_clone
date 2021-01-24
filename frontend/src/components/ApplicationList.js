@@ -42,7 +42,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function ApplicationList({ applications, fetchApplications }) {
+function ApplicationList({ applications, fetchApplications, userId }) {
   console.log('here');
   const [view, setView] = useState('list');
   const classes = useStyles();
@@ -50,8 +50,8 @@ function ApplicationList({ applications, fetchApplications }) {
   const history = useHistory();
   const { id } = params;
   useEffect(() => {
-    console.log('firing up fetch');
-    fetchApplications('6005eca83bd3570f22e478d6');
+    console.log('firing up fetch', userId);
+    fetchApplications(userId);
   }, []);
   console.log('applications', applications);
   const renderDetail = () =>
@@ -85,7 +85,7 @@ function ApplicationList({ applications, fetchApplications }) {
 }
 
 export default connect(
-  (state) => ({ applications: state.entities.applications }),
+  (state) => ({ applications: state.entities.applications, userId: state.session.user.id }),
   (dispatch) => ({
     fetchApplications: (userId) => dispatch(fetchApplications(userId)),
   })
