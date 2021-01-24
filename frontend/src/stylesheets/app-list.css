@@ -8,3 +8,29 @@ img.app-detail-img {
 	width: 200px;
 	border-radius: 50%;
 }
+div#app-form-container {
+	height: 700px;
+	width: 900px;
+}
+div#app-form-left {
+	margin-right: 30px;
+}
+
+.app-form-textarea {
+	overflow: hidden;
+	width: 300px;
+	height: 200px !important;
+	background: #494949;
+	color: #f3ffc8;
+	border: 1px solid #f3ffc8;
+	border-radius: 5px;
+}
+
+.app-form-textarea::placeholder {
+	color: #f3ffc8;
+}
+#app-form-left-form {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+}

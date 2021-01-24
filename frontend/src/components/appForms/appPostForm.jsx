@@ -64,7 +64,7 @@ function AppPostForm({ job = newJob, currentUser, postApplication }) {
 			newErrors = { ...newErrors, salaryMin: "Minimum salary cannot be zero." };
 		}
 		if (currJob.salaryMax === 0) {
-			newErrors = { ...newErrors, salaryMin: "Maximum salary cannot be zero." };
+			newErrors = { ...newErrors, salaryMax: "Maximum salary cannot be zero." };
 		}
 		if (currJob.date === "") {
 			newErrors = { ...newErrors, date: "Must select a date" };
@@ -74,6 +74,7 @@ function AppPostForm({ job = newJob, currentUser, postApplication }) {
 		}
 		setErrors(newErrors);
 		console.log(currJob);
+		console.log("err", newErrors);
 		if (Object.values(newErrors).every((err) => err === "")) {
 			setCurrJob({
 				...currJob,
@@ -82,8 +83,8 @@ function AppPostForm({ job = newJob, currentUser, postApplication }) {
 				salaryMax: parseInt(currJob.salaryMax),
 				logo: currJob.companyLogo,
 			});
-			console.log("err", newErrors);
 			console.log(currJob);
+			console.log("err", newErrors);
 			postApplication(currJob).then(() => {
 				setCurrJob(newJob);
 			});
@@ -92,10 +93,10 @@ function AppPostForm({ job = newJob, currentUser, postApplication }) {
 
 	return job ? (
 		<div className={classes.root}>
-			<div className={classes.signincard}>
-				<div className={classes.leftPanel}>
+			<div className={classes.signincard} id="app-form-container">
+				<div className={classes.leftPanel} id="app-form-left">
 					<Typography style={{ fontSize: 18 }}>New Application</Typography>
-					<div className={classes.inputs}>
+					<div className={classes.inputs} id="app-form-left-form">
 						<CssTextField
 							className={classes.textField}
 							required
@@ -168,7 +169,7 @@ function AppPostForm({ job = newJob, currentUser, postApplication }) {
 						<p style={{ color: "red" }}>{errors.salaryMax}</p>
 					</div>
 				</div>
-				<div className={classes.rightPanel}>
+				<div className={classes.rightPanel} id="app-form-left">
 					{currJob.companyLogo ? (
 						<a href={job.url} target="_blank">
 							<img className="app-company-logo" src={currJob.companyLogo} />
@@ -208,7 +209,7 @@ function AppPostForm({ job = newJob, currentUser, postApplication }) {
 						onChange={update("note")}
 						aria-label="maximum height"
 						placeholder="Note about this job."
-						className={classes.textField}
+						className="app-form-textarea"
 					/>
 					<Button onClick={handleSubmit} className={classes.submitButton}>
 						SUBMIT

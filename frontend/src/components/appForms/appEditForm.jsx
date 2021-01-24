@@ -92,10 +92,10 @@ function AppEditForm({ job = newJob, currentUser, updateApplication }) {
 
 	return job ? (
 		<div className={classes.root}>
-			<div className={classes.signincard}>
-				<div className={classes.leftPanel}>
+			<div className={classes.signincard} id="app-form-container">
+				<div className={classes.leftPanel} id="app-form-left">
 					<Typography style={{ fontSize: 18 }}>New Application</Typography>
-					<div className={classes.inputs}>
+					<div className={classes.inputs} id="app-form-left-form">
 						<CssTextField
 							className={classes.textField}
 							required
@@ -168,7 +168,7 @@ function AppEditForm({ job = newJob, currentUser, updateApplication }) {
 						<p style={{ color: "red" }}>{errors.salaryMax}</p>
 					</div>
 				</div>
-				<div className={classes.rightPanel}>
+				<div className={classes.rightPanel} id="app-form-left">
 					{currJob.companyLogo ? (
 						<a href={job.url} target="_blank">
 							<img className="app-company-logo" src={currJob.companyLogo} />
@@ -208,7 +208,7 @@ function AppEditForm({ job = newJob, currentUser, updateApplication }) {
 						onChange={update("note")}
 						aria-label="maximum height"
 						placeholder="Note about this job."
-						className={classes.textField}
+						className="app-form-textarea"
 					/>
 					<Button onClick={handleSubmit} className={classes.submitButton}>
 						SUBMIT
