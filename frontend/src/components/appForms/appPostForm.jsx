@@ -227,7 +227,9 @@ const mSTP = (state, ownProps) => {
 			user: state.session.user.id,
 			salaryMax: 0,
 			salaryMin: 0,
-			logo: ownProps.location.data.companyLogo,
+			logo: ownProps.location.data.hasOwnProperty("companyLogo")
+				? ownProps.location.data.companyLogo
+				: "",
 		},
 	};
 };
