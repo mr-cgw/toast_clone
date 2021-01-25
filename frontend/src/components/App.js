@@ -11,8 +11,9 @@ import Profolio from './profolio/profolio_container';
 import ApplicationList from './ApplicationList';
 import ApplicationDetailItem from './ApplicationDetailItem';
 import Footer from './Footer';
-import Charts from './charts/allChartsContainer';
-import ApplicationPostForm from './appForms/appPostForm';
+import Charts from './charts/allChartsContainer'
+import ApplicationPostForm from './appForms/appPostForm'
+import ApplicationEditForm from './appForms/appEditForm'
 
 function App() {
   const loggedIn = false;
@@ -24,11 +25,8 @@ function App() {
         <AuthRoute exact path="/signin" component={Signin} />
         <AuthRoute exact path="/signup" component={Signup} />
         <ProtectedRoute exact path="/edit" component={Profolio} />
-        <ProtectedRoute
-          exact
-          path="/newApplication"
-          component={ApplicationPostForm}
-        />
+        <ProtectedRoute exact path="/newApplication" component={ApplicationPostForm} />
+        <ProtectedRoute exact path="/editApplication/:applicationId" component={ApplicationEditForm} />
         <Route exact path="/" component={Landing} />
         {/* <ProtectedRoute exact path='/edit' component={EditForm} /> */}
         <Route exact path="/item" component={ApplicationDetailItem} />

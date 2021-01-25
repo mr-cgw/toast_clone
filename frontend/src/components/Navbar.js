@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import { useHistory, useLocation } from 'react-router-dom';
+import { useHistory, useLocation, Link } from 'react-router-dom';
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 import {
   makeStyles,
@@ -214,27 +214,27 @@ function Navbar({ currentUser, fetchUser, signout }) {
           </MenuItem>
         </div>
       ) : (
-        <div>
-          <MenuItem
-            className={classes.menuItem}
-            onClick={() => {
-              history.push('/signin');
-              handleMenuClose();
-            }}
-          >
-            <Typography>SIGN IN</Typography>
-          </MenuItem>
-          <MenuItem
-            className={classes.menuItem}
-            onClick={() => {
-              history.push('/signup');
-              handleMenuClose();
-            }}
-          >
-            <Typography>SIGN UP</Typography>
-          </MenuItem>
-        </div>
-      )}
+          <div>
+            <MenuItem
+              className={classes.menuItem}
+              onClick={() => {
+                history.push('/signin');
+                handleMenuClose();
+              }}
+            >
+              <Typography>SIGN IN</Typography>
+            </MenuItem>
+            <MenuItem
+              className={classes.menuItem}
+              onClick={() => {
+                history.push('/signup');
+                handleMenuClose();
+              }}
+            >
+              <Typography>SIGN UP</Typography>
+            </MenuItem>
+          </div>
+        )}
     </Menu>
   );
   const renderButtons = () =>
@@ -247,31 +247,33 @@ function Navbar({ currentUser, fetchUser, signout }) {
           />
         </IconButton>
         <IconButton className={classes.applyButton}>
-          <AddCircleOutlineIcon style={{ width: 60, height: 60 }} />
+          <Link to={{ pathname: "/newApplication", data: {} }} >
+            <AddCircleOutlineIcon style={{ width: 60, height: 60, color: "#BFF499" }} />
+          </Link>
         </IconButton>
-      </div>
+      </div >
     ) : (
-      <div className={classes.buttons}>
-        <Button
-          className={classes.button}
-          style={{ marginRight: 20 }}
-          onClick={() => history.push('/signin')}
-        >
-          Sign in
+        <div className={classes.buttons}>
+          <Button
+            className={classes.button}
+            style={{ marginRight: 20 }}
+            onClick={() => history.push('/signin')}
+          >
+            Sign in
         </Button>
-        <Button
-          variant="contained"
-          className={classes.button}
-          onClick={() => history.push('/signup')}
-          style={{
-            backgroundColor: Colors.lightestGreen,
-            color: Colors.navBlack,
-          }}
-        >
-          Sign up
+          <Button
+            variant="contained"
+            className={classes.button}
+            onClick={() => history.push('/signup')}
+            style={{
+              backgroundColor: Colors.lightestGreen,
+              color: Colors.navBlack,
+            }}
+          >
+            Sign up
         </Button>
-      </div>
-    );
+        </div>
+      );
 
   return (
     <div>
@@ -286,14 +288,14 @@ function Navbar({ currentUser, fetchUser, signout }) {
             />
           </div>
           {location.pathname === '/signin' ||
-          location.pathname === '/signup' ? (
-            <div></div>
-          ) : (
-            <div>
-              <div>{renderButtons()}</div>
-              <div>{renderAuthButtons()}</div>
-            </div>
-          )}
+            location.pathname === '/signup' ? (
+              <div></div>
+            ) : (
+              <div>
+                <div>{renderButtons()}</div>
+                <div>{renderAuthButtons()}</div>
+              </div>
+            )}
         </Toolbar>
       </AppBar>
       {renderMobileMenu}
