@@ -134,114 +134,115 @@ function ApplicationDetailItem({ application, updateApplication }) {
   );
 
   return (
-    <Link to={{ pathname: `/editApplication/${application._id}`, data: application }} className="app-item-link" >
-      <div className={classes.root}>
-        <div className={classes.leftPanel}>
-          {/* <JobCard /> */}
+    <div className={classes.root}>
+      <div className={classes.leftPanel}>
+        {/* <JobCard /> */}
+        <Link to={{ pathname: `/editApplication/${application._id}`, data: application }} className="app-item-link" >
           <img
             src={application.logo || "https://res.cloudinary.com/willwang/image/upload/v1611016309/JobCard_2_tzffxc.png"}
             alt="card replacement"
             className="app-detail-img"
           />
-          <div className={classes.companyInfo}>
-            <Typography style={{ fontWeight: 800, fontSize: 40 }}>
-              {/* {application.date.toString().split(' ').slice(0, 4).join(' ') +
+        </Link>
+
+        <div className={classes.companyInfo}>
+          <Typography style={{ fontWeight: 800, fontSize: 40 }}>
+            {/* {application.date.toString().split(' ').slice(0, 4).join(' ') +
               ' ' +
               application.date.toString().split(' ')[4].slice(0, 5)} */}
-              {application.date}
-            </Typography>
-            <div>
-              <a
-                href={application.url || 'https://www.google.com/docs/about/'}
-                target="_blank"
+            {application.date}
+          </Typography>
+          <div>
+            <a
+              href={application.url || 'https://www.google.com/docs/about/'}
+              target="_blank"
+            >
+              <Typography
+                style={{
+                  fontWeight: 100,
+                  fontSize: 30,
+                  color: Colors.navBlack,
+                  marginRight: '1rem',
+                }}
               >
-                <Typography
-                  style={{
-                    fontWeight: 100,
-                    fontSize: 30,
-                    color: Colors.navBlack,
-                    marginRight: '1rem',
-                  }}
-                >
-                  Resume link
+                Resume link
               </Typography>
-              </a>
+            </a>
 
-              <Typography className={classes.procedure}>
-                Phone Screening:{' '}
-                <span className={classes.status}>
-                  {!application.phoneScreen ? (
-                    <span className={classes.notyet}>Not yet</span>
-                  ) : (
-                      'attended'
-                    )}
-                </span>
-              </Typography>
-              <Typography className={classes.procedure}>
-                Tech interview:{' '}
-                <span className={classes.status}>
-                  {!application.techInterview ? (
-                    <span className={classes.notyet}>Not yet</span>
-                  ) : (
-                      'attended'
-                    )}
-                </span>
-              </Typography>
-              <Typography className={classes.procedure}>
-                On site:{' '}
-                <span className={classes.status}>
-                  {!application.onSite ? (
-                    <span className={classes.notyet}>Not yet</span>
-                  ) : (
-                      'attended'
-                    )}
-                </span>
-              </Typography>
-              <Typography className={classes.procedure}>
-                Offer:{' '}
-                <span className={classes.status}>
-                  {!application.Offer ? (
-                    <span className={classes.notyet}>Not yet</span>
-                  ) : (
-                      'attended'
-                    )}
-                </span>
-              </Typography>
-            </div>
+            <Typography className={classes.procedure}>
+              Phone Screening:{' '}
+              <span className={classes.status}>
+                {!application.phoneScreen ? (
+                  <span className={classes.notyet}>Not yet</span>
+                ) : (
+                    'attended'
+                  )}
+              </span>
+            </Typography>
+            <Typography className={classes.procedure}>
+              Tech interview:{' '}
+              <span className={classes.status}>
+                {!application.techInterview ? (
+                  <span className={classes.notyet}>Not yet</span>
+                ) : (
+                    'attended'
+                  )}
+              </span>
+            </Typography>
+            <Typography className={classes.procedure}>
+              On site:{' '}
+              <span className={classes.status}>
+                {!application.onSite ? (
+                  <span className={classes.notyet}>Not yet</span>
+                ) : (
+                    'attended'
+                  )}
+              </span>
+            </Typography>
+            <Typography className={classes.procedure}>
+              Offer:{' '}
+              <span className={classes.status}>
+                {!application.Offer ? (
+                  <span className={classes.notyet}>Not yet</span>
+                ) : (
+                    'attended'
+                  )}
+              </span>
+            </Typography>
           </div>
         </div>
+      </div>
 
-        <div className={classes.rightPanel}>
-          <div
+      <div className={classes.rightPanel}>
+        <div
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}
+        >
+          <IconButton>
+            <Star style={{ color: 'gold', width: 50, height: 50 }} />
+          </IconButton>
+          <Typography
             style={{
-              display: 'flex',
-              flexDirection: 'column',
-              justifyContent: 'center',
-              alignItems: 'center',
+              color: '#FFB400',
+              fontSize: 20,
+              fontWeight: 'bold',
             }}
           >
-            <IconButton>
-              <Star style={{ color: 'gold', width: 50, height: 50 }} />
-            </IconButton>
-            <Typography
-              style={{
-                color: '#FFB400',
-                fontSize: 20,
-                fontWeight: 'bold',
-              }}
-            >
-              Favorite
+            Favorite
           </Typography>
-          </div>
-          <IconButton onClick={(e) => handleMenuOpen(e)}>
-            <MoreHoriz
-              style={{ color: Colors.darkerGreen, width: 50, height: 50 }}
-            />
-          </IconButton>
         </div>
-        {renderMenu}
+        <IconButton onClick={(e) => handleMenuOpen(e)}>
+          <MoreHoriz
+            style={{ color: Colors.darkerGreen, width: 50, height: 50 }}
+          />
+        </IconButton>
       </div>
-    </Link>
+      {renderMenu}
+    </div>
   );
 }
 

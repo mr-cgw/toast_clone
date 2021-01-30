@@ -40,9 +40,9 @@ function ApplicationListItem({ application, updateApplication }) {
   const classes = useStyles();
   return (
     <div className={classes.root}>
-      <Link to={{ pathname: `/editApplication/${application._id}`, data: application }} className="app-item-link" >
-        {console.log(application._id)}
-        <div className={classes.leftPanel}>
+      {console.log(application._id)}
+      <div className={classes.leftPanel}>
+        <Link to={{ pathname: `/editApplication/${application._id}`, data: application }} className="app-item-link" >
           <img
             className={classes.logo}
             src={
@@ -50,106 +50,107 @@ function ApplicationListItem({ application, updateApplication }) {
               'https://cdn.worldvectorlogo.com/logos/google-icon.svg'
             }
           />
+        </Link>
 
-          <div className={classes.companyInfo}>
-            <Typography style={{ fontWeight: 800 }}>
-              {application.company}
-            </Typography>
-            <div
+
+        <div className={classes.companyInfo}>
+          <Typography style={{ fontWeight: 800 }}>
+            {application.company}
+          </Typography>
+          <div
+            style={{
+              display: 'flex',
+              justifyContent: 'flex-start',
+              alignItems: 'center',
+            }}
+          >
+            <Typography
               style={{
-                display: 'flex',
-                justifyContent: 'flex-start',
-                alignItems: 'center',
+                fontWeight: 100,
+                fontSize: 14,
+                marginRight: '1rem',
               }}
             >
-              <Typography
-                style={{
-                  fontWeight: 100,
-                  fontSize: 14,
-                  marginRight: '1rem',
-                }}
-              >
-                {application.position}
-              </Typography>
-              <Typography
-                style={{
-                  fontWeight: 100,
-                  fontSize: 14,
-                }}
-              >
-                {application.location}
-              </Typography>
-            </div>
+              {application.position}
+            </Typography>
+            <Typography
+              style={{
+                fontWeight: 100,
+                fontSize: 14,
+              }}
+            >
+              {application.location}
+            </Typography>
           </div>
         </div>
+      </div>
 
-        <div className={classes.rightPanel}>
-          <label style={{ display: 'flex', alignItems: 'center' }}>
-            <Typography
-              style={{ fontWeight: 800, fontSize: 12, marginLeft: '1rem' }}
-            >
-              phone screen
-          </Typography>
-            <Checkbox
-              checked={phoneScreen}
-              inputProps={{ 'aria-label': 'primary checkbox' }}
-              onChange={() => {
-                setPhoneScreen(!phoneScreen);
-                application.phoneScreen = !application.phoneScreen;
-                updateApplication(application);
-              }}
-            />
-          </label>
-          <label
-            style={{ display: 'flex', alignItems: 'center', marginLeft: '1rem' }}
+      <div className={classes.rightPanel}>
+        <label style={{ display: 'flex', alignItems: 'center' }}>
+          <Typography
+            style={{ fontWeight: 800, fontSize: 12, marginLeft: '1rem' }}
           >
-            <Typography style={{ fontWeight: 800, fontSize: 12 }}>
-              Tech Interview
+            phone screen
           </Typography>
-            <Checkbox
-              checked={techInterview}
-              inputProps={{ 'aria-label': 'primary checkbox' }}
-              onChange={() => {
-                setTechInterview(!techInterview);
-                application.techInterview = !application.techInterview;
-                updateApplication(application);
-              }}
-            />
-          </label>
-          <label
-            style={{ display: 'flex', alignItems: 'center', marginLeft: '1rem' }}
-          >
-            <Typography style={{ fontWeight: 800, fontSize: 12 }}>
-              On Site
+          <Checkbox
+            checked={phoneScreen}
+            inputProps={{ 'aria-label': 'primary checkbox' }}
+            onChange={() => {
+              setPhoneScreen(!phoneScreen);
+              application.phoneScreen = !application.phoneScreen;
+              updateApplication(application);
+            }}
+          />
+        </label>
+        <label
+          style={{ display: 'flex', alignItems: 'center', marginLeft: '1rem' }}
+        >
+          <Typography style={{ fontWeight: 800, fontSize: 12 }}>
+            Tech Interview
           </Typography>
-            <Checkbox
-              checked={onSite}
-              inputProps={{ 'aria-label': 'primary checkbox' }}
-              onChange={() => {
-                setOnsite(!onSite);
-                application.onSite = !application.onSite;
-                updateApplication(application);
-              }}
-            />
-          </label>
-          <label
-            style={{ display: 'flex', alignItems: 'center', marginLeft: '1rem' }}
-          >
-            <Typography style={{ fontWeight: 800, fontSize: 12 }}>
-              Offer
+          <Checkbox
+            checked={techInterview}
+            inputProps={{ 'aria-label': 'primary checkbox' }}
+            onChange={() => {
+              setTechInterview(!techInterview);
+              application.techInterview = !application.techInterview;
+              updateApplication(application);
+            }}
+          />
+        </label>
+        <label
+          style={{ display: 'flex', alignItems: 'center', marginLeft: '1rem' }}
+        >
+          <Typography style={{ fontWeight: 800, fontSize: 12 }}>
+            On Site
           </Typography>
-            <Checkbox
-              checked={Offer}
-              inputProps={{ 'aria-label': 'primary checkbox' }}
-              onChange={() => {
-                setOffer(!Offer);
-                application.Offer = !application.Offer;
-                updateApplication(application);
-              }}
-            />
-          </label>
-        </div>
-      </Link>
+          <Checkbox
+            checked={onSite}
+            inputProps={{ 'aria-label': 'primary checkbox' }}
+            onChange={() => {
+              setOnsite(!onSite);
+              application.onSite = !application.onSite;
+              updateApplication(application);
+            }}
+          />
+        </label>
+        <label
+          style={{ display: 'flex', alignItems: 'center', marginLeft: '1rem' }}
+        >
+          <Typography style={{ fontWeight: 800, fontSize: 12 }}>
+            Offer
+          </Typography>
+          <Checkbox
+            checked={Offer}
+            inputProps={{ 'aria-label': 'primary checkbox' }}
+            onChange={() => {
+              setOffer(!Offer);
+              application.Offer = !application.Offer;
+              updateApplication(application);
+            }}
+          />
+        </label>
+      </div>
     </div >
   );
 }
