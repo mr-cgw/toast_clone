@@ -144,19 +144,10 @@ function Navbar({ currentUser, fetchUser, signout }) {
         className={classes.menuItem}
         onClick={() => {
           handleMenuClose();
-          history.push('/list');
-        }}
-      >
-        Application List
-      </MenuItem>
-      <MenuItem
-        className={classes.menuItem}
-        onClick={() => {
-          handleMenuClose();
           history.push('/edit');
         }}
       >
-        Edit Profile
+        Applications
       </MenuItem>
 
       <MenuItem
@@ -184,15 +175,6 @@ function Navbar({ currentUser, fetchUser, signout }) {
     >
       {currentUser ? (
         <div>
-          <MenuItem
-            className={classes.menuItem}
-            onClick={() => {
-              handleMenuClose();
-              history.push('/list');
-            }}
-          >
-            <Typography>Application List</Typography>
-          </MenuItem>
           <MenuItem
             className={classes.menuItem}
             onClick={() => {

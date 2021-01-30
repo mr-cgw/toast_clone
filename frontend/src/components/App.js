@@ -50,7 +50,6 @@ function App() {
             path="/item"
             component={ApplicationDetailItem}
           />
-          <ProtectedRoute exact path="/list" component={ApplicationList} />
         </Switch>
         {location.pathname === '/signin' || location.pathname === '/signup' ? (
           <div></div>
