@@ -18,7 +18,12 @@ const newJob = {
 	companyLogo: "",
 };
 
-function AppEditForm({ job = newJob, currentUser, updateApplication }) {
+function AppEditForm({
+	job = newJob,
+	currentUser,
+	updateApplication,
+	history,
+}) {
 	const classes = useStyles();
 	const [currJob, setCurrJob] = useState(job);
 	const [errors, setErrors] = useState({
@@ -82,14 +87,16 @@ function AppEditForm({ job = newJob, currentUser, updateApplication }) {
 				salaryMax: parseInt(currJob.salaryMax),
 				logo: currJob.companyLogo,
 			});
-			console.log("err", newErrors);
-			console.log(currJob);
+
 			updateApplication(currJob).then((res) => {
 				setCurrJob(newJob);
+				history.goBack();
 			});
 		}
 	};
-
+	const handleCancel = () =>{
+		history.goBack();
+	}
 	return job ? (
 		<div className={classes.root}>
 			<div className={classes.signincard} id="app-form-container">
@@ -213,6 +220,9 @@ function AppEditForm({ job = newJob, currentUser, updateApplication }) {
 					<Button onClick={handleSubmit} className={classes.submitButton}>
 						SUBMIT
 					</Button>
+					<Button onClick={handleCancel} className={classes.submitButton}>
+						CANCEL
+					</Button>
 				</div>
 			</div>
 		</div>
@@ -220,9 +230,10 @@ function AppEditForm({ job = newJob, currentUser, updateApplication }) {
 }
 
 const mSTP = (state, ownProps) => {
-	console.log(ownProps.location.data);
+	console.log(ownProps);
 	return {
 		currentUser: state.session.user,
+		history: ownProps.history,
 		job: ownProps.location.data,
 	};
 };

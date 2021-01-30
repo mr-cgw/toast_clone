@@ -18,7 +18,7 @@ const newJob = {
 	companyLogo: "",
 };
 
-function AppPostForm({ job = newJob, currentUser, postApplication }) {
+function AppPostForm({ job = newJob, currentUser, postApplication, history }) {
 	const classes = useStyles();
 	const [currJob, setCurrJob] = useState(job);
 	const [errors, setErrors] = useState({
@@ -87,8 +87,12 @@ function AppPostForm({ job = newJob, currentUser, postApplication }) {
 			console.log("err", newErrors);
 			postApplication(currJob).then(() => {
 				setCurrJob(newJob);
+				history.goBack();
 			});
 		}
+	};
+	const handleCancel = () => {
+		history.goBack();
 	};
 
 	return job ? (
@@ -214,6 +218,9 @@ function AppPostForm({ job = newJob, currentUser, postApplication }) {
 					<Button onClick={handleSubmit} className={classes.submitButton}>
 						SUBMIT
 					</Button>
+					<Button onClick={handleCancel} className={classes.submitButton}>
+						CANCEL
+					</Button>
 				</div>
 			</div>
 		</div>
@@ -223,6 +230,7 @@ function AppPostForm({ job = newJob, currentUser, postApplication }) {
 const mSTP = (state, ownProps) => {
 	return {
 		currentUser: state.session.user,
+		history: ownProps.history,
 		job: {
 			...ownProps.location.data,
 			user: state.session.user.id,
