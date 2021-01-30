@@ -37,8 +37,8 @@ function App() {
         />
         <Route exact path="/" component={Landing} />
         {/* <ProtectedRoute exact path='/edit' component={EditForm} /> */}
-        <Protected exact path="/item" component={ApplicationDetailItem} />
-        <Protected exact path="/list" component={ApplicationList} />
+        <ProtectedRoute exact path="/item" component={ApplicationDetailItem} />
+        <ProtectedRoute exact path="/list" component={ApplicationList} />
       </Switch>
       {location.pathname === '/signin' || location.pathname === '/signup' ? (
         <div></div>
