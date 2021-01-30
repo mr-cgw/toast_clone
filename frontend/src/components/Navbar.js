@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { useHistory, useLocation, Link } from 'react-router-dom';
-import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
+import Add from '@material-ui/icons/Add';
 import {
   makeStyles,
   Typography,
@@ -63,9 +63,8 @@ const useStyles = makeStyles((theme) => ({
   },
   moreButtons: {
     display: 'block',
-    marginRight: '1rem',
     position: 'absolute',
-    right: 20,
+    right: '5%',
     bottom: 35,
     [theme.breakpoints.up('md')]: {
       display: 'none',
@@ -78,8 +77,8 @@ const useStyles = makeStyles((theme) => ({
     color: Colors.lightestGreen,
     display: 'none',
     position: 'absolute',
-    right: 40,
-    bottom: 17,
+    right: '1%',
+    bottom: 10,
     [theme.breakpoints.up('md')]: {
       display: 'block',
     },
@@ -134,7 +133,7 @@ function Navbar({ currentUser, fetchUser, signout }) {
   const renderMenu = (
     <Menu
       anchorEl={anchorEl}
-      anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+      anchorOrigin={{ vertical: 'top', horizontal: 'left' }}
       id={menuId}
       keepMounted
       transformOrigin={{ vertical: 'top', horizontal: 'right' }}
@@ -214,27 +213,27 @@ function Navbar({ currentUser, fetchUser, signout }) {
           </MenuItem>
         </div>
       ) : (
-          <div>
-            <MenuItem
-              className={classes.menuItem}
-              onClick={() => {
-                history.push('/signin');
-                handleMenuClose();
-              }}
-            >
-              <Typography>SIGN IN</Typography>
-            </MenuItem>
-            <MenuItem
-              className={classes.menuItem}
-              onClick={() => {
-                history.push('/signup');
-                handleMenuClose();
-              }}
-            >
-              <Typography>SIGN UP</Typography>
-            </MenuItem>
-          </div>
-        )}
+        <div>
+          <MenuItem
+            className={classes.menuItem}
+            onClick={() => {
+              history.push('/signin');
+              handleMenuClose();
+            }}
+          >
+            <Typography>SIGN IN</Typography>
+          </MenuItem>
+          <MenuItem
+            className={classes.menuItem}
+            onClick={() => {
+              history.push('/signup');
+              handleMenuClose();
+            }}
+          >
+            <Typography>SIGN UP</Typography>
+          </MenuItem>
+        </div>
+      )}
     </Menu>
   );
   const renderButtons = () =>
@@ -247,33 +246,33 @@ function Navbar({ currentUser, fetchUser, signout }) {
           />
         </IconButton>
         <IconButton className={classes.applyButton}>
-          <Link to={{ pathname: "/newApplication", data: {} }} >
-            <AddCircleOutlineIcon style={{ width: 60, height: 60, color: "#BFF499" }} />
+          <Link to={{ pathname: '/newApplication', data: {} }}>
+            <Add style={{ width: 60, height: 60, color: '#BFF499' }} />
           </Link>
         </IconButton>
-      </div >
+      </div>
     ) : (
-        <div className={classes.buttons}>
-          <Button
-            className={classes.button}
-            style={{ marginRight: 20 }}
-            onClick={() => history.push('/signin')}
-          >
-            Sign in
+      <div className={classes.buttons}>
+        <Button
+          className={classes.button}
+          style={{ marginRight: 20 }}
+          onClick={() => history.push('/signin')}
+        >
+          Sign in
         </Button>
-          <Button
-            variant="contained"
-            className={classes.button}
-            onClick={() => history.push('/signup')}
-            style={{
-              backgroundColor: Colors.lightestGreen,
-              color: Colors.navBlack,
-            }}
-          >
-            Sign up
+        <Button
+          variant="contained"
+          className={classes.button}
+          onClick={() => history.push('/signup')}
+          style={{
+            backgroundColor: Colors.lightestGreen,
+            color: Colors.navBlack,
+          }}
+        >
+          Sign up
         </Button>
-        </div>
-      );
+      </div>
+    );
 
   return (
     <div>
@@ -288,14 +287,14 @@ function Navbar({ currentUser, fetchUser, signout }) {
             />
           </div>
           {location.pathname === '/signin' ||
-            location.pathname === '/signup' ? (
-              <div></div>
-            ) : (
-              <div>
-                <div>{renderButtons()}</div>
-                <div>{renderAuthButtons()}</div>
-              </div>
-            )}
+          location.pathname === '/signup' ? (
+            <div></div>
+          ) : (
+            <div>
+              <div>{renderButtons()}</div>
+              <div>{renderAuthButtons()}</div>
+            </div>
+          )}
         </Toolbar>
       </AppBar>
       {renderMobileMenu}

@@ -21,32 +21,45 @@ function App() {
   return (
     <div>
       <Navbar loggedIn={loggedIn} />
-      <Switch>
-        <AuthRoute exact path="/signin" component={Signin} />
-        <AuthRoute exact path="/signup" component={Signup} />
-        <ProtectedRoute exact path="/edit" component={Profolio} />
-        <ProtectedRoute
-          exact
-          path="/newApplication"
-          component={ApplicationPostForm}
-        />
-        <ProtectedRoute
-          exact
-          path="/editApplication/:applicationId"
-          component={ApplicationEditForm}
-        />
-        <Route exact path="/" component={Landing} />
-        {/* <ProtectedRoute exact path='/edit' component={EditForm} /> */}
-        <ProtectedRoute exact path="/item" component={ApplicationDetailItem} />
-        <ProtectedRoute exact path="/list" component={ApplicationList} />
-      </Switch>
-      {location.pathname === '/signin' || location.pathname === '/signup' ? (
-        <div></div>
-      ) : (
-        <Footer />
-      )}
-      {/* <Charts />
+      <div
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}
+      >
+        <Switch style={{ maxWidth: 1200 }}>
+          <AuthRoute exact path="/signin" component={Signin} />
+          <AuthRoute exact path="/signup" component={Signup} />
+          <ProtectedRoute exact path="/edit" component={Profolio} />
+          <ProtectedRoute
+            exact
+            path="/newApplication"
+            component={ApplicationPostForm}
+          />
+          <ProtectedRoute
+            exact
+            path="/editApplication/:applicationId"
+            component={ApplicationEditForm}
+          />
+          <Route exact path="/" component={Landing} />
+          {/* <ProtectedRoute exact path='/edit' component={EditForm} /> */}
+          <ProtectedRoute
+            exact
+            path="/item"
+            component={ApplicationDetailItem}
+          />
+          <ProtectedRoute exact path="/list" component={ApplicationList} />
+        </Switch>
+        {location.pathname === '/signin' || location.pathname === '/signup' ? (
+          <div></div>
+        ) : (
+          <Footer />
+        )}
+        {/* <Charts />
       <ApplicationPostForm /> */}
+      </div>
     </div>
   );
 }

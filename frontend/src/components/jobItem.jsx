@@ -27,7 +27,7 @@ function JobItem({ job, location, positions }) {
                 width: 100,
                 height: 100,
                 borderRadius: 999,
-                boxShadow: '0 1px 1px 0 rgba(100,100,100,0.1)',
+                boxShadow: '0px 0px 1px 1px rgba(0,0,0,0.1)',
               }}
             ></div>
             {/* <img src={job.companyLogo} /> */}

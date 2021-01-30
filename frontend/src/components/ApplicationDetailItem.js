@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
 import { updateApplication } from '../actions/ApplicationActions';
 import { connect } from 'react-redux';
 import JobCard from './JobCard';
@@ -137,9 +137,18 @@ function ApplicationDetailItem({ application, updateApplication }) {
     <div className={classes.root}>
       <div className={classes.leftPanel}>
         {/* <JobCard /> */}
-        <Link to={{ pathname: `/editApplication/${application._id}`, data: application }} className="app-item-link" >
+        <Link
+          to={{
+            pathname: `/editApplication/${application._id}`,
+            data: application,
+          }}
+          className="app-item-link"
+        >
           <img
-            src={application.logo || "https://res.cloudinary.com/willwang/image/upload/v1611016309/JobCard_2_tzffxc.png"}
+            src={
+              application.logo ||
+              'https://res.cloudinary.com/willwang/image/upload/v1611903119/wqaqa8yhpr9tw80vbs4w.png'
+            }
             alt="card replacement"
             className="app-detail-img"
           />
@@ -175,8 +184,8 @@ function ApplicationDetailItem({ application, updateApplication }) {
                 {!application.phoneScreen ? (
                   <span className={classes.notyet}>Not yet</span>
                 ) : (
-                    'attended'
-                  )}
+                  'attended'
+                )}
               </span>
             </Typography>
             <Typography className={classes.procedure}>
@@ -185,8 +194,8 @@ function ApplicationDetailItem({ application, updateApplication }) {
                 {!application.techInterview ? (
                   <span className={classes.notyet}>Not yet</span>
                 ) : (
-                    'attended'
-                  )}
+                  'attended'
+                )}
               </span>
             </Typography>
             <Typography className={classes.procedure}>
@@ -195,8 +204,8 @@ function ApplicationDetailItem({ application, updateApplication }) {
                 {!application.onSite ? (
                   <span className={classes.notyet}>Not yet</span>
                 ) : (
-                    'attended'
-                  )}
+                  'attended'
+                )}
               </span>
             </Typography>
             <Typography className={classes.procedure}>
@@ -205,8 +214,8 @@ function ApplicationDetailItem({ application, updateApplication }) {
                 {!application.Offer ? (
                   <span className={classes.notyet}>Not yet</span>
                 ) : (
-                    'attended'
-                  )}
+                  'attended'
+                )}
               </span>
             </Typography>
           </div>

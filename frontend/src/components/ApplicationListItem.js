@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
 import { makeStyles, Typography, Checkbox } from '@material-ui/core';
 import { updateApplication } from '../actions/ApplicationActions';
+import * as Colors from '../Colors';
 import { connect } from 'react-redux';
 
 const useStyles = makeStyles((theme) => ({
@@ -20,7 +21,11 @@ const useStyles = makeStyles((theme) => ({
   },
   logo: {
     height: '6vh',
+    width: '6vh',
     marginRight: '2rem',
+    backgroundColor: 'white',
+    borderRadius: 999,
+    boxShadow: '0 3px 3px 0 rgba(0,0,0, 0.1)',
   },
   leftPanel: {
     display: 'flex',
@@ -42,16 +47,21 @@ function ApplicationListItem({ application, updateApplication }) {
     <div className={classes.root}>
       {console.log(application._id)}
       <div className={classes.leftPanel}>
-        <Link to={{ pathname: `/editApplication/${application._id}`, data: application }} className="app-item-link" >
+        <Link
+          to={{
+            pathname: `/editApplication/${application._id}`,
+            data: application,
+          }}
+          className="app-item-link"
+        >
           <img
             className={classes.logo}
             src={
               application.logo ||
-              'https://cdn.worldvectorlogo.com/logos/google-icon.svg'
+              'https://res.cloudinary.com/willwang/image/upload/v1611903119/wqaqa8yhpr9tw80vbs4w.png'
             }
           />
         </Link>
-
 
         <div className={classes.companyInfo}>
           <Typography style={{ fontWeight: 800 }}>
@@ -151,7 +161,7 @@ function ApplicationListItem({ application, updateApplication }) {
           />
         </label>
       </div>
-    </div >
+    </div>
   );
 }
 
