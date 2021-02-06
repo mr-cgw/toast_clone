@@ -1,6 +1,7 @@
 import React from 'react';
 import { Typography, Divider } from '@material-ui/core';
 import useStyles from './MenuCardStyles';
+import { useHistory } from 'react-router-dom';
 
 function MenuCard({ list }) {
   list = list || [
@@ -14,13 +15,16 @@ function MenuCard({ list }) {
     'Items Database',
   ];
   const classes = useStyles();
+  const history = useHistory();
   return (
     <div className={classes.root}>
       <Typography className={classes.title}>Menu</Typography>
       <div className={classes.functionList}>
         {list.map((item, index) => (
           <div className={classes.functionItem} key={index}>
-            <Typography>{item}</Typography>
+            <Typography onClick={() => history.push('/menu')}>
+              {item}
+            </Typography>
             <Divider light={true} />
           </div>
         ))}
