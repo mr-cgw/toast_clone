@@ -64,10 +64,11 @@ router.get(
   passport.authenticate('jwt', { session: false }),
   (req, res) => {
     Menu.find({ _id: req.params.menuId })
-      .then(menu => res.json(menu))
+      .then(menu => res.json(menu[0]))
       .catch(err => res.status(400).json(err))
   }
 )
+//* get all menu names
 
 router.get(
   '/',

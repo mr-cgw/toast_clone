@@ -8,6 +8,7 @@ const path = require('path');
 
 const users = require('./routes/api/users');
 const menus = require('./routes/api/menus');
+const groups = require('./routes/api/groups');
 
 //* connect to mongoDB
 mongoose
@@ -25,6 +26,7 @@ app.use(bodyParser.json());
 //* set up api routes
 app.use('/api/users', users);
 app.use('/api/menus', menus);
+app.use('/api/groups', groups)
 
 app.listen(port, () => console.log(`server is running on port ${port}`));
 
