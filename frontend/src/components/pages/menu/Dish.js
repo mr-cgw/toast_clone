@@ -14,12 +14,14 @@ function Dish({ dish, group }) {
       {
         name: "no garlic",
         id: "601f433ba0e0dc2a9bbbb336",
-        required: false
+        required: false,
+        price: 0
       },
       {
         name: "no ginger",
         id: "601f4343a0e0dc2a9bbbb337",
-        required: false
+        required: false,
+        price: 0
       }
     ]
   };
@@ -32,12 +34,14 @@ function Dish({ dish, group }) {
     {
       name: "no garlic",
       id: "601f433ba0e0dc2a9bbbb336",
-      required: false
+      required: false,
+      price: 0
     },
     {
       name: "no ginger",
       id: "601f4343a0e0dc2a9bbbb337",
-      required: false
+      required: false,
+      price: 0
     }
   ]
   const modifierTable = modifiers.map((el) => ({
@@ -51,6 +55,8 @@ function Dish({ dish, group }) {
   const [name, setName] = useState(dish.name || 'dish');
   return (
     <div>
+      {console.log("modifierTable", modifierTable)}
+      {console.log("modifiers", modifiers)}
       <Navbar title="groups" navType="Dish" data={{ dish: dish, group: group }} />
       <div style={{ display: 'flex' }}>
         <div className={classes.root} style={{ margin: '2rem auto' }}>
