@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useParams } from 'react-router-dom'
 import MenuTable from './MenuTable';
 import InputWithLabel from '../../inputs/Input';
 import useStyles from './MenuDetailsStyles';
@@ -8,6 +9,7 @@ function Group({ group }) {
   group = group || {
     name: 'Cocktails To-go',
   };
+
   const dishes = group.dishes || [
     { name: 'Green Papaya Salad', id: 1, price: 20, note: 'string' },
     {
@@ -57,7 +59,7 @@ function Group({ group }) {
           </Typography>
           <Divider style={{ width: 500 }} />
           <div style={{ marginTop: '2rem', width: 500 }}>
-            <MenuTable menus={dishTable} dish={true} />
+            <MenuTable menus={dishTable} dish={true} tableType="dishes" />
           </div>
         </div>
       </div>

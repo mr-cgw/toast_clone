@@ -27,7 +27,7 @@ function Menu({ menuList }) {
         </div>
         <Divider />
         <br />
-        <MenuTable menuList={menuList} />
+        <MenuTable menuList={menuList} tableType="menus"/>
       </div>
     </div>
   );

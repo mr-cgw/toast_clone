@@ -4,7 +4,7 @@ import { Menu as MenuIcon } from '@material-ui/icons';
 import useStyles from './NavbarStyles';
 import SearchBar from './SearchBar';
 import AccountMenu from './AccountMenu';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 
 export default function Navbar({ title }) {
   const history = useHistory();

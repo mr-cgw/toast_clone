@@ -1,37 +1,42 @@
 import React, { useState } from 'react';
+import MenuTable from './MenuTable';
+import InputWithLabel from '../../inputs/Input';
 import useStyles from './MenuDetailsStyles';
 import { Typography, Divider } from '@material-ui/core';
-import InputWithLabel from '../../inputs/Input';
-import MenuTable from '../../pages/menu/MenuTable';
 import Navbar from '../../navbar/Navbar';
-function MenuDetails({ menu }) {
-  const classes = useStyles();
-  menu = menu || {
-    name: 'Slanted Door Take Out Food & Drink Menu',
-    posname: 'Slanted Door Take Out Food & Drink Menu',
-    buttonColor: 'black',
-    number: 10023123949491,
-    groups: {
-      1: 'Cocktails To-go',
-      2: 'Non-Alcoholic Beverage',
-      3: 'Dim Sum',
-      4: 'Starters',
-      5: 'Bowls',
-    },
+function Group({ group }) {
+  group = group || {
+    name: 'Cocktails To-go',
   };
-  const [name, setName] = useState(menu.name);
-  const menuGroups = [];
-  for (const key in menu.groups) {
-    menuGroups.push({
-      id: key,
-      name: menu.groups[key],
-      type: 'group',
-    });
-  }
-
+  const dishes = group.dishes || [
+    { name: 'Green Papaya Salad', id: 1, price: 20, note: 'string' },
+    {
+      name: 'Slanted Door Wild Gulf Shrimp Gresh Spring Roll',
+      id: 2,
+      price: 10,
+    },
+    { name: 'Vegeterian Spring Roll', id: 3, price: 8, note: 'string' },
+    {
+      name: 'Crispy Pork & Shrimp imperial Roll',
+      id: 4,
+      price: 120,
+      note: 'string',
+    },
+    { name: 'Crispy Veggie Imperial Roll', id: 5, price: 100, note: 'string' },
+    { name: 'Green Bean Salad', id: 1, price: 10, note: 'string' },
+  ];
+  const dishTable = dishes.map((el) => ({
+    name: el.name,
+    id: el.id,
+    type: 'dish',
+    note: el.note,
+    price: el.price,
+  }));
+  const classes = useStyles();
+  const [name, setName] = useState(group?.name || 'group');
   return (
     <div>
-      <Navbar title="menu details" />
+      <Navbar title="groups" />
       <div style={{ display: 'flex' }}>
         <div className={classes.root} style={{ margin: '2rem auto' }}>
           <div style={{ marginTop: '2rem' }}></div>
@@ -52,7 +57,7 @@ function MenuDetails({ menu }) {
           </Typography>
           <Divider style={{ width: 500 }} />
           <div style={{ marginTop: '2rem', width: 500 }}>
-            <MenuTable menus={menuGroups} tableType="groups"/>
+            <MenuTable menus={dishTable} dish={true} />
           </div>
         </div>
       </div>
@@ -60,4 +65,4 @@ function MenuDetails({ menu }) {
   );
 }
 
-export default MenuDetails;
+export default Group;

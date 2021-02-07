@@ -1,5 +1,5 @@
 import React from 'react';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import {
   withStyles,
   IconButton,
@@ -31,7 +31,7 @@ const StyledTableRow = withStyles((theme) => ({
   },
 }))(TableRow);
 
-export default function CustomizedTables({ menus, dish }) {
+export default function CustomizedTables({ menus, dish, tableType }) {
   menus = menus || [
     { name: 'lunch menu', id: '1', type: 'menu' },
     { name: 'dinner menu', id: '2', type: 'menu' },
@@ -40,17 +40,39 @@ export default function CustomizedTables({ menus, dish }) {
     { name: 'retail', id: '5', type: 'menu' },
   ];
   const history = useHistory();
+  let params = useParams();
+  console.log("dish", dish);
+  console.log("menus", menus)
+  console.log("params", params.hasOwnProperty("dishId"))
+  const tableHeader = () => {
+    if (tableType === "menus" || tableType === "groups") {
+      return (
+        <TableRow>
+          <StyledTableCell>Name</StyledTableCell>
+          <StyledTableCell align="right">
+          </StyledTableCell>
+        </TableRow>
+      )
+    } else if (tableType === "dishes") {
+      return (
+        <TableRow>
+          <StyledTableCell>Name</StyledTableCell>
+          <StyledTableCell align="right">
+            Prices
+          </StyledTableCell>
+        </TableRow>
+      )
+    } else if (tableType === "modifiers") {
+      return (<h1>HI</h1>)
+    }
+  }
 
   return (
     <TableContainer component={Paper}>
       <Table aria-label="customized table">
         <TableHead>
-          <TableRow>
-            <StyledTableCell>Name</StyledTableCell>
-            <StyledTableCell align="right">
-              {dish ? 'prices' : ''}
-            </StyledTableCell>
-          </TableRow>
+          {tableHeader()}
+
         </TableHead>
         <TableBody>
           {menus.map((menu) => (
@@ -67,10 +89,10 @@ export default function CustomizedTables({ menus, dish }) {
                 {dish ? (
                   '$' + menu.price
                 ) : (
-                  <IconButton style={{ width: 30, height: 30 }}>
-                    <MoreHoriz />
-                  </IconButton>
-                )}
+                    <IconButton style={{ width: 30, height: 30 }}>
+                      <MoreHoriz />
+                    </IconButton>
+                  )}
               </StyledTableCell>
             </StyledTableRow>
           ))}
