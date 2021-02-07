@@ -17,7 +17,8 @@ router.post(
     }
     const newGroup = new Group({
       name: req.body.name,
-      items: req.body.groups
+      items: req.body.groups,
+      menuId: req.body.menuId
     })
 
     newGroup.save().then(group => res.json(group));
@@ -33,6 +34,7 @@ router.patch(
       { _id: req.params.id },
       {
         name: req.body.name,
+        menuId: req.body.menuId,
         items: req.body.items
       },
       { new: true }

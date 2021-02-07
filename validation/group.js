@@ -6,6 +6,9 @@ module.exports = function validateGroup(data) {
   if (Validator.isEmpty(data.name)) {
     errors.name = "Group name cannot be empty.";
   }
+  if (Validator.isEmpty(data.menuId)) {
+    errors.menuId = "menuId cannot be empty.";
+  }
   // if (!Array.isArray(data.items)) {
   //   errors.items = "Items must be an array."
   // }
