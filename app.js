@@ -9,7 +9,8 @@ const path = require('path');
 const users = require('./routes/api/users');
 const menus = require('./routes/api/menus');
 const groups = require('./routes/api/groups');
-
+const items = require('./routes/api/items');
+const modifiers = require('./routes/api/modifiers');
 //* connect to mongoDB
 mongoose
   .connect(db, { useNewUrlParser: true, useUnifiedTopology: true })
@@ -26,7 +27,9 @@ app.use(bodyParser.json());
 //* set up api routes
 app.use('/api/users', users);
 app.use('/api/menus', menus);
-app.use('/api/groups', groups)
+app.use('/api/groups', groups);
+app.use('/api/items', items);
+app.use('/api/modifiers', modifiers)
 
 app.listen(port, () => console.log(`server is running on port ${port}`));
 

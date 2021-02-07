@@ -16,6 +16,9 @@ router.post(
     }
     const newItem = new Item({
       name: req.body.name,
+      imgUrl: req.body.imgUrl,
+      description: req.body.description,
+      price: req.body.price,
       modifiers: req.body.modifiers
     })
 
@@ -32,6 +35,9 @@ router.patch(
       { _id: req.params.id },
       {
         name: req.body.name,
+        imgUrl: req.body.imgUrl,
+        description: req.body.description,
+        price: req.body.price,
         modifiers: req.body.modifiers
       },
       { new: true }
