@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const Modifier = require("../../models/Modifier");
+const Item = require("../../models/Item");
 const validateModifier = require("../../validation/modifier")
 const passport = require('passport');
 
@@ -68,14 +69,36 @@ router.get(
       .catch(err => res.status(400).json(err))
   }
 )
-//* get all modifier names
+//* get all modifier names and id
 router.get(
   '/',
   passport.authenticate('jwt', { session: false }),
   (req, res) => {
     Modifier.find()
       .then(modifiers => {
-        res.json(modifiers.map(modifier => modifier.name))
+        res.json(modifiers.map(modifier => { return { name: modifier.name, _id: modifier._id } }))
+      })
+      .catch(err => res.status(400).json(err))
+  }
+)
+
+//* get all modifier names and ids for one item
+router.get(
+  '/item/:itemId',
+  passport.authenticate('jwt', { session: false }),
+  (req, res) => {
+    Item.find({ _id: req.params.itemId })
+      .then(item => {
+        const modifierArr = []
+        item.modifiers.forEach((modId, idx) => {
+          Modifier.find({ _id: modId })
+            .then(mod => {
+              modifierArr.push(mod)
+              if (idx === item.modifiers.length - 1) {
+                res.json(modifierArr.map(mod => { return { name: mod.name, _id: mod._id } }))
+              }
+            })
+        })
       })
       .catch(err => res.status(400).json(err))
   }

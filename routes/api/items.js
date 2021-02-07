@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const Item = require("../../models/Item");
+const Group = require("../../models/Group");
 const validateItem = require("../../validation/item")
 const passport = require('passport');
 
@@ -74,14 +75,36 @@ router.get(
       .catch(err => res.status(400).json(err))
   }
 )
-//* get all item names
+//* get all item names and id
 router.get(
   '/',
   passport.authenticate('jwt', { session: false }),
   (req, res) => {
     Item.find()
       .then(groups => {
-        res.json(groups.map(item => item.name))
+        res.json(groups.map(item => { return { name: item.name, _id: item._id } }))
+      })
+      .catch(err => res.status(400).json(err))
+  }
+)
+
+//* get all item names and ids for one group
+router.get(
+  '/group/:groupId',
+  passport.authenticate('jwt', { session: false }),
+  (req, res) => {
+    Group.find({ _id: req.params.groupId })
+      .then(group => {
+        const itemArr = []
+        group.items.forEach((itemId, idx) => {
+          Item.find({ _id: itemId })
+            .then(item => {
+              groupArr.push(item)
+              if (idx === group.items.length - 1) {
+                res.json(itemArr.map(item => { return { name: item.name, _id: item._id } }))
+              }
+            })
+        })
       })
       .catch(err => res.status(400).json(err))
   }

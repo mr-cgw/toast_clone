@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const Group = require("../../models/Group");
+const Menu = require("../../models/Menu");
 const validateGroup = require("../../validation/group")
 const passport = require('passport');
 
@@ -68,14 +69,36 @@ router.get(
       .catch(err => res.status(400).json(err))
   }
 )
-//* get all group names
+//* get all group names and id
 router.get(
   '/',
   passport.authenticate('jwt', { session: false }),
   (req, res) => {
     Group.find()
       .then(groups => {
-        res.json(groups.map(group => group.name))
+        res.json(groups.map(group => { return { name: group.name, _id: group._id } }))
+      })
+      .catch(err => res.status(400).json(err))
+  }
+)
+
+//* get all group names and ids for one menu
+router.get(
+  '/menu/:menuId',
+  passport.authenticate('jwt', { session: false }),
+  (req, res) => {
+    Menu.find({ _id: req.params.menuId })
+      .then(menu => {
+        const groupArr = []
+        menu.groups.forEach((groupId, idx) => {
+          Group.find({ _id: groupId })
+            .then(group => {
+              groupArr.push(group)
+              if (idx === menu.groups.length - 1) {
+                res.json(groupArr.map(group => { return { name: group.name, _id: group._id } }))
+              }
+            })
+        })
       })
       .catch(err => res.status(400).json(err))
   }

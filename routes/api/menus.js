@@ -68,7 +68,7 @@ router.get(
       .catch(err => res.status(400).json(err))
   }
 )
-//* get all menu names
+//* get all menu names and id
 
 router.get(
   '/',
@@ -76,7 +76,7 @@ router.get(
   (req, res) => {
     Menu.find()
       .then(menus => {
-        res.json(menus.map(menu => menu.name))
+        res.json(menus.map(menu => { return { name: menu.name, _id: menu._id } }))
       })
       .catch(err => res.status(400).json(err))
   }
