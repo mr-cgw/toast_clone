@@ -55,8 +55,6 @@ function Dish({ dish, group }) {
   const [name, setName] = useState(dish.name || 'dish');
   return (
     <div>
-      {console.log("modifierTable", modifierTable)}
-      {console.log("modifiers", modifiers)}
       <Navbar title="groups" navType="Dish" data={{ dish: dish, group: group }} />
       <div style={{ display: 'flex' }}>
         <div className={classes.root} style={{ margin: '2rem auto' }}>

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import {
   withStyles,
@@ -10,6 +10,7 @@ import {
   TableHead,
   TableRow,
   Paper,
+  Checkbox,
 } from '@material-ui/core';
 import { MoreHoriz } from '@material-ui/icons';
 
@@ -39,6 +40,8 @@ export default function CustomizedTables({ menus, dish, tableType }) {
     { name: 'bar quick screen', id: '4', type: 'menu' },
     { name: 'retail', id: '5', type: 'menu' },
   ];
+  const [currMenus, setCurrMenus] = useState(menus);
+  console.log(currMenus)
   const history = useHistory();
   let params = useParams();
   const tableHeader = () => {
@@ -117,7 +120,16 @@ export default function CustomizedTables({ menus, dish, tableType }) {
           >{item.name}
           </StyledTableCell>
           <StyledTableCell>
-            {item.required ? "Y" : "N"}
+            <Checkbox checked={currMenus.filter(el => el.id === item.id)[0].required} onChange={() => {
+              setCurrMenus(currMenus.map(el => {
+                if (el.id === item.id) {
+                  console.log({ ...el, required: !el.required })
+                  return { ...el, required: !el.required }
+                } else {
+                  return el
+                }
+              }))
+            }} />
           </StyledTableCell>
 
           <StyledTableCell align="right">
