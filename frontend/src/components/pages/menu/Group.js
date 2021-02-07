@@ -8,6 +8,8 @@ import Navbar from '../../navbar/Navbar';
 function Group({ group }) {
   group = group || {
     name: 'Cocktails To-go',
+    menuId: 1,
+    menuName: "To-go"
   };
 
   const dishes = group.dishes || [
@@ -35,10 +37,10 @@ function Group({ group }) {
     price: el.price,
   }));
   const classes = useStyles();
-  const [name, setName] = useState(group?.name || 'group');
+  const [name, setName] = useState(group.name || 'group');
   return (
     <div>
-      <Navbar title="groups" />
+      <Navbar title="groups" navType="group" data={group} />
       <div style={{ display: 'flex' }}>
         <div className={classes.root} style={{ margin: '2rem auto' }}>
           <div style={{ marginTop: '2rem' }}></div>
@@ -55,7 +57,7 @@ function Group({ group }) {
             <InputWithLabel label={'POS Name'} value={name} setName={setName} />
           </div>
           <Typography variant="h5" style={{ margin: '2rem 0' }}>
-            Groups
+            Dishes
           </Typography>
           <Divider style={{ width: 500 }} />
           <div style={{ marginTop: '2rem', width: 500 }}>

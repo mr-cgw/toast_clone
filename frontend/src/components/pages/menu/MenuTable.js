@@ -41,9 +41,6 @@ export default function CustomizedTables({ menus, dish, tableType }) {
   ];
   const history = useHistory();
   let params = useParams();
-  console.log("dish", dish);
-  console.log("menus", menus)
-  console.log("params", params)
   const tableHeader = () => {
     if (tableType === "menus" || tableType === "groups") {
       return (
@@ -116,7 +113,7 @@ export default function CustomizedTables({ menus, dish, tableType }) {
             component="th"
             scope="row"
             style={{ cursor: 'pointer', color: 'darkblue' }}
-            onClick={() => history.push(`/${item.type}/${item.id}`)}
+            onClick={() => history.push(`/group/${params.groupId}/dish/${params.dishId}/modifier/${item.id}`)}
           >{item.name}
           </StyledTableCell>
           <StyledTableCell>
