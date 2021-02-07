@@ -96,12 +96,12 @@ router.get(
     Group.find({ _id: req.params.groupId })
       .then(group => {
         const itemArr = []
-        group.items.forEach((itemId, idx) => {
+        group[0].items.forEach((itemId, idx) => {
           Item.find({ _id: itemId })
             .then(item => {
-              groupArr.push(item)
-              if (idx === group.items.length - 1) {
-                res.json(itemArr.map(item => { return { name: item.name, _id: item._id } }))
+              itemArr.push(item)
+              if (idx === group[0].items.length - 1) {
+                res.json(itemArr.flat().map(item => { return { name: item.name, _id: item._id } }))
               }
             })
         })

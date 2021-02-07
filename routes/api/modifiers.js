@@ -90,12 +90,12 @@ router.get(
     Item.find({ _id: req.params.itemId })
       .then(item => {
         const modifierArr = []
-        item.modifiers.forEach((modId, idx) => {
+        item[0].modifiers.forEach((modId, idx) => {
           Modifier.find({ _id: modId })
             .then(mod => {
               modifierArr.push(mod)
-              if (idx === item.modifiers.length - 1) {
-                res.json(modifierArr.map(mod => { return { name: mod.name, _id: mod._id } }))
+              if (idx === item[0].modifiers.length - 1) {
+                res.json(modifierArr.flat().map(mod => { return { name: mod.name, _id: mod._id } }))
               }
             })
         })

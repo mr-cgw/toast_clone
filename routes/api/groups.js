@@ -90,12 +90,12 @@ router.get(
     Menu.find({ _id: req.params.menuId })
       .then(menu => {
         const groupArr = []
-        menu.groups.forEach((groupId, idx) => {
+        menu[0].groups.forEach((groupId, idx) => {
           Group.find({ _id: groupId })
             .then(group => {
               groupArr.push(group)
-              if (idx === menu.groups.length - 1) {
-                res.json(groupArr.map(group => { return { name: group.name, _id: group._id } }))
+              if (idx === menu[0].groups.length - 1) {
+                res.json(groupArr.flat().map(group => { return { name: group.name, _id: group._id } }))
               }
             })
         })
