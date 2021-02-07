@@ -10,8 +10,8 @@ export default function Navbar({ title, data, navType }) {
   const history = useHistory();
   const params = useParams();
   const classes = useStyles();
-  console.log("params", params);
-  console.log("data", data);
+  // console.log("params", params);
+  // console.log("data", data);
   // console.log("navType", navType);
   const [anchorEl, setAnchorEl] = React.useState(null);
 
@@ -40,9 +40,7 @@ export default function Navbar({ title, data, navType }) {
         </span>
       )
     } else if (params.hasOwnProperty("dishId") && !params.hasOwnProperty("modifierId")) {
-      // console.log(`Edit menus/menu_${data.group.menuId}/group_${params.groupId}/`)
       return (
-        // `Edit menus/menu_${data.group.menuId}/group_${params.groupId}/`
         <span >
           < Link to='/menu' style={{ textDecoration: "none", color: "white" }}>Menus</Link >
           { ` / `}
