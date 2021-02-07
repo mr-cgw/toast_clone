@@ -22,7 +22,7 @@ const Routes = () => (
     <Route exact path="/group/:groupId">
       <Group />
     </Route>
-    <Route exact path="group/:groupId/dish/:dishId">
+    <Route exact path="/group/:groupId/dish/:dishId">
       <Dish />
     </Route>
   </Switch>

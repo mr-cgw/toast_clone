@@ -10,6 +10,10 @@ const ModifierSchema = new Schema({
     type: Number,
     default: 0
   },
+  required: {
+    type: Boolean,
+    default: false
+  }
 },
   {
     timestamps: true

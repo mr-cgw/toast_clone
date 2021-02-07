@@ -43,7 +43,7 @@ export default function CustomizedTables({ menus, dish, tableType }) {
   let params = useParams();
   console.log("dish", dish);
   console.log("menus", menus)
-  console.log("params", params.hasOwnProperty("dishId"))
+  console.log("params", params)
   const tableHeader = () => {
     if (tableType === "menus" || tableType === "groups") {
       return (
@@ -63,7 +63,72 @@ export default function CustomizedTables({ menus, dish, tableType }) {
         </TableRow>
       )
     } else if (tableType === "modifiers") {
-      return (<h1>HI</h1>)
+      return (
+        <TableRow>
+          <StyledTableCell>Name</StyledTableCell>
+          <StyledTableCell>Required</StyledTableCell>
+          <StyledTableCell align="right">
+            Prices
+          </StyledTableCell>
+        </TableRow >
+      )
+    }
+  }
+  const tableItem = (item) => {
+    if (tableType === "menus" || tableType === "groups") {
+      return (
+        <StyledTableRow key={item.name}>
+          <StyledTableCell
+            component="th"
+            scope="row"
+            style={{ cursor: 'pointer', color: 'darkblue' }}
+            onClick={() => history.push(`/${item.type}/${item.id}`)}
+          >
+            {item.name}
+          </StyledTableCell>
+          <StyledTableCell align="right">
+            <IconButton style={{ width: 30, height: 30 }}>
+              <MoreHoriz />
+            </IconButton>
+          </StyledTableCell>
+        </StyledTableRow>
+      )
+    } else if (tableType === "dishes") {
+      return (
+        <StyledTableRow key={item.name}>
+          <StyledTableCell
+            component="th"
+            scope="row"
+            style={{ cursor: 'pointer', color: 'darkblue' }}
+            onClick={() => history.push(`/group/${params.groupId}/dish/${item.id}`)}
+          >
+            {item.name}
+          </StyledTableCell>
+          <StyledTableCell align="right">
+            {'$' + item.price}
+          </StyledTableCell>
+        </StyledTableRow>
+      )
+    } else if (tableType === "modifiers") {
+      return (
+        <StyledTableRow key={item.name}>
+          <StyledTableCell
+            component="th"
+            scope="row"
+            style={{ cursor: 'pointer', color: 'darkblue' }}
+            onClick={() => history.push(`/${item.type}/${item.id}`)}
+          >{item.name}
+          </StyledTableCell>
+          <StyledTableCell>
+            {item.required ? "Y" : "N"}
+          </StyledTableCell>
+
+          <StyledTableCell align="right">
+            {'$' + item.price}
+          </StyledTableCell>
+        </StyledTableRow>
+
+      )
     }
   }
 
@@ -76,28 +141,12 @@ export default function CustomizedTables({ menus, dish, tableType }) {
         </TableHead>
         <TableBody>
           {menus.map((menu) => (
-            <StyledTableRow key={menu.name}>
-              <StyledTableCell
-                component="th"
-                scope="row"
-                style={{ cursor: 'pointer', color: 'darkblue' }}
-                onClick={() => history.push(`/${menu.type}/${menu.id}`)}
-              >
-                {menu.name}
-              </StyledTableCell>
-              <StyledTableCell align="right">
-                {dish ? (
-                  '$' + menu.price
-                ) : (
-                    <IconButton style={{ width: 30, height: 30 }}>
-                      <MoreHoriz />
-                    </IconButton>
-                  )}
-              </StyledTableCell>
-            </StyledTableRow>
+            tableItem(menu)
           ))}
         </TableBody>
       </Table>
     </TableContainer>
   );
 }
+
+
