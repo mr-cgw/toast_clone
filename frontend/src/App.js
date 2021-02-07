@@ -3,6 +3,7 @@ import { Switch, Route } from 'react-router-dom';
 import Home from './components/Home';
 import Menu from './components/pages/menu/Menu';
 import MenuDetails from './components/pages/menu/MenuDetails';
+import Group from './components/pages/menu/Group';
 
 const Routes = () => (
   <Switch>
@@ -17,6 +18,9 @@ const Routes = () => (
     </Route>
     <Route exact path="/menu/:menuId">
       <MenuDetails />
+    </Route>
+    <Route exact path="/group/:groupId">
+      <Group />
     </Route>
   </Switch>
 );

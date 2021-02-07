@@ -31,7 +31,7 @@ const StyledTableRow = withStyles((theme) => ({
   },
 }))(TableRow);
 
-export default function CustomizedTables({ menus }) {
+export default function CustomizedTables({ menus, dish }) {
   menus = menus || [
     { name: 'lunch menu', id: '1', type: 'menu' },
     { name: 'dinner menu', id: '2', type: 'menu' },
@@ -47,7 +47,9 @@ export default function CustomizedTables({ menus }) {
         <TableHead>
           <TableRow>
             <StyledTableCell>Name</StyledTableCell>
-            <StyledTableCell></StyledTableCell>
+            <StyledTableCell align="right">
+              {dish ? 'prices' : ''}
+            </StyledTableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -62,9 +64,13 @@ export default function CustomizedTables({ menus }) {
                 {menu.name}
               </StyledTableCell>
               <StyledTableCell align="right">
-                <IconButton style={{ width: 30, height: 30 }}>
-                  <MoreHoriz />
-                </IconButton>
+                {dish ? (
+                  '$' + menu.price
+                ) : (
+                  <IconButton style={{ width: 30, height: 30 }}>
+                    <MoreHoriz />
+                  </IconButton>
+                )}
               </StyledTableCell>
             </StyledTableRow>
           ))}

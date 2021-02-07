@@ -1,11 +1,13 @@
 import React from 'react';
 import { AppBar, Toolbar, IconButton, Typography } from '@material-ui/core';
-import { AccountCircle, Menu as MenuIcon } from '@material-ui/icons';
+import { Menu as MenuIcon } from '@material-ui/icons';
 import useStyles from './NavbarStyles';
 import SearchBar from './SearchBar';
 import AccountMenu from './AccountMenu';
+import { useHistory } from 'react-router-dom';
 
-export default function Navbar() {
+export default function Navbar({ title }) {
+  const history = useHistory();
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
 
@@ -24,23 +26,31 @@ export default function Navbar() {
   return (
     <div className={classes.grow}>
       <AppBar position="static" elevation={1}>
-        <Toolbar style={{ backgroundColor: '#444', color: 'white' }}>
-          <IconButton
-            edge="start"
-            className={classes.menuButton}
-            color="inherit"
-            aria-label="open drawer"
+        <Toolbar
+          style={{ backgroundColor: '#444', color: 'white', height: '10vh' }}
+        >
+          <img
+            src="https://res.cloudinary.com/willwang/image/upload/v1612660704/logl_hd44c3.png"
+            style={{
+              height: '5vh',
+              cursor: 'pointer',
+            }}
+            onClick={() => history.push('/')}
+          />
+          <Typography
+            style={{
+              marginLeft: '1rem',
+              fontFamily: "'Anton', sans-serif",
+              letterSpacing: 3,
+            }}
           >
-            <MenuIcon />
-          </IconButton>
-          <Typography className={classes.title} variant="h6" noWrap>
-            Toast
+            {title ? title : 'ROASTED'}
           </Typography>
-          <SearchBar />
           <div className={classes.grow} />
+          {title ? '' : <SearchBar />}
           <div className={classes.sectionDesktop}>
             <IconButton aria-controls={menuId} onClick={handleMenuOpen}>
-              <AccountCircle />
+              <MenuIcon style={{ color: 'white' }} />
             </IconButton>
           </div>
         </Toolbar>
