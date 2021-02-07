@@ -29,7 +29,7 @@ router.post('/register', (req, res) => {
         password: req.body.password,
         email: req.body.email,
         username: req.body.username,
-        avatarUrl: req.body.avatarUrl,
+        // avatarUrl: req.body.avatarUrl,
       });
       bcrypt.genSalt(10, (err, salt) => {
         bcrypt.hash(newUser.password, salt, (err, hash) => {
@@ -124,7 +124,7 @@ router.patch(
             password: req.body.newPassword,
             email: req.body.email,
             username: req.body.username,
-            avatarUrl: req.body.avatarUrl,
+            // avatarUrl: req.body.avatarUrl,
           };
 
           bcrypt.genSalt(10, (err, salt) => {

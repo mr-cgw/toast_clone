@@ -12,7 +12,7 @@ const ItemSchema = new Schema({
   },
   imgUrl:{
     type:String,
-    default:""
+    default:"https://res.cloudinary.com/willwang/image/upload/v1612653963/placeholder_rg5wvi.png"
   },
   description:{
     type:String,
