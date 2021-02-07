@@ -1,7 +1,7 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 import {
   withStyles,
-  makeStyles,
   IconButton,
   Table,
   TableBody,
@@ -33,12 +33,13 @@ const StyledTableRow = withStyles((theme) => ({
 
 export default function CustomizedTables({ menus }) {
   menus = menus || [
-    { name: 'lunch menu' },
-    { name: 'dinner menu' },
-    { name: 'drinks' },
-    { name: 'bar quick screen' },
-    { name: 'retail' },
+    { name: 'lunch menu', id: '1', type: 'menu' },
+    { name: 'dinner menu', id: '2', type: 'menu' },
+    { name: 'drinks', id: '3', type: 'menu' },
+    { name: 'bar quick screen', id: '4', type: 'menu' },
+    { name: 'retail', id: '5', type: 'menu' },
   ];
+  const history = useHistory();
 
   return (
     <TableContainer component={Paper}>
@@ -56,6 +57,7 @@ export default function CustomizedTables({ menus }) {
                 component="th"
                 scope="row"
                 style={{ cursor: 'pointer', color: 'darkblue' }}
+                onClick={() => history.push(`/${menu.type}/${menu.id}`)}
               >
                 {menu.name}
               </StyledTableCell>
