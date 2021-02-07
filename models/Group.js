@@ -6,7 +6,7 @@ const GroupSchema = new Schema({
     type: String,
     required: true
   },
-  Items: {
+  items: {
     type: Array,
     default: []
   }
