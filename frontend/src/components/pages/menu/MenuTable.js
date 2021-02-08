@@ -207,9 +207,17 @@ export default function CustomizedTables({ menus, dish, tableType }) {
             </IconButton>
           </StyledTableCell>
         </StyledTableRow>
-
       )
     }
+  }
+  const addItemButton = () => {
+    // const newMenus = currMenus;
+
+    return (
+      <IconButton style={{ height: 35, width: 35 }} onClick={
+        () => console.log("add new item")
+      }>Add</IconButton>
+    )
   }
 
   return (
@@ -225,6 +233,7 @@ export default function CustomizedTables({ menus, dish, tableType }) {
           ))}
         </TableBody>
       </Table>
+      {addItemButton()}
     </TableContainer>
   );
 }
