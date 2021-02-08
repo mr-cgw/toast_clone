@@ -210,6 +210,15 @@ export default function CustomizedTables({ menus, dish, tableType }) {
       )
     }
   }
+  const addItemButton = () => {
+    // const newMenus = currMenus;
+
+    return (
+      <IconButton style={{ height: 35, width: 35 }} onClick={
+        () => console.log("add new item")
+      }>Add</IconButton>
+    )
+  }
 
   return (
     <TableContainer component={Paper}>
@@ -224,6 +233,7 @@ export default function CustomizedTables({ menus, dish, tableType }) {
           ))}
         </TableBody>
       </Table>
+      {addItemButton()}
     </TableContainer>
   );
 }
