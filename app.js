@@ -11,6 +11,7 @@ const menus = require('./routes/api/menus');
 const groups = require('./routes/api/groups');
 const items = require('./routes/api/items');
 const modifiers = require('./routes/api/modifiers');
+const orders = require('./routes/api/orders');
 //* connect to mongoDB
 mongoose
   .connect(db, { useNewUrlParser: true, useUnifiedTopology: true })
@@ -29,7 +30,8 @@ app.use('/api/users', users);
 app.use('/api/menus', menus);
 app.use('/api/groups', groups);
 app.use('/api/items', items);
-app.use('/api/modifiers', modifiers)
+app.use('/api/modifiers', modifiers);
+app.use('/api/orders', orders);
 
 app.listen(port, () => console.log(`server is running on port ${port}`));
 
