@@ -71,7 +71,7 @@ function Dish({ dish, group }) {
             <InputWithLabel label={'Name'} value={name} setName={setName} />
             <InputWithLabel label={'POS Name'} value={name} setName={setName} />
           </div>
-          <Typography variant="h5" style={{ margin: '2rem 0' }}>
+          <Typography variant="h5" style={{ marginTop: '2rem' }}>
             Modifiers
           </Typography>
           <Divider style={{ width: 500 }} />
