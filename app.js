@@ -31,7 +31,7 @@ app.use('/api/menus', menus);
 app.use('/api/groups', groups);
 app.use('/api/items', items);
 app.use('/api/modifiers', modifiers);
-app.use('/api/order', orders);
+app.use('/api/orders', orders);
 
 app.listen(port, () => console.log(`server is running on port ${port}`));
 
