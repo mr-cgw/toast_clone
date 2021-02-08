@@ -9,6 +9,10 @@ const GroupSchema = new Schema({
   items: {
     type: Array,
     default: []
+  },
+  menuId: {
+    type: String,
+    required: true
   }
 
 

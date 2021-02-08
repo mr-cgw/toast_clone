@@ -17,7 +17,8 @@ router.post(
     }
     const newModifier = new Modifier({
       name: req.body.name,
-      price: req.body.price
+      price: req.body.price,
+      required: req.body.required
     })
 
     newModifier.save().then(modifier => res.json(modifier));
@@ -33,7 +34,8 @@ router.patch(
       { _id: req.params.id },
       {
         name: req.body.name,
-        price: req.body.price
+        price: req.body.price,
+        required: req.body.required
       },
       { new: true }
     )

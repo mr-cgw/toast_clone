@@ -1,46 +1,61 @@
 import React, { useState } from 'react';
-import { useParams } from 'react-router-dom'
 import MenuTable from './MenuTable';
 import InputWithLabel from '../../inputs/Input';
 import useStyles from './MenuDetailsStyles';
 import { Typography, Divider } from '@material-ui/core';
 import Navbar from '../../navbar/Navbar';
-function Group({ group }) {
-  group = group || {
-    name: 'Cocktails To-go',
-    menuId: 1,
-    menuName: "To-go"
+function Dish({ dish, group }) {
+  dish = dish || {
+    name: 'Pork and Shrimp Spring Roll',
+    price: 14,
+    imgUrl: "https://res.cloudinary.com/willwang/image/upload/v1612653963/placeholder_rg5wvi.png",
+    description: "Slanted Door Wild Gulf Shrimp fresh spring roll. filled with vermicelli noodles, red oak lettuce, mint & a touch of shallot mayo. Served with peanut dipping sauce.",
+    modifiers: [
+      {
+        name: "no garlic",
+        id: "601f433ba0e0dc2a9bbbb336",
+        required: false,
+        price: 0
+      },
+      {
+        name: "no ginger",
+        id: "601f4343a0e0dc2a9bbbb337",
+        required: false,
+        price: 0
+      }
+    ]
   };
-
-  const dishes = group.dishes || [
-    { name: 'Green Papaya Salad', id: 1, price: 20, note: 'string' },
+  group = group || {
+    menuId: 1,
+    name: "starter",
+    menuName: "To-go"
+  }
+  const modifiers = dish.modifiers || [
     {
-      name: 'Slanted Door Wild Gulf Shrimp Gresh Spring Roll',
-      id: 2,
-      price: 10,
+      name: "no garlic",
+      id: "601f433ba0e0dc2a9bbbb336",
+      required: false,
+      price: 0
     },
-    { name: 'Vegeterian Spring Roll', id: 3, price: 8, note: 'string' },
     {
-      name: 'Crispy Pork & Shrimp imperial Roll',
-      id: 4,
-      price: 120,
-      note: 'string',
-    },
-    { name: 'Crispy Veggie Imperial Roll', id: 5, price: 100, note: 'string' },
-    { name: 'Green Bean Salad', id: 1, price: 10, note: 'string' },
-  ];
-  const dishTable = dishes.map((el) => ({
+      name: "no ginger",
+      id: "601f4343a0e0dc2a9bbbb337",
+      required: false,
+      price: 0
+    }
+  ]
+  const modifierTable = modifiers.map((el) => ({
     name: el.name,
     id: el.id,
-    type: 'dish',
-    note: el.note,
+    type: 'modifier',
     price: el.price,
+    required: el.required
   }));
   const classes = useStyles();
-  const [name, setName] = useState(group.name || 'group');
+  const [name, setName] = useState(dish.name || 'dish');
   return (
     <div>
-      <Navbar title="groups" navType="group" data={group} />
+      <Navbar title="groups" navType="Dish" data={{ dish: dish, group: group }} />
       <div style={{ display: 'flex' }}>
         <div className={classes.root} style={{ margin: '2rem auto' }}>
           <div style={{ marginTop: '2rem' }}></div>
@@ -57,11 +72,11 @@ function Group({ group }) {
             <InputWithLabel label={'POS Name'} value={name} setName={setName} />
           </div>
           <Typography variant="h5" style={{ marginTop: '2rem' }}>
-            Dishes
+            Modifiers
           </Typography>
           <Divider style={{ width: 500 }} />
           <div style={{ marginTop: '2rem', width: 500 }}>
-            <MenuTable menus={dishTable} dish={true} tableType="dishes" />
+            <MenuTable menus={modifierTable} tableType="modifiers" />
           </div>
         </div>
       </div>
@@ -69,4 +84,4 @@ function Group({ group }) {
   );
 }
 
-export default Group;
+export default Dish;

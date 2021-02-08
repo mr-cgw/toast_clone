@@ -4,11 +4,15 @@ import { Menu as MenuIcon } from '@material-ui/icons';
 import useStyles from './NavbarStyles';
 import SearchBar from './SearchBar';
 import AccountMenu from './AccountMenu';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useParams, Link } from 'react-router-dom';
 
-export default function Navbar({ title }) {
+export default function Navbar({ title, data, navType }) {
   const history = useHistory();
+  const params = useParams();
   const classes = useStyles();
+  // console.log("params", params);
+  // console.log("data", data);
+  // console.log("navType", navType);
   const [anchorEl, setAnchorEl] = React.useState(null);
 
   const isMenuOpen = Boolean(anchorEl);
@@ -22,7 +26,31 @@ export default function Navbar({ title }) {
   };
 
   const menuId = 'account-menu';
-
+  const links = () => {
+    if (!data) {
+      return (`Roasted`)
+    } else if (params.hasOwnProperty("menuId") && !params.hasOwnProperty("groupId")) {
+      return (<Link to='/menu' style={{ textDecoration: "none", color: "white" }}>Menus</Link>)
+    } else if (params.hasOwnProperty("groupId") && !params.hasOwnProperty("dishId")) {
+      return (
+        <span>
+          < Link to='/menu' style={{ textDecoration: "none", color: "white" }}>Menus</Link >
+          {` / `}
+          <Link to={`/menu/${data.menuId}`} style={{ textDecoration: "none", color: "white" }}>{data.menuName}</Link>
+        </span>
+      )
+    } else if (params.hasOwnProperty("dishId") && !params.hasOwnProperty("modifierId")) {
+      return (
+        <span >
+          < Link to='/menu' style={{ textDecoration: "none", color: "white" }}>Menus</Link >
+          { ` / `}
+          <Link to={`/menu/${data.group.menuId}`} style={{ textDecoration: "none", color: "white" }}>{data.group.menuName}</Link>
+          { ` / `}
+          <Link to={`/group/${params.groupId}`} style={{ textDecoration: "none", color: "white" }}>{data.group.name}</Link>
+        </span >
+      )
+    }
+  }
   return (
     <div className={classes.grow}>
       <AppBar position="static" elevation={1}>
@@ -44,7 +72,7 @@ export default function Navbar({ title }) {
               letterSpacing: 3,
             }}
           >
-            {title ? title : 'ROASTED'}
+            {title ? links() : "Roasted"}
           </Typography>
           <div className={classes.grow} />
           {title ? '' : <SearchBar />}

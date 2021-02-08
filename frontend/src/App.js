@@ -4,7 +4,7 @@ import Home from './components/Home';
 import Menu from './components/pages/menu/Menu';
 import MenuDetails from './components/pages/menu/MenuDetails';
 import Group from './components/pages/menu/Group';
-
+import Dish from './components/pages/menu/Dish'
 const Routes = () => (
   <Switch>
     <Route exact path="/">
@@ -21,6 +21,9 @@ const Routes = () => (
     </Route>
     <Route exact path="/group/:groupId">
       <Group />
+    </Route>
+    <Route exact path="/group/:groupId/dish/:dishId">
+      <Dish />
     </Route>
   </Switch>
 );

@@ -31,7 +31,7 @@ function MenuDetails({ menu }) {
 
   return (
     <div>
-      <Navbar title="menu details" />
+      <Navbar title="menu details" navType="menuDetail" data={menu} />
       <div style={{ display: 'flex' }}>
         <div className={classes.root} style={{ margin: '2rem auto' }}>
           <div style={{ marginTop: '2rem' }}></div>
@@ -52,7 +52,7 @@ function MenuDetails({ menu }) {
           </Typography>
           <Divider style={{ width: 500 }} />
           <div style={{ marginTop: '2rem', width: 500 }}>
-            <MenuTable menus={menuGroups} />
+            <MenuTable menus={menuGroups} tableType="groups" />
           </div>
         </div>
       </div>
