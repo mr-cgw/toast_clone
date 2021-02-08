@@ -207,7 +207,6 @@ export default function CustomizedTables({ menus, dish, tableType }) {
             </IconButton>
           </StyledTableCell>
         </StyledTableRow>
-
       )
     }
   }
