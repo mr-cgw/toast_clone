@@ -19,7 +19,7 @@ function Menu({ menuList }) {
         >
           <Typography variant="h3">Menus</Typography>
           <Typography
-            variant="body"
+            variant="body1"
             style={{ color: 'darkblue', cursor: 'pointer' }}
           >
             Advanced Properties
@@ -27,7 +27,7 @@ function Menu({ menuList }) {
         </div>
         <Divider />
         <br />
-        <MenuTable menuList={menuList} tableType="menus"/>
+        <MenuTable menuList={menuList} tableType="menus" />
       </div>
     </div>
   );

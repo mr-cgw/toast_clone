@@ -1,5 +1,5 @@
 import { makeStyles, InputBase, Typography, fade } from '@material-ui/core';
-export default function InputWithLabel({ label, value, setName }) {
+export default function InputWithLabel({ label, value, setName, type }) {
   const withStyles = makeStyles((theme) => ({
     input: {
       marginLeft: '1rem',
@@ -37,6 +37,7 @@ export default function InputWithLabel({ label, value, setName }) {
         className={classes.input}
         value={value}
         onChange={(e) => setName(e.target.value)}
+        type={type}
       />
     </label>
   );

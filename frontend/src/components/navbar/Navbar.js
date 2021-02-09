@@ -1,12 +1,39 @@
-import React from 'react';
-import { AppBar, Toolbar, IconButton, Typography } from '@material-ui/core';
+import React, { useEffect } from 'react';
+import { connect } from 'react-redux';
+import {
+  receiveUser,
+  getUser,
+  signoutUserAction,
+} from '../../actions/SessionActions';
+import {
+  AppBar,
+  Toolbar,
+  IconButton,
+  Typography,
+  Button,
+} from '@material-ui/core';
 import { Menu as MenuIcon } from '@material-ui/icons';
 import useStyles from './NavbarStyles';
 import SearchBar from './SearchBar';
 import AccountMenu from './AccountMenu';
-import { useHistory, useParams, Link } from 'react-router-dom';
+import { useHistory, useParams, Link, useLocation } from 'react-router-dom';
+import jwt_decode from 'jwt-decode';
 
-export default function Navbar({ title, data, navType }) {
+function Navbar({
+  title,
+  data,
+  navType,
+  currentUser,
+  getUserInfo,
+  signoutUser,
+}) {
+  useEffect(() => {
+    if (!localStorage.getItem('jwtToken')) return;
+    const decoded = jwt_decode(localStorage.getItem('jwtToken'));
+    console.log('token', decoded);
+    getUserInfo(decoded.id);
+  }, []);
+  console.log(currentUser);
   const history = useHistory();
   const params = useParams();
   const classes = useStyles();
@@ -28,29 +55,62 @@ export default function Navbar({ title, data, navType }) {
   const menuId = 'account-menu';
   const links = () => {
     if (!data) {
-      return (`Roasted`)
-    } else if (params.hasOwnProperty("menuId") && !params.hasOwnProperty("groupId")) {
-      return (<Link to='/menu' style={{ textDecoration: "none", color: "white" }}>Menus</Link>)
-    } else if (params.hasOwnProperty("groupId") && !params.hasOwnProperty("dishId")) {
+      return `Roasted`;
+    } else if (
+      params.hasOwnProperty('menuId') &&
+      !params.hasOwnProperty('groupId')
+    ) {
+      return (
+        <Link to="/menu" style={{ textDecoration: 'none', color: 'white' }}>
+          Menus
+        </Link>
+      );
+    } else if (
+      params.hasOwnProperty('groupId') &&
+      !params.hasOwnProperty('dishId')
+    ) {
       return (
         <span>
-          < Link to='/menu' style={{ textDecoration: "none", color: "white" }}>Menus</Link >
+          <Link to="/menu" style={{ textDecoration: 'none', color: 'white' }}>
+            Menus
+          </Link>
           {` / `}
-          <Link to={`/menu/${data.menuId}`} style={{ textDecoration: "none", color: "white" }}>{data.menuName}</Link>
+          <Link
+            to={`/menu/${data.menuId}`}
+            style={{ textDecoration: 'none', color: 'white' }}
+          >
+            {data.menuName}
+          </Link>
         </span>
-      )
-    } else if (params.hasOwnProperty("dishId") && !params.hasOwnProperty("modifierId")) {
+      );
+    } else if (
+      params.hasOwnProperty('dishId') &&
+      !params.hasOwnProperty('modifierId')
+    ) {
       return (
-        <span >
-          < Link to='/menu' style={{ textDecoration: "none", color: "white" }}>Menus</Link >
-          { ` / `}
-          <Link to={`/menu/${data.group.menuId}`} style={{ textDecoration: "none", color: "white" }}>{data.group.menuName}</Link>
-          { ` / `}
-          <Link to={`/group/${params.groupId}`} style={{ textDecoration: "none", color: "white" }}>{data.group.name}</Link>
-        </span >
-      )
+        <span>
+          <Link to="/menu" style={{ textDecoration: 'none', color: 'white' }}>
+            Menus
+          </Link>
+          {` / `}
+          <Link
+            to={`/menu/${data.group.menuId}`}
+            style={{ textDecoration: 'none', color: 'white' }}
+          >
+            {data.group.menuName}
+          </Link>
+          {` / `}
+          <Link
+            to={`/group/${params.groupId}`}
+            style={{ textDecoration: 'none', color: 'white' }}
+          >
+            {data.group.name}
+          </Link>
+        </span>
+      );
     }
-  }
+  };
+  const location = useLocation();
   return (
     <div className={classes.grow}>
       <AppBar position="static" elevation={1}>
@@ -72,15 +132,32 @@ export default function Navbar({ title, data, navType }) {
               letterSpacing: 3,
             }}
           >
-            {title ? links() : "Roasted"}
+            {title ? links() : 'Roasted'}
           </Typography>
           <div className={classes.grow} />
-          {title ? '' : <SearchBar />}
-          <div className={classes.sectionDesktop}>
-            <IconButton aria-controls={menuId} onClick={handleMenuOpen}>
-              <MenuIcon style={{ color: 'white' }} />
-            </IconButton>
-          </div>
+          {title ? '' : location.pathname === '/signin' ? '' : <SearchBar />}
+          {location.pathname === '/signin' ? (
+            ''
+          ) : (
+            <div className={classes.sectionDesktop}>
+              {currentUser._id ? (
+                <IconButton
+                  aria-controls={menuId}
+                  onClick={(e) => handleMenuOpen(e)}
+                >
+                  <MenuIcon style={{ color: 'white' }} />
+                </IconButton>
+              ) : (
+                <Button
+                  variant="contained"
+                  onClick={() => history.push('/signin')}
+                  style={{ backgroundColor: 'white', color: '#444' }}
+                >
+                  SIGN IN
+                </Button>
+              )}
+            </div>
+          )}
         </Toolbar>
       </AppBar>
       <AccountMenu
@@ -88,7 +165,20 @@ export default function Navbar({ title, data, navType }) {
         menuId={menuId}
         isMenuOpen={isMenuOpen}
         handleMenuClose={handleMenuClose}
+        signoutUser={signoutUser}
       />
     </div>
   );
 }
+
+const mapStateToProps = (state) => ({
+  currentUser: state.session,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  fetchUser: (user) => dispatch(receiveUser(user)),
+  getUserInfo: (userId) => dispatch(getUser(userId)),
+  signoutUser: () => dispatch(signoutUserAction()),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Navbar);
