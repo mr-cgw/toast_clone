@@ -26,8 +26,10 @@ function Navbar({
   currentUser,
   getUserInfo,
   signoutUser,
+  loadingState,
 }) {
   useEffect(() => {
+    if (loadingState === 'loaded') return;
     if (!localStorage.getItem('jwtToken')) return;
     const decoded = jwt_decode(localStorage.getItem('jwtToken'));
     console.log('token', decoded);
@@ -173,6 +175,7 @@ function Navbar({
 
 const mapStateToProps = (state) => ({
   currentUser: state.session,
+  loadingState: state.ui.status,
 });
 
 const mapDispatchToProps = (dispatch) => ({

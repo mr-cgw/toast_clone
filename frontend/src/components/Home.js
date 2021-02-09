@@ -3,6 +3,7 @@ import Navbar from './navbar/Navbar';
 import MenuCard from './cards/MenuCard';
 import Card from './cards/Card';
 import Menu from './pages/menu/Menu';
+import { connect } from 'react-redux';
 function Home() {
   return (
     <div>
@@ -12,4 +13,4 @@ function Home() {
   );
 }
 
-export default Home;
+export default connect((state) => ({ loadingState: state.ui.status }))(Home);
