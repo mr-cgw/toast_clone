@@ -36,7 +36,7 @@ export const signin = (user) => (dispatch) => {
       localStorage.setItem('jwtToken', token);
       SessionApiUtil.setAuthToken(token);
       const decoded = jwt_decode(token);
-      dispatch(receiveUser(decoded));
+      dispatch(receiveUser(user.data.user));
     })
     .catch((err) => {
       console.log('err', err);

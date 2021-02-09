@@ -20,12 +20,14 @@ const Auth = ({ component: Component, path, loggedIn, exact }) => {
 const Protected = ({ component: Component, loggedIn, ...rest }) => (
   <Route
     {...rest}
-    render={() => (loggedIn ? <Component /> : <Redirect to="/signin" />)}
+    render={(props) =>
+      loggedIn ? <Component {...props} /> : <Redirect to="/signin" />
+    }
   />
 );
 
 const mapDispatchToProps = (state) => ({
-  loggedIn: state.session.id,
+  loggedIn: state.session._id,
 });
 
 export const AuthRoute = connect(mapDispatchToProps)(Auth);

@@ -48,7 +48,7 @@ function Info({ signin }) {
 function Signin({ signinUser, user }) {
   const history = useHistory();
   useEffect(() => {
-    if (user._id) {
+    if (user._id || user.id) {
       history.push('/');
     }
     console.log('user', user);

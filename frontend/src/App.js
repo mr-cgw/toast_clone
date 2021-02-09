@@ -10,22 +10,28 @@ import * as SpecialRoutes from './components/Routes';
 const { AuthRoute, ProtectedRoute } = SpecialRoutes;
 const Routes = () => (
   <Switch>
-    <Route exact path="/" component={Home}></Route>
-    <Route exact path="/menu">
-      <Menu />
-    </Route>
-    <Route exact path="/menudetail">
-      <MenuDetails />
-    </Route>
-    <Route exact path="/menu/:menuId">
-      <MenuDetails />
-    </Route>
-    <Route exact path="/group/:groupId">
-      <Group />
-    </Route>
-    <Route exact path="/group/:groupId/dish/:dishId">
-      <Dish />
-    </Route>
+    <ProtectedRoute exact path="/" component={Home}></ProtectedRoute>
+    <ProtectedRoute exact path="/menu" component={Menu}></ProtectedRoute>
+    <ProtectedRoute
+      exact
+      path="/menudetail"
+      component={MenuDetails}
+    ></ProtectedRoute>
+    <ProtectedRoute
+      exact
+      path="/menu/:menuId"
+      component={MenuDetails}
+    ></ProtectedRoute>
+    <ProtectedRoute
+      exact
+      path="/group/:groupId"
+      component={Group}
+    ></ProtectedRoute>
+    <ProtectedRoute
+      exact
+      path="/group/:groupId/dish/:dishId"
+      component={Dish}
+    ></ProtectedRoute>
     <AuthRoute exact path="/signin" component={Signin}></AuthRoute>
   </Switch>
 );
